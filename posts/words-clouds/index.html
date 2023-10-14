@@ -220,12 +220,12 @@ div.csl-indent {
 <li>Load the text of Aristophanes’ <em>Clouds</em> and preprocess the text and create a Counter object with word frequencies. This will get us the data we need to create the wordcloud and give us a sense of what we should expect to see there.</li>
 <li>Import the <a href="https://github.com/amueller/word_cloud"><code>wordcloud</code> package</a> (<span class="citation" data-cites="mueller_wordcloud_2020">Mueller (<a href="#ref-mueller_wordcloud_2020" role="doc-biblioref">2020</a>)</span>) and use it to create a word cloud from the Counter object.</li>
 </ol>
-<p>The thing is that we’ll quickly realize that a wordcloud of just the most frequent words isn’t very interesting. So we’ll add a few more steps to get the key words in the text. We already know from previous experiments that kai and de and so on are going to be the most frequent words. But we also know that καί and δέ are not the main characters, so to speak, of <em>Clouds</em>. Our visualization should have literal main characters like Socrates in big type. The Phronisterion is central to the action of <em>Clouds</em> but doesn’t appear in the other plays—it should call attention to itself in the mass of words. This play is about thinking and learning. The cloud should reflect this. So, we push the experiment one step further…</p>
+<p>The thing is that we’ll quickly realize that a wordcloud of just the most frequent words isn’t very interesting. So we’ll add a few more steps to get the key words in the text. We already know from previous experiments that καί and δέ and so on are going to be the most frequent words. But we also know that καί and δέ are not the main characters, so to speak, of <em>Clouds</em>. Our visualization should have literal main characters like Socrates in big type. The Phronisterion is central to the action of <em>Clouds</em> but doesn’t appear in the other plays—it should call attention to itself in the mass of words. This play is about thinking and learning. The cloud should reflect this. So, we push the experiment one step further…</p>
 <ol start="3" type="1">
 <li>Compute tf-idf scores for each word in all of the plays of Aristophanes.</li>
 <li>Create a word cloud based on the key words from <em>Clouds</em> (in comparison with the other plays).</li>
 </ol>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cltkreaders.grc <span class="im">import</span> GreekTesseraeCorpusReader</span>
@@ -239,7 +239,7 @@ div.csl-indent {
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We’ll use <a href="https://github.com/diyclassics/cltk_readers">CLTK Readers</a> to get the text of Aristophanes’ <em>Clouds</em> into memory and preprocess it in a way that is easier to visualize in a wordcloud, specifically we will lowercase the text and remove diacritics such as breathings and accents.</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode 1a: "Load the text of Aristophanes' *Clouds*..."</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>CR <span class="op">=</span> GreekTesseraeCorpusReader()</span>
@@ -250,7 +250,7 @@ div.csl-indent {
 <pre><code>aristophanes.clouds.tess</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print sample from text</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="bu">next</span>(CR.texts(<span class="bu">file</span>))</span>
@@ -261,7 +261,7 @@ div.csl-indent {
 ἀπέραντον. οὐδέποθ' ἡμέρα γενήσεται;</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode 1b: "preprocess the text..."</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> preprocess(text, diacriticals<span class="op">=</span><span class="va">False</span>)</span>
@@ -274,7 +274,7 @@ div.csl-indent {
 </div>
 </div>
 <p>Before making the wordcloud, let’s get a preliminary sense of which words are most frequent in the <em>Clouds</em>, especially since, without any further processing, the words that we should expect to see in the wordcloud are going to be these very words. A century ago, to get sense of word frequency you might look to a concordance like <span class="citation" data-cites="dunbar_complete_1883">Dunbar (<a href="#ref-dunbar_complete_1883" role="doc-biblioref">1883</a>)</span>. With the digitized text, we can count words directly from the textual data using <code>Counter</code> from the <code>collections</code> module…</p>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode 1c: "... and create a Counter object with word frequencies."</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>wordcount <span class="op">=</span> Counter(text.split())</span>
@@ -295,13 +295,13 @@ div.csl-indent {
 </div>
 </div>
 <p>This list gives us a nice tabular view of the most frequent words in the text, but how can we get a better sense of the relative frequency of different words (and do it with a fully graphical representation)? For this, we turn to the wordcloud…</p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pseudocode 2: Import the `wordcloud` package and use it to create a word cloud from the Counter object.</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>wordcloud <span class="op">=</span> WordCloud(regexp<span class="op">=</span><span class="vs">r'\b[^\W\d_]+\b'</span>).generate(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the wordcloud</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.imshow(wordcloud, interpolation<span class="op">=</span><span class="st">'bilinear'</span>)<span class="op">;</span></span>
@@ -311,7 +311,7 @@ div.csl-indent {
 </div>
 </div>
 <p>We can adjust the parameters, spec. the <code>max_font_size</code> parameter in the <code>WordCloud</code> class to cram even more words into the same space.</p>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the wordcloud, with lower `max_font_size`</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>wordcloud <span class="op">=</span> WordCloud(max_font_size<span class="op">=</span><span class="dv">40</span>).generate(text)</span>
@@ -326,7 +326,7 @@ div.csl-indent {
 <p>Looking at this frequency-based wordcloud, we see exactly the words we expected to see based on the Counter from above: και, τι, τον, γαρ, την, αλλ, ω, δ, αν, των. All important, of course, but carrying no signature of <em>Clouds</em>. It could be any play of Aristophanes, any work on Ancient Greek.</p>
 <p>Luckily we have ways of getting key terms based on a collection of documents, for example tf-idf. A full discussion of tf-idf—or term frequency-inverse document frequency—is out-of-scope for this blog post (though I do have a full tf-idf blog-post explainer coming soon!). For now, let’s take the basic <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">Wikipedia definition</a> as our starting point: we are talking about a “measure of importance of a word to a document in a collection or corpus, adjusted for the fact that some words appear more frequently in general.” The word for “clouds” appears more often <em>Clouds</em> than in the other Aristophanic works. Ditto “frogs” and <em>Frogs</em>. And the ways in which some words appear not merely frequently throughout a collection of documents but within specific documents (and not other!) can be measured using tf-idf.</p>
 <p>Let’s use the approach here, using all of the plays of Aristophanes as ground to <em>Clouds</em> figure.</p>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all of the files of Aristophanes' plays</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> [<span class="bu">file</span> <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> CR.fileids() <span class="cf">if</span> <span class="st">'aristophanes.'</span> <span class="kw">in</span> <span class="bu">file</span>]</span>
@@ -368,7 +368,7 @@ div.csl-indent {
 There are 11 texts in this collection.</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pseudocode 3. Compute the tf-idf scores for each word in all of the plays of Aristophanes.</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># In fact we will build a document-term matrix (DTM) with the `CountVectorizer` class from `scikit-learn` first</span></span>
@@ -382,7 +382,7 @@ There are 11 texts in this collection.</code></pre>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>df_cv <span class="op">=</span> pd.DataFrame(dtm.toarray(), columns<span class="op">=</span>vocab, index<span class="op">=</span>labels)</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>df_cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -689,7 +689,7 @@ There are 11 texts in this collection.</code></pre>
 <p>(It is not a complete vocabulary. Note the parameter <code>max_df=.90</code> which tells CountVectorizer to ignore words that appear in more than 90% of the documents. This helps remove very high frequency words, not unlike the ones we tended to see in the first batch of wordclouds we generated.)</p>
 <p>But while this DTM is a convenient data structure for representing—and comparing—documents generally, it is for us here a means to a tf-idf end. Remember from the definition of above that we want to use tf-idf as a way to adjust “for the fact that some words appear more frequently in general” or conversely that some words are more informative within certain documents than within others.”</p>
 <p>This counts-based DTM can be easily transformed into a tf-idf matrix using the <code>TfidfTransformer</code> class from <code>sklearn</code>…</p>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now the tfidf scores</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> TfidfTransformer</span>
@@ -698,7 +698,7 @@ There are 11 texts in this collection.</code></pre>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>tfidf_dtm <span class="op">=</span> TT.transform(dtm)</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>df_tfidf <span class="op">=</span> pd.DataFrame(tfidf_dtm.toarray(), columns<span class="op">=</span>vocab, index<span class="op">=</span>labels)</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>df_tfidf.iloc[:, :<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 
 
@@ -808,13 +808,13 @@ There are 11 texts in this collection.</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode 4. Create a word cloud based on the key words from *Clouds* (in comparison with the other plays).</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the dataframe to just the *Clouds* row</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>clouds <span class="op">=</span> df_tfidf.loc[<span class="st">'clouds'</span>]</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>clouds.sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>μανθανειν        0.127072
 νεφελαι          0.112953
 σωκρατες         0.098834
@@ -829,7 +829,7 @@ Name: clouds, dtype: float64</code></pre>
 </div>
 </div>
 <p>We can already see some encouraging signs in the tf-idf scores that our keyness-based wordcloud will tell us something about <em>Clouds</em> and not, say, <em>Frogs</em>. We see Socrates. We see the Phrontisterion. A verb of learning tops the list. Perhaps most key of all, we see clouds, or should I say Clouds. (Note how the proper-name character of the Clouds as chorus has been obscured through preprocessing.)</p>
-<div class="cell" data-execution_count="26">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pseudocode 4. Create a word cloud based on the key words from *Clouds* (in comparison with the other plays). (cont.)</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>Cloud <span class="op">=</span> WordCloud(background_color<span class="op">=</span><span class="st">"white"</span>, max_words<span class="op">=</span><span class="dv">50</span>).generate_from_frequencies(clouds)</span>
