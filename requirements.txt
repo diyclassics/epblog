@@ -1,9 +1,7 @@
-cltk-readers @ git+https://github.com/diyclassics/cltk_readers.git@2864746354b9e62751e77423eac0641dac8355a4
-la-core-web-sm @ https://huggingface.co/latincy/la_core_web_sm/resolve/main/la_core_web_sm-any-py3-none-any.whl
-la-core-web-lg @ https://huggingface.co/latincy/la_core_web_lg/resolve/main/la_core_web_lg-any-py3-none-any.whl
+cltk_readers @ git+https://github.com/diyclassics/cltk_readers.git#egg=cltk_readers
 natsort==8.2.0
-pandas==1.5.3
-spacy==3.5.3
+pandas==2.1.1
+spacy==3.6.1
 tabulate==0.9.0
 tqdm==4.64.1
 wordcloud==1.9.2
