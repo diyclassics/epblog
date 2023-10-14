@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-10-13">
 <meta name="description" content="An ‘Exploratory Philology’ code notebook showing how to construct wordclouds of key words from Ancient Greek text">
 
-<title>Exploratory Philology Blog - Aristophanic Word Clouds</title>
+<title>Exploratory Philology Blog - Aristophanic Wordclouds</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -162,7 +162,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Aristophanic Word Clouds</h1>
+      <h1 class="title">Aristophanic Wordclouds</h1>
                   <div>
         <div class="description">
           An ‘Exploratory Philology’ code notebook showing how to construct wordclouds of key words from Ancient Greek text
@@ -215,18 +215,18 @@ div.csl-indent {
 <figcaption class="figure-caption">Binder</figcaption>
 </figure>
 </div>
-<p>In Aristophanes’s <em>Clouds</em>, we find a certain Strepsiades who joins a philosophy-rhetoric school—The Phrontisterion—in order to learn the arts of Strong and Weak Argumentation from Socrates in the hopes of getting out of financial straits. For our purposes, we don’t need to concern ourselves as much with the plot as with the main characters and main ideas of the comedy. Or to put in in terms of an earlier experiment, we want to find the <em>key</em> words of <em>Clouds</em>, that is that words that refer to the characters, places, ideas, and so on that are specifically important to this play and so to, say, other plays of Aristophanes like <em>Lysistrata</em> or <em>The Frogs</em>. Our plan then in this experiment based on a chapter from the upcoming book <em>Exploratory Philology</em> is to generate a word cloud, a <em>Clouds</em> cloud if you will.</p>
+<p>In Aristophanes’s <em>Clouds</em>, we find a certain Strepsiades who joins a philosophy-rhetoric school—The Phrontisterion—in order to learn the arts of Strong and Weak Argumentation from Socrates in the hopes of getting out of financial straits. For our purposes, we don’t need to concern ourselves as much with the plot as with the main characters and main ideas of the comedy. Or to put in in terms of an earlier experiment, we want to find the <em>key</em> words of <em>Clouds</em>, that is that words that refer to the characters, places, ideas, and so on that are specifically important to this play and so to, say, other plays of Aristophanes like <em>Lysistrata</em> or <em>The Frogs</em>. Our plan then in this experiment based on a chapter from the upcoming book <em>Exploratory Philology</em> is to generate a wordcloud, a <em>Clouds</em> cloud if you will.</p>
 <p><img src="preview.png" class="preview-image img-fluid"></p>
 <p>Wordclouds are a text visualization that packs words densely into a confined space such that the words themselves are given visual priority—e.g.&nbsp;some words will be bigger than others—based on some criteria and often specifically based on frequency. As <span class="citation" data-cites="hicke_word_2022">Hicke, Goenka, and Alexander (<a href="#ref-hicke_word_2022" role="doc-biblioref">2022</a>)</span> notes: “Their intuitive and engaging design has made them a popular choice for authors, but many visualization specialists are skeptical about their effectiveness.” Nevertheless, as <span class="citation" data-cites="kalanicraig_teaching_2014">Craig (<a href="#ref-kalanicraig_teaching_2014" role="doc-biblioref">2014</a>)</span> writes, the format can show students a “systematic way to handle something many of them think of as ineffable” and specifically one that can “appeal to humanities students a way of questioning their intuitive approach to textual analysis.”</p>
 <p>Before getting into the code, let’s sketch out a plan for the experiment in pseudocode, i.e.&nbsp;some plain-language instructions that we can “translate” into working Python. Let’s start with the following…</p>
 <ol type="1">
 <li>Load the text of Aristophanes’ <em>Clouds</em> and preprocess the text and create a Counter object with word frequencies. This will get us the data we need to create the wordcloud and give us a sense of what we should expect to see there.</li>
-<li>Import the <code>wordcloud</code> package and use it to create a word cloud from the Counter object.</li>
+<li>Import the <a href="https://github.com/amueller/word_cloud"><code>wordcloud</code> package</a> (<span class="citation" data-cites="mueller_wordcloud_2020">Mueller (<a href="#ref-mueller_wordcloud_2020" role="doc-biblioref">2020</a>)</span>) and use it to create a wordcloud from the Counter object.</li>
 </ol>
 <p>The thing is that we’ll quickly realize that a wordcloud of just the most frequent words isn’t very interesting. So we’ll add a few more steps to get the <em>key</em> words in the text. We already know from previous experiments that kai and de and so on are going to be the most frequent words. But we also know that καί and δέ and de are not the main characters, so to speak, if <em>Clouds</em>. Our visualization should the literal main character like Socrates in big type. The Phrontisterion is central to the action of <em>Clouds</em> but doesn’t appear in the other plays—it should call attention to itself in the mass of words. This play is about thinking and learning. The cloud should reflect this. So, we push the experiment one step further…</p>
 <ol start="3" type="1">
 <li>Compute tf-idf scores for each word in all of the plays of Aristophanes.</li>
-<li>Create a word cloud based on the key words from <em>Clouds</em> (in comparison with the other plays).</li>
+<li>Create a wordcloud based on the key words from <em>Clouds</em> (in comparison with the other plays).</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
@@ -271,7 +271,7 @@ div.csl-indent {
 </div>
 <p>This list gives us a nice tabular view of the most frequent words in the text, but how can we get a better sense of the relative frequency of different words (and do it with a fully graphical representation)? For this, we turn to the wordcloud…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pseudocode 2: Import the `wordcloud` package and use it to create a word cloud from the Counter object.</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pseudocode 2: Import the `wordcloud` package and use it to create a wordcloud from the Counter object.</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>wordcloud <span class="op">=</span> WordCloud(regexp<span class="op">=</span><span class="vs">r'\b[^\W\d_]+\b'</span>).generate(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -340,7 +340,7 @@ div.csl-indent {
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>df_tfidf.iloc[:, :<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode 4. Create a word cloud based on the key words from *Clouds* (in comparison with the other plays).</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode 4. Create a wordcloud based on the key words from *Clouds* (in comparison with the other plays).</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the dataframe to just the *Clouds* row</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>clouds <span class="op">=</span> df_tfidf.loc[<span class="st">'clouds'</span>]</span>
@@ -348,7 +348,7 @@ div.csl-indent {
 </div>
 <p>We can already see some encouraging signs in the tf-idf scores that our keyness-based wordcloud will tell us something about <em>Clouds</em> and not, say, <em>Frogs</em>. We see Socrates. We see the Phrontisterion. A verb of learning tops the list. Perhaps most key of all, we see clouds, or should I say Clouds. (Note how the proper-name character of the Clouds as chorus has been obscured through preprocessing.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pseudocode 4. Create a word cloud based on the key words from *Clouds* (in comparison with the other plays). (cont.)</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pseudocode 4. Create a wordcloud based on the key words from *Clouds* (in comparison with the other plays). (cont.)</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Cloud <span class="op">=</span> WordCloud(background_color<span class="op">=</span><span class="st">"white"</span>, max_words<span class="op">=</span><span class="dv">50</span>).generate_from_frequencies(clouds)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -368,6 +368,9 @@ Dunbar, Henry. 1883. <em>A <span>Complete</span> <span>Concordance</span> to the
 </div>
 <div id="ref-hicke_word_2022" class="csl-entry" role="listitem">
 Hicke, Rebecca M. M., Maanya Goenka, and Eric Alexander. 2022. <span>“Word <span>Clouds</span> in the <span>Wild</span>.”</span> In <em>2022 <span>IEEE</span> 7th <span>Workshop</span> on <span>Visualization</span> for the <span>Digital</span> <span>Humanities</span> (<span>VIS4DH</span>)</em>, 43–48. Oklahoma City, OK, USA: IEEE. <a href="https://doi.org/10.1109/VIS4DH57440.2022.00015">https://doi.org/10.1109/VIS4DH57440.2022.00015</a>.
+</div>
+<div id="ref-mueller_wordcloud_2020" class="csl-entry" role="listitem">
+Mueller, Andreas C. 2020. <span>“Wordcloud.”</span> <a href="https://github.com/amueller/wordcloud">https://github.com/amueller/wordcloud</a>.
 </div>
 </div>
 
