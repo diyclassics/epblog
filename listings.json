@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/virgilian-numbers/index.html",
       "/posts/words-clouds/index.html",
       "/posts/wills-1996/index.html"
     ]
