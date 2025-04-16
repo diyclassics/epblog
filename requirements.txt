@@ -2,7 +2,7 @@ cltk_readers @ git+https://github.com/diyclassics/cltk_readers.git#egg=cltk_read
 natsort==8.4.0
 pandas==2.1.1
 seaborn==0.13.2
-spacy==3.8.5
+spacy==3.7.5
 tabulate==0.9.0
 tqdm==4.64.1
 wordcloud==1.9.2
