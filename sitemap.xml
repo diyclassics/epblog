@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://diyclassics.github.io/epblog/about.html</loc>
-    <lastmod>2023-10-17T01:00:32.234Z</lastmod>
-  </url>
-  <url>
     <loc>https://diyclassics.github.io/epblog/posts/words-clouds/index.html</loc>
-    <lastmod>2023-10-17T01:00:31.481Z</lastmod>
-  </url>
-  <url>
-    <loc>https://diyclassics.github.io/epblog/posts/virgilian-numbers/index.html</loc>
-    <lastmod>2023-10-17T01:00:29.853Z</lastmod>
+    <lastmod>2025-04-16T16:38:36.000Z</lastmod>
   </url>
   <url>
     <loc>https://diyclassics.github.io/epblog/posts/wills-1996/index.html</loc>
-    <lastmod>2023-10-17T01:00:30.485Z</lastmod>
+    <lastmod>2025-04-16T16:38:36.000Z</lastmod>
   </url>
   <url>
     <loc>https://diyclassics.github.io/epblog/index.html</loc>
-    <lastmod>2023-10-17T01:00:31.965Z</lastmod>
+    <lastmod>2025-04-16T16:38:36.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://diyclassics.github.io/epblog/about.html</loc>
+    <lastmod>2025-04-16T16:38:36.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://diyclassics.github.io/epblog/posts/virgilian-numbers/index.html</loc>
+    <lastmod>2025-04-16T16:38:36.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://diyclassics.github.io/epblog/posts/word-counts/index.html</loc>
+    <lastmod>2025-04-16T16:38:36.000Z</lastmod>
   </url>
 </urlset>
