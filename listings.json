@@ -3,7 +3,6 @@
     "listing": "/index.html",
     "items": [
       "/posts/pleias-tokenizer/index.html",
-      "/posts/dataset-common-corpus/index.html",
       "/posts/word-counts/index.html",
       "/posts/virgilian-numbers/index.html",
       "/posts/words-clouds/index.html",
