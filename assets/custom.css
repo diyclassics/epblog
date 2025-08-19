@@ -1,0 +1,2 @@
+/* Hide the title block on the index page only */
+header#title-block-header { display: none !important; }

@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Patrick J. Burns">
+<meta name="dcterms.date" content="2025-08-13">
+<meta name="description" content="Exploratory Philology post describing the Common Corpus dataset with a focus on its Latin content. First in a series on Latin repositories.">
 
-<title>About – Exploratory Philology Blog</title>
+<title>Latin Repositories: Common Corpus – Exploratory Philology Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +23,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-af93d6fc5463f431738d724cc677ec3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-af93d6fc5463f431738d724cc677ec3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,17 +91,17 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Exploratory Philology Blog</span>
     </a>
   </div>
@@ -89,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -110,38 +133,93 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Latin Repositories: Common Corpus</h1>
+                  <div>
+        <div class="description">
+          Exploratory Philology post describing the Common Corpus dataset with a focus on its Latin content. First in a series on Latin repositories.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">exploratory-philology</div>
+                <div class="quarto-category">latin</div>
+                <div class="quarto-category">latin-repos</div>
+                <div class="quarto-category">llms</div>
+                <div class="quarto-category">massive philology</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Patrick J. Burns </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 13, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-jolla">
- <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">About</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header><main class="content" id="quarto-document-content">
-<p>Data science + Latin literature</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-</main> 
-  <hr class="about-sep">
-   <div class="about-links">
-  <a href="https://twitter.com/diyclassics" class="about-link" rel="" target="">
-    <i class="bi bi-twitter"></i>
-     <span class="about-link-text">Twitter</span>
-  </a>
-  <a href="https://github.com/diyclassics" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Today’s large language models (LLM) are trained on language datasets measuring in the <em>trillions</em> of tokens–this is at the heart of what makes them “large” models. In many cases these datasets are proprietary and so not available for further inspection. This post looks at an such a dataset—<em>Common Corpus</em> (CC), described as “the largest open dataset for language model pre-training.” And it looks at this dataset through a particular lens, namely with a focus on the substantial Latin content advertised in the dataset. By substantial, I refer here to the 36 <em>billion</em> Latin tokens noted in Table 2 of the paper. That is a number magnitudes larger than a metacollection of Latin texts like <em>Corpus Corporum</em>, which at time of writing contains ~226.3M words of Latin. (A discussion on how we should compare tokens to words is pursued below.)</p>
+<p>This post consists of the following sections: 1. a brief review of the CC preprint; 2. a summary and discussion of the Latin content in CC; and 3. an outline of the necessary next steps–the necessary next <em>philological</em> steps–in determining how this dataset can be useful to Latinists and computational Latinists in particular Subsequent posts will take up the next steps as described in this section, including audits of specific texts within the CC collection, overviews of subsections of CC (like Wikipedia), and demonstration of the curation tools used in CC development (like the OCR correction tool OCRonos).</p>
+</section>
+<section id="summary-of-cc-preprint" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-cc-preprint">Summary of CC preprint</h2>
+<section id="what-is-a-token" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-a-token">What is a token?</h3>
+</section>
+</section>
+<section id="latin-content-in-cc" class="level2">
+<h2 class="anchored" data-anchor-id="latin-content-in-cc">Latin content in CC</h2>
+</section>
+<section id="next-steps-i.e.-opportunities-for-computational-philological-work" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps-i.e.-opportunities-for-computational-philological-work">Next steps, i.e.&nbsp;opportunities for computational philological work</h2>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" role="list">
+
 </div>
-</div>
- <!-- /main -->
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
