@@ -286,31 +286,21 @@ Decoded text: Gallia est omnis divisa in partes tres.</code></pre>
 <div id="cell-7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load high-quality text, i.e. Cicero's Cat. 1 from CLTK-Tesserae</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cltkreaders.lat <span class="im">import</span> LatinTesseraeCorpusReader</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> LatinTesseraeCorpusReader()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Temp fix for running multiple tokenizers</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"TOKENIZERS_PARALLELISM"</span>] <span class="op">=</span> <span class="st">"false"</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> <span class="st">'cicero.in_catilinam.tess'</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>cicero <span class="op">=</span> T.fileids(match<span class="op">=</span><span class="bu">file</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="bu">next</span>(T.texts(cicero))</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Opening of Cat. 1:"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[:<span class="dv">100</span>])  <span class="co"># first 100 characters</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> <span class="bu">list</span>(T.words(cicero))</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of words in Cat. 1: </span><span class="sc">{</span><span class="bu">len</span>(words)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
-To disable this warning, you can either:
-    - Avoid using `tokenizers` before the fork if possible
-    - Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
-huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
-To disable this warning, you can either:
-    - Avoid using `tokenizers` before the fork if possible
-    - Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
-huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
-To disable this warning, you can either:
-    - Avoid using `tokenizers` before the fork if possible
-    - Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)</code></pre>
-</div>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cltkreaders.lat <span class="im">import</span> LatinTesseraeCorpusReader</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> LatinTesseraeCorpusReader()</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> <span class="st">'cicero.in_catilinam.tess'</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>cicero <span class="op">=</span> T.fileids(match<span class="op">=</span><span class="bu">file</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="bu">next</span>(T.texts(cicero))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Opening of Cat. 1:"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[:<span class="dv">100</span>])  <span class="co"># first 100 characters</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> <span class="bu">list</span>(T.words(cicero))</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of words in Cat. 1: </span><span class="sc">{</span><span class="bu">len</span>(words)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Opening of Cat. 1:
 quo usque tandem abutere, Catilina, patientia nostra? quam diu etiam furor iste tuus nos eludet? que
@@ -319,15 +309,15 @@ Number of words in Cat. 1: 14714</code></pre>
 </div>
 <p>Now let’s compare the number of words given by the LatinCy tokenizer to the number of Pleias tokens for the same text…</p>
 <div id="cell-9" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize Cicero's Cat. 1 with Pleias tokenizer and compute ratio of tokens to words</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> Tok.tokenize(text)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Word-Token summary for Cat. 1:"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of words: </span><span class="sc">{</span><span class="bu">len</span>(words)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of tokens: </span><span class="sc">{</span><span class="bu">len</span>(tokens)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ratio <span class="op">=</span> <span class="bu">len</span>(tokens) <span class="op">/</span> <span class="bu">len</span>(words)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tokens/words ratio: </span><span class="sc">{</span>ratio<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize Cicero's Cat. 1 with Pleias tokenizer and compute ratio of tokens to words</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> Tok.tokenize(text)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Word-Token summary for Cat. 1:"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of words: </span><span class="sc">{</span><span class="bu">len</span>(words)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of tokens: </span><span class="sc">{</span><span class="bu">len</span>(tokens)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ratio <span class="op">=</span> <span class="bu">len</span>(tokens) <span class="op">/</span> <span class="bu">len</span>(words)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tokens/words ratio: </span><span class="sc">{</span>ratio<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Word-Token summary for Cat. 1:
 Number of words: 14714
@@ -337,37 +327,37 @@ Tokens/words ratio: 1.62</code></pre>
 </div>
 <p>If the CLTK-Tesserae text were representative of the Latin texts in CC, and we used this tokens-to-words ratio (1.62) to estimate the CC word count…</p>
 <div id="cell-11" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the number of words corresponding to 36 billion tokens using the observed ratio</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pleias_latin_tokens <span class="op">=</span> <span class="dv">36_000_000_000</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>estimated_words <span class="op">=</span> pleias_latin_tokens <span class="op">/</span> ratio</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Estimated number of Latin words for 36B Latin Pleias tokens: </span><span class="sc">{</span>estimated_words<span class="sc">:,.0f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the number of words corresponding to 36 billion tokens using the observed ratio</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pleias_latin_tokens <span class="op">=</span> <span class="dv">36_000_000_000</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>estimated_words <span class="op">=</span> pleias_latin_tokens <span class="op">/</span> ratio</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Estimated number of Latin words for 36B Latin Pleias tokens: </span><span class="sc">{</span>estimated_words<span class="sc">:,.0f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated number of Latin words for 36B Latin Pleias tokens: 22,277,062,831</code></pre>
 </div>
 </div>
 <p>But most of the content in CC is lower quality than our CLTK-Tesserae version of Cicero. Here are some extracts from an Internet Archive text (Ratellerus’s 1576 edition of <em>Trageodiae Sophoclis</em>):</p>
 <div id="cell-13" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load lower-quality text from Internet Archive...</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>noisy_url <span class="op">=</span> <span class="st">"https://archive.org/stream/bub_gb_u1HTSd5V6dwC/bub_gb_u1HTSd5V6dwC_djvu.txt"</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(noisy_url)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>noisy_text <span class="op">=</span> response.text</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(noisy_text, <span class="st">"html.parser"</span>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>main <span class="op">=</span> soup.find(<span class="st">"pre"</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> main:</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    main_plaintext <span class="op">=</span> main.get_text(separator<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>).strip()</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/noisy_latin.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> out:</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        out.write(main_plaintext)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No &lt;main id=</span><span class="ch">\"</span><span class="st">maincontent</span><span class="ch">\"</span><span class="st">&gt; block found."</span>)</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Extract 1 from noisy text:"</span>)</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(main_plaintext[<span class="dv">0</span>:<span class="dv">250</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load lower-quality text from Internet Archive...</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>noisy_url <span class="op">=</span> <span class="st">"https://archive.org/stream/bub_gb_u1HTSd5V6dwC/bub_gb_u1HTSd5V6dwC_djvu.txt"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(noisy_url)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>noisy_text <span class="op">=</span> response.text</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(noisy_text, <span class="st">"html.parser"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>main <span class="op">=</span> soup.find(<span class="st">"pre"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> main:</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    main_plaintext <span class="op">=</span> main.get_text(separator<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>).strip()</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/noisy_latin.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> out:</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        out.write(main_plaintext)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No &lt;main id=</span><span class="ch">\"</span><span class="st">maincontent</span><span class="ch">\"</span><span class="st">&gt; block found."</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Extract 1 from noisy text:"</span>)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(main_plaintext[<span class="dv">0</span>:<span class="dv">250</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Extract 1 from noisy text:
 z/^  -i,  ■ 
@@ -425,8 +415,8 @@ V ■«
 </div>
 </div>
 <div id="cell-14" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Extract 2 from noisy text:"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(main_plaintext[<span class="dv">20000</span>:<span class="dv">20250</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Extract 2 from noisy text:"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(main_plaintext[<span class="dv">20000</span>:<span class="dv">20250</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Extract 2 from noisy text:
 rans  ambitione  ruit  ? 
@@ -442,8 +432,8 @@ Hinc  ira  impatiens  Grace </code></pre>
 </div>
 </div>
 <div id="cell-15" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Extract 3 from noisy text:"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(main_plaintext[<span class="dv">50000</span>:<span class="dv">50250</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Extract 3 from noisy text:"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(main_plaintext[<span class="dv">50000</span>:<span class="dv">50250</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Extract 3 from noisy text:
 itur, 
@@ -467,16 +457,16 @@ V i'</code></pre>
 </div>
 <p>We’ll use <code>split</code> to tokenize this text approximately into words, and again compare this to the Pleias tokenizer output…</p>
 <div id="cell-17" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize Ratellerus with Pleias tokenizer and compute ratio of tokens to words</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> main_plaintext.split()</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> Tok.tokenize(main_plaintext)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Word-Token summary for Ratellerus extract:"</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of words: </span><span class="sc">{</span><span class="bu">len</span>(words)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of tokens: </span><span class="sc">{</span><span class="bu">len</span>(tokens)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>ratio <span class="op">=</span> <span class="bu">len</span>(tokens) <span class="op">/</span> <span class="bu">len</span>(words)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tokens/words ratio: </span><span class="sc">{</span>ratio<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize Ratellerus with Pleias tokenizer and compute ratio of tokens to words</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> main_plaintext.split()</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> Tok.tokenize(main_plaintext)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Word-Token summary for Ratellerus extract:"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of words: </span><span class="sc">{</span><span class="bu">len</span>(words)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of tokens: </span><span class="sc">{</span><span class="bu">len</span>(tokens)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ratio <span class="op">=</span> <span class="bu">len</span>(tokens) <span class="op">/</span> <span class="bu">len</span>(words)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tokens/words ratio: </span><span class="sc">{</span>ratio<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Word-Token summary for Ratellerus extract:
 Number of words: 101096
@@ -487,37 +477,37 @@ Tokens/words ratio: 3.27</code></pre>
 <p>As we can see, the noisy text has a much higher token-to-word ratio, almost certainly because of the large amount of noise (i.e.&nbsp;non-word OCR artifacts) in the digitized text.</p>
 <p>Before coming to any provisional conclusions, let’s try one more text, one of reasonably good quality but also with non-standard Latin words and one drawn from material known to be in CC. Here is the first text alphabetically in the <a href="https://la.wikipedia.org/">Latin Wikipedia, or <em>Vicipaedia</em></a>, namely the article on ‘Weird Al’ Yankovic.</p>
 <div id="cell-19" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>vicipedia_url <span class="op">=</span> <span class="st">"https://la.wikipedia.org/wiki/Alfredus_Yankovic"</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(vicipedia_url)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(response.text, <span class="st">"html.parser"</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>content_div <span class="op">=</span> soup.find(<span class="st">"div"</span>, {<span class="st">"id"</span>: <span class="st">"mw-content-text"</span>})</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> content_div:</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    article_text <span class="op">=</span> content_div.get_text(separator<span class="op">=</span><span class="st">" "</span>, strip<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    article_text <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(article_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>vicipedia_url <span class="op">=</span> <span class="st">"https://la.wikipedia.org/wiki/Alfredus_Yankovic"</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(vicipedia_url)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(response.text, <span class="st">"html.parser"</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>content_div <span class="op">=</span> soup.find(<span class="st">"div"</span>, {<span class="st">"id"</span>: <span class="st">"mw-content-text"</span>})</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> content_div:</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    article_text <span class="op">=</span> content_div.get_text(separator<span class="op">=</span><span class="st">" "</span>, strip<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    article_text <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(article_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-4 (corrigenda) Latinitas huius paginae corrigenda est. Si potes, corrige vel rescribe. Vide {{ latinitas }}. Alfredus Yankovic (usitate notus a suo agnomine "Weird Al" Yankovic ( Latine "Alienus Al")) est cantor Americanus carminum satiricorum . Notus est per paroediis suis carminium popularium Michaelis Jackson , Madonnae , et aliorum cantorum famosorum. Vita [ recensere | fontem recensere ] Natus 23 Octobris 1959 in Lynwood in California . [ 1 ] Quando 7 anni natus est, mercator vendere eo accordion aut citharam obtulit. Pater Alfredi accordion decrevit quod fidicinem musicae polcae alium cum agnomine Yankovic voluit (primus erat "rex polcae" Franciscus Yankovic). [ 2 ] Alfredus non cognatus est eo, sed erat unus suorum inspirationum). Erat valedictor in suo lyceo, ab ubi graduavit uno anno mature. Suam careram musicam incepit quando erat discipulus in Universitate Polytechnica Californiae in Sancto Ludovico Episcopo. [ 3 ] Erat in hoc tempore quando apparuit on programmate radiophonica Dr. Demento. Notae [ recensere | fontem recensere ] ↑ Ankeny, Jason. "Weird Al Yankovic Biography" . AllMusic.com ( Rovi ) ↑ "Permanent Record: Al in the Box" ↑ Conrad, Harold (August 1985). Guccione, Jr., Bob. ed. "The Glamorous Life Of Al Yankovic" . SPIN (SPIN Media LLC) 1 (4):  48. – 50 Nexus externi [ recensere | fontem recensere ] Vicimedia Communia plura habent quae ad Alfredum Yankovic spectant. Musica Haec stipula ad musicam spectat. Amplifica , si potes! Receptum de " https://la.wikipedia.org/w/index.php?title=Alfredus_Yankovic&amp;oldid=3477049 "</code></pre>
 </div>
 </div>
 <p>How does this Latin (if not canonical Latin) text fare in comparison to the Cicero and Ratellerus texts?</p>
 <div id="cell-21" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize Vicipaedia article with Pleias tokenizer and compute ratio of tokens to words</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> article_text.split()</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> Tok.tokenize(article_text)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Word-Token summary for Vicipaedia extract:"</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of words: </span><span class="sc">{</span><span class="bu">len</span>(words)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of tokens: </span><span class="sc">{</span><span class="bu">len</span>(tokens)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>ratio <span class="op">=</span> <span class="bu">len</span>(tokens) <span class="op">/</span> <span class="bu">len</span>(words)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tokens/words ratio: </span><span class="sc">{</span>ratio<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize Vicipaedia article with Pleias tokenizer and compute ratio of tokens to words</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> article_text.split()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> Tok.tokenize(article_text)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Word-Token summary for Vicipaedia extract:"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of words: </span><span class="sc">{</span><span class="bu">len</span>(words)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of tokens: </span><span class="sc">{</span><span class="bu">len</span>(tokens)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>ratio <span class="op">=</span> <span class="bu">len</span>(tokens) <span class="op">/</span> <span class="bu">len</span>(words)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tokens/words ratio: </span><span class="sc">{</span>ratio<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Word-Token summary for Vicipaedia extract:
 Number of words: 238
@@ -527,19 +517,19 @@ Tokens/words ratio: 2.03</code></pre>
 </div>
 <p>We can now summarize our findings…</p>
 <div id="cell-23" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize findings</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabulate <span class="im">import</span> tabulate</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Cicero"</span>, <span class="dv">14714</span>, <span class="dv">23778</span>, <span class="fl">1.62</span>],</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Vicipaedia"</span>, <span class="dv">238</span>, <span class="dv">484</span>, <span class="fl">2.03</span>],</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Ratellerus"</span>, <span class="dv">101096</span>, <span class="dv">330870</span>, <span class="fl">3.27</span>],</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> [<span class="st">"Text"</span>, <span class="st">"Words"</span>, <span class="st">"Tokens"</span>, <span class="st">"Tokens/Words Ratio"</span>]</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(data, headers<span class="op">=</span>headers))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize findings</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabulate <span class="im">import</span> tabulate</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Cicero"</span>, <span class="dv">14714</span>, <span class="dv">23778</span>, <span class="fl">1.62</span>],</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Vicipaedia"</span>, <span class="dv">238</span>, <span class="dv">484</span>, <span class="fl">2.03</span>],</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Ratellerus"</span>, <span class="dv">101096</span>, <span class="dv">330870</span>, <span class="fl">3.27</span>],</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> [<span class="st">"Text"</span>, <span class="st">"Words"</span>, <span class="st">"Tokens"</span>, <span class="st">"Tokens/Words Ratio"</span>]</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(data, headers<span class="op">=</span>headers))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Text          Words    Tokens    Tokens/Words Ratio
 ----------  -------  --------  --------------------
@@ -550,14 +540,14 @@ Ratellerus   101096    330870                  3.27</code></pre>
 </div>
 <p>Let’s provisionally establish an lower and upper bound for the token-to-word ratio in Latin texts. In the case of the higher-quality text, we have 1.62 tokens per word. In the case of the lower-quality text, we have 3.27 tokens per word. Since CC reports 36 billion tokens, this suggests a range of 11 to 22.2 billion words in CC Latin texts, and we should err for now on the lower-bound side of this range as assessment of the CC Latin text quality continues.</p>
 <div id="cell-25" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pleias_latin_tokens <span class="op">=</span> <span class="dv">36_000_000_000</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>lower_ratio <span class="op">=</span> <span class="fl">1.62</span>  <span class="co"># from Cicero</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>upper_ratio <span class="op">=</span> <span class="fl">3.27</span>  <span class="co"># from noisy text</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>lower_estimate <span class="op">=</span> pleias_latin_tokens <span class="op">/</span> upper_ratio</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>upper_estimate <span class="op">=</span> pleias_latin_tokens <span class="op">/</span> lower_ratio</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Estimated Latin words in CC (provisional): </span><span class="sc">{</span>lower_estimate<span class="op">/</span><span class="dv">1_000_000_000</span><span class="sc">:.1f}</span><span class="ss">B to </span><span class="sc">{</span>upper_estimate<span class="op">/</span><span class="dv">1_000_000_000</span><span class="sc">:.1f}</span><span class="ss">B"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pleias_latin_tokens <span class="op">=</span> <span class="dv">36_000_000_000</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>lower_ratio <span class="op">=</span> <span class="fl">1.62</span>  <span class="co"># from Cicero</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>upper_ratio <span class="op">=</span> <span class="fl">3.27</span>  <span class="co"># from noisy text</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>lower_estimate <span class="op">=</span> pleias_latin_tokens <span class="op">/</span> upper_ratio</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>upper_estimate <span class="op">=</span> pleias_latin_tokens <span class="op">/</span> lower_ratio</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Estimated Latin words in CC (provisional): </span><span class="sc">{</span>lower_estimate<span class="op">/</span><span class="dv">1_000_000_000</span><span class="sc">:.1f}</span><span class="ss">B to </span><span class="sc">{</span>upper_estimate<span class="op">/</span><span class="dv">1_000_000_000</span><span class="sc">:.1f}</span><span class="ss">B"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated Latin words in CC (provisional): 11.0B to 22.2B</code></pre>
 </div>
