@@ -162,7 +162,14 @@ cython_debug/
 # Quarto
 /.quarto/
 /_site/
+**/*.quarto_ipynb
 
 # Mac
 .DS_Store
 
+# uv
+.python-version
+uv.lock
+
+# Claude
+.claude/
