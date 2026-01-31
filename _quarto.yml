@@ -1,8 +1,17 @@
 project:
   type: website
+  render:
+    - "!posts/pleias-tokenizer/"
+    - "!posts/tool-rnntagger/"
+    - "**/*.qmd"
+    - "**/*.ipynb"
+
+execute:
+  freeze: auto
 
 website:
   title: "Exploratory Philology Blog"
+  draft-mode: gone
   navbar:
     background: seagreen
     right:
@@ -11,6 +20,7 @@ website:
         href: https://github.com/diyclassics
       - icon: twitter
         href: https://twitter.com/diyclassics
+
 format:
   html:
     theme: cosmo
