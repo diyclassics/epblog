@@ -4,13 +4,15 @@ Convert a Quarto blog notebook to a standalone Binder-ready notebook.
 
 Usage:
     python scripts/convert_to_binder.py posts/word-counts/index.ipynb notebooks/word-counts.ipynb
+    python scripts/convert_to_binder.py --check posts/word-counts/index.ipynb  # Check if include_notebook is true
 
 This script:
 1. Reads the Quarto blog notebook
-2. Extracts metadata from the YAML frontmatter
-3. Replaces the frontmatter cell with a markdown header
-4. Removes blog-specific elements (Binder badge, preview image)
-5. Writes a standalone notebook suitable for Binder
+2. Checks for include_notebook: true in YAML frontmatter (skips if false/missing)
+3. Extracts metadata from the YAML frontmatter
+4. Replaces the frontmatter cell with a markdown header
+5. Removes blog-specific elements (Binder badge, preview image, citations, references)
+6. Writes a standalone notebook suitable for Binder
 """
 
 import json
@@ -41,6 +43,12 @@ def extract_yaml_frontmatter(source: str) -> dict:
     return metadata
 
 
+def should_include_notebook(metadata: dict) -> bool:
+    """Check if the notebook should be converted (include_notebook: true)."""
+    include = metadata.get('include_notebook', 'false')
+    return include.lower() == 'true'
+
+
 def create_binder_header(metadata: dict, blog_url: str) -> str:
     """Create a markdown header cell for the Binder notebook."""
     title = metadata.get('title', 'Untitled')
@@ -66,6 +74,13 @@ def create_binder_header(metadata: dict, blog_url: str) -> str:
     return header
 
 
+def generate_binder_link(post_slug: str, repo: str = "diyclassics/epblog", branch: str = "notebooks") -> str:
+    """Generate the Binder badge markdown for a post."""
+    notebook_path = f"notebooks/{post_slug}.ipynb"
+    binder_url = f"https://mybinder.org/v2/gh/{repo}/{branch}?labpath={notebook_path.replace('/', '%2F')}"
+    return f"[![Binder](https://mybinder.org/badge_logo.svg)]({binder_url})"
+
+
 def clean_markdown_cell(source: str) -> str:
     """Remove blog-specific elements from markdown cells."""
     lines = source.split('\n')
@@ -87,12 +102,27 @@ def clean_markdown_cell(source: str) -> str:
             skip_until_empty = True
             continue
 
+        # Skip Quarto reference sections
+        if '::: {#refs}' in line or ':::' in line.strip():
+            continue
+
+        # Skip "References" header if it's alone
+        if line.strip() == '### References':
+            continue
+
         if skip_until_empty:
             if line.strip() == '':
                 skip_until_empty = False
             continue
 
         cleaned_lines.append(line)
+
+    # Remove Quarto citation syntax (@citation)
+    cleaned_text = '\n'.join(cleaned_lines)
+    cleaned_text = re.sub(r'\s*\(@\w+\)', '', cleaned_text)
+    cleaned_text = re.sub(r'\(@\w+\)', '', cleaned_text)
+
+    cleaned_lines = cleaned_text.split('\n')
 
     # Remove leading/trailing empty lines
     while cleaned_lines and cleaned_lines[0].strip() == '':
@@ -103,12 +133,40 @@ def clean_markdown_cell(source: str) -> str:
     return '\n'.join(cleaned_lines)
 
 
-def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "https://diyclassics.github.io/epblog") -> None:
-    """Convert a Quarto blog notebook to a Binder-ready notebook."""
+def is_references_cell(source: str) -> bool:
+    """Check if a cell is a Quarto references section."""
+    return '### References' in source or '::: {#refs}' in source
+
+
+def is_update_note_cell(source: str) -> bool:
+    """Check if a cell is an update/publication note (blog-specific)."""
+    return source.strip().startswith('---') and 'Originally published' in source
+
+
+def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "https://diyclassics.github.io/epblog", force: bool = False) -> bool:
+    """Convert a Quarto blog notebook to a Binder-ready notebook.
+
+    Returns True if conversion was performed, False if skipped.
+    """
 
     # Read the input notebook
     with open(input_path, 'r', encoding='utf-8') as f:
         notebook = json.load(f)
+
+    # Get first cell to check metadata
+    first_cell = notebook['cells'][0] if notebook['cells'] else None
+    metadata = {}
+
+    if first_cell:
+        cell_type = first_cell.get('cell_type', '')
+        source = ''.join(first_cell.get('source', []))
+        if cell_type == 'raw' and source.strip().startswith('---'):
+            metadata = extract_yaml_frontmatter(source)
+
+    # Check if we should convert this notebook
+    if not force and not should_include_notebook(metadata):
+        print(f"Skipped: {input_path} (include_notebook is not true)")
+        return False
 
     # Determine blog post URL from path
     # e.g., posts/word-counts/index.ipynb -> posts/word-counts/
@@ -116,20 +174,17 @@ def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "
     blog_url = f"{blog_base_url}/posts/{post_slug}/"
 
     new_cells = []
-    metadata = {}
-    first_cell = True
+    first_cell_processed = False
 
     for cell in notebook['cells']:
         cell_type = cell.get('cell_type', '')
         source = ''.join(cell.get('source', []))
 
-        if first_cell:
-            first_cell = False
+        if not first_cell_processed:
+            first_cell_processed = True
 
             # Check if this is a raw cell with YAML frontmatter
             if cell_type == 'raw' and source.strip().startswith('---'):
-                metadata = extract_yaml_frontmatter(source)
-
                 # Create new markdown header cell
                 header_source = create_binder_header(metadata, blog_url)
                 new_cells.append({
@@ -139,8 +194,11 @@ def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "
                 })
                 continue
 
-        # Clean markdown cells
+        # Skip references and update note cells
         if cell_type == 'markdown':
+            if is_references_cell(source) or is_update_note_cell(source):
+                continue
+
             cleaned_source = clean_markdown_cell(source)
             if cleaned_source.strip():  # Only add non-empty cells
                 new_cell = cell.copy()
@@ -176,21 +234,65 @@ def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "
     print(f"Converted: {input_path} -> {output_path}")
     print(f"  Title: {metadata.get('title', 'Unknown')}")
     print(f"  Blog URL: {blog_url}")
+    print(f"  Binder link: {generate_binder_link(post_slug)}")
+
+    return True
+
+
+def check_notebook(input_path: Path) -> bool:
+    """Check if a notebook has include_notebook: true."""
+    with open(input_path, 'r', encoding='utf-8') as f:
+        notebook = json.load(f)
+
+    first_cell = notebook['cells'][0] if notebook['cells'] else None
+
+    if first_cell:
+        cell_type = first_cell.get('cell_type', '')
+        source = ''.join(first_cell.get('source', []))
+        if cell_type == 'raw' and source.strip().startswith('---'):
+            metadata = extract_yaml_frontmatter(source)
+            return should_include_notebook(metadata)
+
+    return False
 
 
 def main():
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         print(__doc__)
         sys.exit(1)
 
-    input_path = Path(sys.argv[1])
-    output_path = Path(sys.argv[2])
+    # Handle --check flag
+    if sys.argv[1] == '--check':
+        if len(sys.argv) < 3:
+            print("Usage: convert_to_binder.py --check <input_notebook>")
+            sys.exit(1)
+        input_path = Path(sys.argv[2])
+        if check_notebook(input_path):
+            print(f"{input_path}: include_notebook=true")
+            sys.exit(0)
+        else:
+            print(f"{input_path}: include_notebook=false (or not set)")
+            sys.exit(1)
+
+    # Handle --force flag
+    force = '--force' in sys.argv
+    args = [a for a in sys.argv[1:] if a != '--force']
+
+    if len(args) < 2:
+        print(__doc__)
+        sys.exit(1)
+
+    input_path = Path(args[0])
+    output_path = Path(args[1])
 
     if not input_path.exists():
         print(f"Error: Input file not found: {input_path}")
         sys.exit(1)
 
-    convert_notebook(input_path, output_path)
+    if convert_notebook(input_path, output_path, force=force):
+        sys.exit(0)
+    else:
+        sys.exit(1)
 
 
 if __name__ == '__main__':
