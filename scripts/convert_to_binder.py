@@ -12,8 +12,10 @@ This script:
 3. Extracts metadata from the YAML frontmatter
 4. Replaces the frontmatter cell with a markdown header
 5. If texts: field is present, generates a setup cell to fetch only those texts
-6. Removes blog-specific elements (Binder badge, preview image, citations, references)
-7. Writes a standalone notebook suitable for Binder
+6. Converts Quarto citations (@key) to static text citations
+7. Adds a References section at the end with full citations
+8. Removes blog-specific elements (Binder badge, preview image)
+9. Writes a standalone notebook suitable for Binder
 """
 
 import json
@@ -24,6 +26,99 @@ from pathlib import Path
 
 # Tesserae raw file URL template
 TESSERAE_RAW_URL = "https://raw.githubusercontent.com/tesserae/tesserae/master/texts/la/{filename}"
+
+
+def parse_bibtex(bib_path: Path) -> dict:
+    """Parse a BibTeX file and return a dict of entries keyed by citation key."""
+    if not bib_path.exists():
+        return {}
+
+    entries = {}
+    with open(bib_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Match BibTeX entries: @type{key, ... }
+    pattern = r'@(\w+)\{([^,]+),([^@]*)\}'
+    matches = re.findall(pattern, content, re.DOTALL)
+
+    for entry_type, key, fields_str in matches:
+        key = key.strip()
+        entry = {'type': entry_type.lower()}
+
+        # Parse fields - handle nested braces by matching balanced braces
+        field_pattern = r'(\w+)\s*=\s*\{((?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*)\}'
+        fields = re.findall(field_pattern, fields_str)
+
+        for field_name, field_value in fields:
+            # Clean up the value (remove LaTeX formatting)
+            value = field_value.strip()
+            # Remove nested braces iteratively
+            while '{{' in value or '}}' in value:
+                value = value.replace('{{', '').replace('}}', '')
+            value = re.sub(r'\{([^}]*)\}', r'\1', value)  # {word} -> word
+            entry[field_name.lower()] = value
+
+        entries[key] = entry
+
+    return entries
+
+
+def format_inline_citation(entry: dict) -> str:
+    """Format a BibTeX entry as an inline citation (Author, Year)."""
+    author = entry.get('author', 'Unknown')
+    year = entry.get('date', entry.get('year', 'n.d.'))
+
+    # Parse author names - handle "Last, F. and Last2, F2." format
+    authors = author.split(' and ')
+    if len(authors) == 1:
+        # Single author - extract last name
+        parts = authors[0].split(',')
+        last_name = parts[0].strip()
+    elif len(authors) == 2:
+        # Two authors
+        last1 = authors[0].split(',')[0].strip()
+        last2 = authors[1].split(',')[0].strip()
+        last_name = f"{last1} & {last2}"
+    else:
+        # Three or more - first author et al.
+        last_name = authors[0].split(',')[0].strip() + " et al."
+
+    return f"({last_name}, {year})"
+
+
+def format_full_citation(entry: dict) -> str:
+    """Format a BibTeX entry as a full reference."""
+    entry_type = entry.get('type', 'misc')
+    author = entry.get('author', 'Unknown')
+    year = entry.get('date', entry.get('year', 'n.d.'))
+    title = entry.get('title', 'Untitled')
+
+    # Format author names
+    authors = author.split(' and ')
+    formatted_authors = []
+    for a in authors:
+        parts = a.split(',')
+        if len(parts) >= 2:
+            last = parts[0].strip()
+            first = parts[1].strip()
+            formatted_authors.append(f"{last}, {first}")
+        else:
+            formatted_authors.append(a.strip())
+
+    author_str = ' & '.join(formatted_authors)
+
+    if entry_type == 'book':
+        publisher = entry.get('publisher', '')
+        location = entry.get('location', '')
+        pub_info = f"{location}: {publisher}" if location and publisher else publisher or location
+        return f"{author_str} ({year}). *{title}*. {pub_info}."
+    elif entry_type == 'article':
+        journal = entry.get('journal', '')
+        volume = entry.get('volume', '')
+        pages = entry.get('pages', '')
+        return f"{author_str} ({year}). {title}. *{journal}*, {volume}, {pages}."
+    else:
+        return f"{author_str} ({year}). *{title}*."
 
 
 def extract_yaml_frontmatter(source: str) -> dict:
@@ -151,6 +246,20 @@ def create_setup_markdown() -> str:
 First, let's fetch the texts needed for this notebook. This downloads only the specific files required, rather than the entire corpus."""
 
 
+def create_references_cell(used_citations: set, bib_entries: dict) -> str:
+    """Create a References markdown cell."""
+    if not used_citations or not bib_entries:
+        return None
+
+    refs = ["## References\n"]
+    for key in sorted(used_citations):
+        if key in bib_entries:
+            ref = format_full_citation(bib_entries[key])
+            refs.append(f"- {ref}")
+
+    return '\n'.join(refs)
+
+
 def generate_binder_link(post_slug: str, repo: str = "diyclassics/epblog", branch: str = "notebooks") -> str:
     """Generate the Binder badge markdown for a post."""
     notebook_path = f"notebooks/{post_slug}.ipynb"
@@ -158,8 +267,29 @@ def generate_binder_link(post_slug: str, repo: str = "diyclassics/epblog", branc
     return f"[![Binder](https://mybinder.org/badge_logo.svg)]({binder_url})"
 
 
-def clean_markdown_cell(source: str) -> str:
-    """Remove blog-specific elements from markdown cells."""
+def replace_citations(source: str, bib_entries: dict) -> tuple[str, set]:
+    """Replace Quarto citation syntax with static citations.
+
+    Returns (modified_source, set_of_used_citation_keys).
+    """
+    used_keys = set()
+
+    def replace_citation(match):
+        key = match.group(1)
+        used_keys.add(key)
+        if key in bib_entries:
+            return format_inline_citation(bib_entries[key])
+        else:
+            return f"({key})"
+
+    # Replace (@key) with formatted citation
+    modified = re.sub(r'\(@(\w+)\)', replace_citation, source)
+
+    return modified, used_keys
+
+
+def clean_markdown_cell(source: str, bib_entries: dict, used_citations: set) -> str:
+    """Remove blog-specific elements from markdown cells and convert citations."""
     lines = source.split('\n')
     cleaned_lines = []
     skip_until_empty = False
@@ -179,11 +309,11 @@ def clean_markdown_cell(source: str) -> str:
             skip_until_empty = True
             continue
 
-        # Skip Quarto reference sections
+        # Skip Quarto reference sections (we'll add our own)
         if '::: {#refs}' in line or ':::' in line.strip():
             continue
 
-        # Skip "References" header if it's alone
+        # Skip "References" header if it's alone (we'll add our own)
         if line.strip() == '### References':
             continue
 
@@ -194,10 +324,11 @@ def clean_markdown_cell(source: str) -> str:
 
         cleaned_lines.append(line)
 
-    # Remove Quarto citation syntax (@citation)
     cleaned_text = '\n'.join(cleaned_lines)
-    cleaned_text = re.sub(r'\s*\(@\w+\)', '', cleaned_text)
-    cleaned_text = re.sub(r'\(@\w+\)', '', cleaned_text)
+
+    # Replace citations with static text
+    cleaned_text, new_citations = replace_citations(cleaned_text, bib_entries)
+    used_citations.update(new_citations)
 
     cleaned_lines = cleaned_text.split('\n')
 
@@ -264,6 +395,11 @@ def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "
         print(f"Skipped: {input_path} (include_notebook is not true)")
         return False
 
+    # Load bibliography if present
+    bib_path = input_path.parent / 'references.bib'
+    bib_entries = parse_bibtex(bib_path)
+    used_citations = set()
+
     # Get texts list if specified
     texts = metadata.get('texts', [])
     has_texts = bool(texts)
@@ -275,7 +411,6 @@ def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "
 
     new_cells = []
     first_cell_processed = False
-    setup_cell_added = False
 
     for cell in notebook['cells']:
         cell_type = cell.get('cell_type', '')
@@ -313,7 +448,6 @@ def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "
                         'outputs': [],
                         'execution_count': None
                     })
-                    setup_cell_added = True
 
                 continue
 
@@ -322,7 +456,7 @@ def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "
             if is_references_cell(source) or is_update_note_cell(source):
                 continue
 
-            cleaned_source = clean_markdown_cell(source)
+            cleaned_source = clean_markdown_cell(source, bib_entries, used_citations)
             if cleaned_source.strip():  # Only add non-empty cells
                 new_cell = cell.copy()
                 new_cell['source'] = cleaned_source.split('\n')
@@ -343,6 +477,15 @@ def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "
             if 'execution_count' in new_cell:
                 new_cell['execution_count'] = None
             new_cells.append(new_cell)
+
+    # Add references section if we have citations
+    refs_content = create_references_cell(used_citations, bib_entries)
+    if refs_content:
+        new_cells.append({
+            'cell_type': 'markdown',
+            'metadata': {},
+            'source': refs_content.split('\n')
+        })
 
     # Create output notebook
     output_notebook = {
@@ -365,6 +508,8 @@ def convert_notebook(input_path: Path, output_path: Path, blog_base_url: str = "
     print(f"  Blog URL: {blog_url}")
     if has_texts:
         print(f"  Texts: {', '.join(texts)}")
+    if used_citations:
+        print(f"  Citations: {', '.join(sorted(used_citations))}")
     print(f"  Binder link: {generate_binder_link(post_slug)}")
 
     return True
