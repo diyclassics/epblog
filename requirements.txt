@@ -1,4 +1,4 @@
-cltk-readers @ git+https://github.com/diyclassics/cltk_readers.git@c83f0cb87352f5e126b0f13edc08f7374b8e95bb
+latincyreaders @ git+https://github.com/diyclassics/latincy-readers.git@v1.0.2
 natsort==8.2.0
 pandas==2.1.1
 seaborn==0.13.2
