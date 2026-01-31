@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,7 +81,7 @@ div.csl-indent {
 }</style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -90,14 +90,15 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-af93d6fc5463f431738d724cc677ec3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-de3d5226f8b5168607ddcc3c03efb082.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -125,7 +126,7 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
@@ -140,6 +141,8 @@ div.csl-indent {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Exploratory Philology Blog</span>
     </a>
@@ -225,7 +228,7 @@ div.csl-indent {
 <p>In the first part of his <a href="https://global.oup.com/academic/product/repetition-in-latin-poetry-9780198140849?cc=us&amp;lang=en&amp;">1996 monograph</a> on repetition in Latin poetry, Jeffrey Wills <span class="citation" data-cites="wills_repetition_1996">(<a href="#ref-wills_repetition_1996" role="doc-biblioref">1996</a>)</span> discusses gemination. i.e.&nbsp;“the repetition of a word in the same form in the same clause with no additional expansion.” In this notebook, we will formalize Wills’ definition of gemination into code using LatinCy.</p>
 <p>Let’s start by setting up a code notebook with Python imports, etc. We will use <a href="https://github.com/diyclassics/cltk_readers">CLTK Readers</a> with the <a href="https://github.com/cltk/lat_text_tesserae">CLTK-Tesserae</a> texts as our exploratory background for gemination.</p>
 <div id="cell-2" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> natsort <span class="im">import</span> natsorted</span>
@@ -239,7 +242,7 @@ div.csl-indent {
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.display <span class="im">import</span> HTML</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Wills uses the following line from Virgil’s <em>Eclogues</em> to illustrate gemination (V. <em>Ecl.</em> 2.69):</p>
 <blockquote class="blockquote">
@@ -247,23 +250,23 @@ div.csl-indent {
 </blockquote>
 <p>Let’s begin there.</p>
 <div id="cell-4" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up corpus</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up corpus</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> LatinTesseraeCorpusReader()</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Eclogues file</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>eclogues <span class="op">=</span> [<span class="bu">file</span> <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> T.fileids() <span class="cf">if</span> <span class="st">'eclogues'</span> <span class="kw">in</span> <span class="bu">file</span>][<span class="dv">0</span>]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eclogues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eclogues)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>vergil.eclogues.tess</code></pre>
 </div>
 </div>
 <p>Next we load a LatinCy model to assist with matching Latin wordforms.</p>
 <div id="cell-6" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up NLP</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up NLP</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> spacy.load(<span class="st">'la_core_web_lg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> spacy.load(<span class="st">'la_core_web_lg'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="simple-gemination" class="level3">
 <h3 class="anchored" data-anchor-id="simple-gemination">Simple gemination</h3>
@@ -281,15 +284,15 @@ div.csl-indent {
 <p><strong>Get a line of Virgil</strong><br>
 For the Tesserae texts, CLTK Readers has a data structure called <code>doc_rows</code> that, at least for poetry, gives us a dictionary with the format {<em>citation</em>: <em>line</em>, etc.}. Let’s get the docrows for the <em>Eclogues</em> and print a sample line.</p>
 <div id="cell-10" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all Eclogue rows</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all Eclogue rows</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>docrows <span class="op">=</span> <span class="bu">next</span>(T.doc_rows(eclogues))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>docrows <span class="op">=</span> <span class="bu">next</span>(T.doc_rows(eclogues))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-11" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a row</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a row</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> docrows[<span class="st">'&lt;verg. ecl. 2.69&gt;'</span>]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ah, Corydon, Corydon, quae te dementia cepit!</code></pre>
 </div>
@@ -298,17 +301,17 @@ For the Tesserae texts, CLTK Readers has a data structure called <code>doc_rows<
 <p><strong>Create a LatinCy Doc</strong><br>
 Next we can create a spaCy Doc for each line. The Doc contains all sorts of annotations useful for philological work. We will use the <code>norm</code> token attribute here to help us match wordforms.</p>
 <div id="cell-13" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create LatinCy Doc for line</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create LatinCy Doc for line</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(test)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(doc))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(doc))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'spacy.tokens.doc.Doc'&gt;</code></pre>
 </div>
 </div>
 <div id="cell-14" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print norm examples</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate([[token.i, token.text, token.norm_] <span class="cf">for</span> token <span class="kw">in</span> doc], headers<span class="op">=</span>[<span class="st">'Index'</span>,<span class="st">'Token'</span>, <span class="st">'Norm'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print norm examples</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate([[token.i, token.text, token.norm_] <span class="cf">for</span> token <span class="kw">in</span> doc], headers<span class="op">=</span>[<span class="st">'Index'</span>,<span class="st">'Token'</span>, <span class="st">'Norm'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Index  Token     Norm
 -------  --------  --------
@@ -327,10 +330,10 @@ Next we can create a spaCy Doc for each line. The Doc contains all sorts of anno
 </div>
 <p>Thinking ahead, if we use lines as is from the Tesserae texts, we have to deal with punctuation. Wills is concerned with the repetition of <em>Corydon</em>, not the repetition of the commas! One way we can deal with this is to preprocess the lines to remove punctuation before creating the Docs. We will discuss the philological implications of preprocessing in a future notebook. For now, we are going to import a script called <code>preprocess</code> that removes punctuation.</p>
 <div id="cell-16" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create LatinCy Doc for preprocessed line and print example</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create LatinCy Doc for preprocessed line and print example</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(preprocess(test, lower<span class="op">=</span><span class="va">False</span>))</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate([[token.i, token.text, token.norm_] <span class="cf">for</span> token <span class="kw">in</span> doc], headers<span class="op">=</span>[<span class="st">'Index'</span>,<span class="st">'Token'</span>, <span class="st">'Norm'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate([[token.i, token.text, token.norm_] <span class="cf">for</span> token <span class="kw">in</span> doc], headers<span class="op">=</span>[<span class="st">'Index'</span>,<span class="st">'Token'</span>, <span class="st">'Norm'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Index  Token     Norm
 -------  --------  --------
@@ -346,11 +349,11 @@ Next we can create a spaCy Doc for each line. The Doc contains all sorts of anno
 <p><strong>Count the <code>norm</code> token attributes</strong><br>
 We can now count the <code>norm</code> token attributes for each line using a <code>Counter</code> from the <code>collections</code> module.</p>
 <div id="cell-18" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count `norm` attr in Doc tokens</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count `norm` attr in Doc tokens</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>norms <span class="op">=</span> [token.norm_ <span class="cf">for</span> token <span class="kw">in</span> doc]</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>norms_counter <span class="op">=</span> Counter(norms)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(norms_counter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(norms_counter)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Counter({'corydon': 2, 'ah': 1, 'quae': 1, 'te': 1, 'dementia': 1, 'cepit': 1})</code></pre>
 </div>
@@ -358,9 +361,9 @@ We can now count the <code>norm</code> token attributes for each line using a <c
 <p><strong>Check <code>norm</code> count</strong></p>
 <p>We can now check the <code>norm</code> count for each line. If the count is greater than 1, then the line has gemination.</p>
 <div id="cell-20" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>geminations <span class="op">=</span> [k <span class="cf">for</span> k, v <span class="kw">in</span> norms_counter.items() <span class="cf">if</span> v <span class="op">&gt;</span> <span class="dv">1</span>]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>geminations <span class="op">=</span> [k <span class="cf">for</span> k, v <span class="kw">in</span> norms_counter.items() <span class="cf">if</span> v <span class="op">&gt;</span> <span class="dv">1</span>]</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Number of geminations: </span><span class="sc">{</span><span class="bu">len</span>(geminations)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>geminations<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>geminations<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of geminations: 1
 ['corydon']</code></pre>
@@ -368,7 +371,7 @@ We can now count the <code>norm</code> token attributes for each line using a <c
 </div>
 <p>We knew from Wills that this line would have gemination; of course, not all lines do.</p>
 <div id="cell-22" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try a different line</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try a different line</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> docrows[<span class="st">'&lt;verg. ecl. 2.70&gt;'</span>]</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(preprocess(test))</span>
@@ -378,7 +381,7 @@ We can now count the <code>norm</code> token attributes for each line using a <c
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(doc.text)</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Number of geminations: </span><span class="sc">{</span><span class="bu">len</span>(geminations)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>geminations<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>geminations<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>semiputata tibi frondosa uitis in ulmo est
 Number of geminations: 0
@@ -387,22 +390,22 @@ Number of geminations: 0
 </div>
 <p>Having worked through our pseudocode, we can now put it all together into a function that we can use to check for gemination in any line of Latin poetry.</p>
 <div id="cell-24" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_geminations(Doc):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_geminations(Doc):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    norms <span class="op">=</span> [token.norm_ <span class="cf">for</span> token <span class="kw">in</span> Doc]</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    norms_counter <span class="op">=</span> Counter(norms)</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    geminations <span class="op">=</span> [k <span class="cf">for</span> k, v <span class="kw">in</span> norms_counter.items() <span class="cf">if</span> v <span class="op">&gt;</span> <span class="dv">1</span>]</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> geminations    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> geminations    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Using this function, we can loop through the docrows for the <em>Eclogues</em> and check for gemination in each line. In the example below, we <code>break</code> after the first match as we are only checking at this point that the function works as expected.</p>
 <div id="cell-26" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> docrows.items():</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> docrows.items():</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    doc <span class="op">=</span> nlp(preprocess(v, lower<span class="op">=</span><span class="va">False</span>))</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    geminations <span class="op">=</span> get_geminations(doc)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(geminations) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>geminations<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>v<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;verg. ecl. 1.23&gt;: ['sic']
 sic canibus catulos similis, sic matribus haedos
@@ -412,7 +415,7 @@ sic canibus catulos similis, sic matribus haedos
 </div>
 <p>More useful of course would be to collect all of the geminations into a data structure like a dictionary…</p>
 <div id="cell-28" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>virgil_geminations <span class="op">=</span> {}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>virgil_geminations <span class="op">=</span> {}</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> tqdm(docrows.items()):</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    doc <span class="op">=</span> nlp(preprocess(v))</span>
@@ -420,7 +423,7 @@ sic canibus catulos similis, sic matribus haedos
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> geminations:</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        virgil_geminations[k] <span class="op">=</span> (v, geminations)</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'There are </span><span class="sc">{</span><span class="bu">len</span>(virgil_geminations)<span class="sc">}</span><span class="ss"> geminations in Virgil</span><span class="ch">\'</span><span class="ss">s *Eclogues*.'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'There are </span><span class="sc">{</span><span class="bu">len</span>(virgil_geminations)<span class="sc">}</span><span class="ss"> geminations in Virgil</span><span class="ch">\'</span><span class="ss">s *Eclogues*.'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>100%|██████████| 828/828 [00:03&lt;00:00, 207.68it/s]</code></pre>
 </div>
@@ -432,9 +435,9 @@ sic canibus catulos similis, sic matribus haedos
 </div>
 </div>
 <div id="cell-29" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Here are the first five examples from our search:</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Here are the first five examples from our search:</span><span class="ch">\n</span><span class="st">'</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">list</span>(virgil_geminations.items())[:<span class="dv">5</span>]:</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>v[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>v[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Here are the first five examples from our search:
 
@@ -447,8 +450,8 @@ sic canibus catulos similis, sic matribus haedos
 </div>
 <p>Note V. <em>Ecl.</em> 1.75 as an example of why we use <code>norm</code> instead of <code>text</code> for matching wordforms. <em>Ite</em> is capitalized here only because it is the first word in the sentence, but should be matched against <em>ite</em> regardless of case. Note the following in Python string matching…</p>
 <div id="cell-31" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Ite'</span> <span class="op">==</span> <span class="st">'ite'</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'ite'</span> <span class="op">==</span> <span class="st">'ite'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Ite'</span> <span class="op">==</span> <span class="st">'ite'</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'ite'</span> <span class="op">==</span> <span class="st">'ite'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>False
 True</code></pre>
@@ -456,7 +459,7 @@ True</code></pre>
 </div>
 <p>We can make it easier to see gemination in our texts by formatting matched tokens in HTML. We can use the <code>display</code> module from the <code>IPython</code> package to display the HTML in the notebook.</p>
 <div id="cell-33" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_gemination(gemination):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_gemination(gemination):</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    html <span class="op">=</span> <span class="st">''</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> nlp(gemination[<span class="dv">0</span>])</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    terms <span class="op">=</span> gemination[<span class="dv">1</span>]</span>
@@ -465,10 +468,10 @@ True</code></pre>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> token.norm_ <span class="kw">in</span> terms:</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>            token <span class="op">=</span> <span class="ss">f'&lt;span style="color: green;"&gt;</span><span class="sc">{</span>token<span class="sc">}</span><span class="ss">&lt;/span&gt;'</span></span>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>        html <span class="op">+=</span> <span class="ss">f'</span><span class="sc">{</span>token<span class="sc">}</span><span class="ss"> '</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-34" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Here are the first five examples from our search:'</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Here are the first five examples from our search:'</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">list</span>(virgil_geminations.items())[:<span class="dv">5</span>]:</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note that if you do not remove the angle brackets from the Tesserae citation, it will be ignored as a (bad) HTML tag in the formatting below.</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    citation <span class="op">=</span> k.replace(<span class="st">'&lt;'</span>, <span class="st">''</span>).replace(<span class="st">'&gt;'</span>, <span class="st">''</span>) </span>
@@ -476,7 +479,7 @@ True</code></pre>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> display_gemination(v)</span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    html <span class="op">=</span> <span class="st">'&lt;br&gt;'</span>.join([citation, text])</span>
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    html <span class="op">+=</span> <span class="st">'&lt;br&gt;&lt;br&gt;'</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    display(HTML(html))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    display(HTML(html))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Here are the first five examples from our search:</code></pre>
 </div>
@@ -498,7 +501,7 @@ True</code></pre>
 </div>
 <p>Moreover, we can write these matches to a file, formatting the geminations to make them easier to spot, here wrapping repeitions with asterisks.</p>
 <div id="cell-36" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_gemination(gemination):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_gemination(gemination):</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    txt <span class="op">=</span> <span class="st">''</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> nlp(gemination[<span class="dv">0</span>])</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    terms <span class="op">=</span> gemination[<span class="dv">1</span>]</span>
@@ -514,7 +517,7 @@ True</code></pre>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>        citation <span class="op">=</span> k.replace(<span class="st">'&lt;'</span>, <span class="st">''</span>).replace(<span class="st">'&gt;'</span>, <span class="st">''</span>)</span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>        citation <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>citation<span class="sc">}</span><span class="ss">'</span></span>
 <span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> format_gemination(v)</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f'</span><span class="sc">{</span>citation<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>text<span class="sc">}</span><span class="ch">\n</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f'</span><span class="sc">{</span>citation<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>text<span class="sc">}</span><span class="ch">\n</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Note that a line like <em>Ecl.</em> 4.51 appears in the output…</p>
 <blockquote class="blockquote">
@@ -523,7 +526,7 @@ True</code></pre>
 <p>…as <em>que</em> is considered a token in the LatinCy model.</p>
 <p>Accordingly, we may want to have a way to drop certain tokens from our matching process. We add below an <code>exclude</code> parameter to the <code>get_geminations</code> function to accomplish this.</p>
 <div id="cell-38" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_geminations(Doc, exclude<span class="op">=</span>[]):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_geminations(Doc, exclude<span class="op">=</span>[]):</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    norms <span class="op">=</span> [token.norm_ <span class="cf">for</span> token <span class="kw">in</span> Doc]</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    norms_counter <span class="op">=</span> Counter(norms)</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    geminations <span class="op">=</span> [k <span class="cf">for</span> k, v <span class="kw">in</span> norms_counter.items() <span class="cf">if</span> v <span class="op">&gt;</span> <span class="dv">1</span> <span class="kw">and</span> k <span class="kw">not</span> <span class="kw">in</span> exclude]</span>
@@ -537,7 +540,7 @@ True</code></pre>
 <span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_geminations(test))</span>
 <span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
 <span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'After...'</span>)</span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_geminations(test, exclude<span class="op">=</span>exclude))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_geminations(test, exclude<span class="op">=</span>exclude))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Before...
 ['que']
@@ -548,7 +551,7 @@ After...
 </div>
 <p>We write to file again, this time excluding <em>que</em>.</p>
 <div id="cell-40" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>virgil_geminations <span class="op">=</span> {}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>virgil_geminations <span class="op">=</span> {}</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> tqdm(docrows.items()):</span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    doc <span class="op">=</span> nlp(preprocess(v))</span>
@@ -561,25 +564,25 @@ After...
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>        citation <span class="op">=</span> k.replace(<span class="st">'&lt;'</span>, <span class="st">''</span>).replace(<span class="st">'&gt;'</span>, <span class="st">''</span>)</span>
 <span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>        citation <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>citation<span class="sc">}</span><span class="ss">'</span></span>
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> format_gemination(v)</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f'</span><span class="sc">{</span>citation<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>text<span class="sc">}</span><span class="ch">\n</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f'</span><span class="sc">{</span>citation<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>text<span class="sc">}</span><span class="ch">\n</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>100%|██████████| 828/828 [00:03&lt;00:00, 213.19it/s]</code></pre>
 </div>
 </div>
 <p>So far, we have worked only with the <em>Eclogues</em>. We could easily expand this gemination search to other texts in the Tesserae corpus. Here is an example of expanding it to all epic poems in the collection.</p>
 <div id="cell-42" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geminations in all Latin epic</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geminations in all Latin epic</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Note here I get the year from the Tesserae metadata, sort the files chronologically, and then discard the date information</span></span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>epic <span class="op">=</span> natsorted([(<span class="bu">file</span>, <span class="bu">int</span>(T.metadata(<span class="st">'date'</span>, <span class="bu">file</span>))) <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> T.fileids() <span class="cf">if</span> T.metadata(<span class="st">'genre'</span>, <span class="bu">file</span>) <span class="op">==</span> <span class="st">'epic'</span>], key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])</span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>epic <span class="op">=</span> [<span class="bu">file</span> <span class="cf">for</span> <span class="bu">file</span>, _ <span class="kw">in</span> epic]</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'There are </span><span class="sc">{</span><span class="bu">len</span>(epic)<span class="sc">}</span><span class="ss"> epic poems in the Tesserae collection.'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'There are </span><span class="sc">{</span><span class="bu">len</span>(epic)<span class="sc">}</span><span class="ss"> epic poems in the Tesserae collection.'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>There are 120 epic poems in the Tesserae collection.</code></pre>
 </div>
 </div>
 <div id="cell-43" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This takes about 7 minutes on my laptop</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This takes about 7 minutes on my laptop</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>all_geminations <span class="op">=</span> {}</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -589,20 +592,20 @@ After...
 <span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>        doc <span class="op">=</span> nlp(preprocess(v))</span>
 <span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>        geminations <span class="op">=</span> get_geminations(doc, exclude<span class="op">=</span>[<span class="st">'que'</span>])</span>
 <span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> geminations:</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>            all_geminations[k] <span class="op">=</span> (v, geminations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>            all_geminations[k] <span class="op">=</span> (v, geminations)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>100%|██████████| 120/120 [06:49&lt;00:00,  3.42s/it]</code></pre>
 </div>
 </div>
 <div id="cell-44" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write to file</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write to file</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'epic_geminations.tsv'</span>, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    f.write(<span class="st">'citation</span><span class="ch">\t</span><span class="st">text</span><span class="ch">\n</span><span class="st">'</span>)</span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, v <span class="kw">in</span> all_geminations.items():</span>
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>        citation <span class="op">=</span> k.replace(<span class="st">'&lt;'</span>, <span class="st">''</span>).replace(<span class="st">'&gt;'</span>, <span class="st">''</span>)</span>
 <span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>        citation <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>citation<span class="sc">}</span><span class="ss">'</span></span>
 <span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> format_gemination(v)</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f'</span><span class="sc">{</span>citation<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>text<span class="sc">}</span><span class="ch">\n</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="ss">f'</span><span class="sc">{</span>citation<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>text<span class="sc">}</span><span class="ch">\n</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This has been an introduction to formalizing a literary critical/philological argument using LatinCy, an example that barely takes us past the first page of Wills Part I. In subsequent notebooks, we will explore variations on gemination and other types of repetition.</p>
 </section>
@@ -669,13 +672,14 @@ Wills, Jeffrey. 1996. <em>Repetition in Latin Poetry: Figures of Allusion</em>. 
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

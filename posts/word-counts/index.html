@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Patrick J. Burns">
-<meta name="dcterms.date" content="2025-04-15">
+<meta name="dcterms.date" content="2026-02-02">
 <meta name="description" content="Exploratory Philology code notebook showing how to generate simple word counts for a Latin text. First in the FSNLP series.">
 
 <title>Latin word counts (FSNLP 1.4.2) – Exploratory Philology Blog</title>
@@ -90,14 +90,15 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-af93d6fc5463f431738d724cc677ec3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-de3d5226f8b5168607ddcc3c03efb082.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -137,6 +138,8 @@ div.csl-indent {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Exploratory Philology Blog</span>
     </a>
@@ -200,7 +203,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 15, 2025</p>
+        <p class="date">February 2, 2026</p>
       </div>
     </div>
     
@@ -219,6 +222,7 @@ div.csl-indent {
 
 
 
+<p>—title: “Latin word counts (FSNLP 1.4.2)”description: “Exploratory Philology code notebook showing how to generate simple word counts for a Latin text. First in the FSNLP series.”author: “Patrick J. Burns”date: “2026-02-02”categories: [exploratory-philology, latin, text-analysis, fsnlp]bibliography: “references.bib”include_notebook: truetexts: - cicero.in_catilinam.tessformat: html: code-fold: falsedraft: false—</p>
 <p>This semester I have been teaching a course called “Statistical Programming for Ancient World” study. As a result I have been returning frequently to some natural language processing fundamentals from Manning and Schütze’s 1999 book <em>Foundations of Statistical Natural Language Processing</em> (<span class="citation" data-cites="manning_1999">Manning and Schütze (<a href="#ref-manning_1999" role="doc-biblioref">1999</a>)</span>) and have been thinking that it may be useful to computational philologists just starting out for me to work through this book using Latin or Ancient Greek examples. This is the first notebook in this series and looks at <strong>FSNLP</strong> 1.4.2 on “Word counts”.</p>
 <p>What we want to do here is represent a Latin text—and we will start by representing a text as a list of words and then count the words to determine which are the most frequent. Manning and Schütze used <em>Tom Sawyer</em> for this exercise. We’ll use Cicero’s <em>In Catilinam</em>. A word count like this is the most basic of text analysis tasks, but it is still one of the most useful. The FSNLP example, shown in Table 1.1, also shows the “Use”, that is roughly the part of speech of each of the items listed.</p>
 <p><span class=".preview-image" style="display: none;"><img src="preview.png"></span></p>
@@ -234,49 +238,29 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
 <p>As always, we start with our basic imports…</p>
 <div id="cell-3" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preliminary imports</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preliminary imports</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tabulate</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>…and set up our corpus reader and pull out the texts we want to describe.</p>
-<div id="cell-5" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 1: Load our library of Latin texts, keeping only *In Catilinam*</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cltkreaders.lat <span class="im">import</span> LatinTesseraeCorpusReader</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> LatinTesseraeCorpusReader()</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> <span class="st">'cicero.in_catilinam.tess'</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>cicero <span class="op">=</span> T.fileids(match<span class="op">=</span><span class="bu">file</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>pprint(cicero)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>['cicero.in_catilinam.tess']</code></pre>
-</div>
+<div id="cell-5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 1: Load our library of Latin texts, keeping only *In Catilinam*from latincyreaders import TesseraeReaderT = TesseraeReader()file = 'cicero.in_catilinam.tess'cicero = T.fileids(match=file)pprint(cicero)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can then use our corpus reader to get a list of the tokens in this text. Reminder that the output here will be a generator of spaCy Token objects (as annotated by the LatinCy pipeline). We convert this to a list for ease of reference. The advantage of using these Token objects—instead of plaintext words—is that they have POS tags available, which we can then use for the resulting table. So, below we see the first word in <em>In Catilinam</em> along with its Python <code>type</code>, i.e.&nbsp;the spaCy Token object.</p>
-<div id="cell-7" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 2: Get the tokens for the text</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> <span class="bu">list</span>(T.words(fileids<span class="op">=</span>cicero))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, token <span class="kw">in</span> <span class="bu">enumerate</span>(tokens, <span class="dv">1</span>):</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>token<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span><span class="bu">type</span>(token)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1: quo &lt;class 'spacy.tokens.token.Token'&gt;</code></pre>
-</div>
+<div id="cell-7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 2: Get the tokens for the texttokens = list(T.tokens(fileids=cicero))for i, token in enumerate(tokens, 1):    print(f'{i}: {token} {type(token)}')    break</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s now extract only the annotations that we plan to use for the table, namely the text of the token and its POS tag. Here we see these annotations for the first ten tokens in our text.</p>
 <div id="cell-9" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tagged_tokens <span class="op">=</span> [(token.text, token.pos_) <span class="cf">for</span> token <span class="kw">in</span> tokens]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (word, tags) <span class="kw">in</span> <span class="bu">enumerate</span>(tagged_tokens[:<span class="dv">10</span>], <span class="dv">1</span>):</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    data.append((word, tags))</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate.tabulate(data, headers<span class="op">=</span>[<span class="st">'Word'</span>, <span class="st">'Tag'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tagged_tokens <span class="op">=</span> [(token.text, token.pos_) <span class="cf">for</span> token <span class="kw">in</span> tokens]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (word, tags) <span class="kw">in</span> <span class="bu">enumerate</span>(tagged_tokens[:<span class="dv">10</span>], <span class="dv">1</span>):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    data.append((word, tags))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate.tabulate(data, headers<span class="op">=</span>[<span class="st">'Word'</span>, <span class="st">'Tag'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Word       Tag
 ---------  -----
@@ -298,51 +282,51 @@ nostra     DET
 }</p>
 <p>And <code>Counter</code> has a <code>most_common</code> method that returns a list of tuples where the first element is the key (the word) and the second element is the value (the count), reverse sorted by count. We see below the first fifteen (15) items in such a “most common” list for our text.</p>
 <div id="cell-11" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 3: Count the tokens, ranking them from most to least frequent and keeping only the top 15.</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the tokens</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> Counter(token.text <span class="cf">for</span> token <span class="kw">in</span> tokens <span class="cf">if</span> token.text.isalpha())</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the 15 most common tokens</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>top_15 <span class="op">=</span> counter.most_common(<span class="dv">15</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_15)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 3: Count the tokens, ranking them from most to least frequent and keeping only the top 15.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the tokens</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> Counter(token.text <span class="cf">for</span> token <span class="kw">in</span> tokens <span class="cf">if</span> token.text.isalpha())</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the 15 most common tokens</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>top_15 <span class="op">=</span> counter.most_common(<span class="dv">15</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_15)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[('et', 259), ('in', 235), ('non', 205), ('atque', 142), ('qui', 141), ('ad', 137), ('esse', 135), ('que', 134), ('est', 132), ('ut', 120), ('cum', 119), ('si', 113), ('quod', 104), ('ac', 91), ('a', 87)]</code></pre>
 </div>
 </div>
 <p>We can combine the data from the last few cells to combine our list of most frequent words with the all relevant POS tags. Note for example that word <em>et</em> in this text appears as both a conjunction and an adverb. We can use the <code>defaultdict</code> class to keep track of data: the <code>word_tags</code> variable keeps a dictionary where the words are the key and the value is set of observed POS tags. See below for an example based on the word <em>et</em>.</p>
 <div id="cell-13" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all of the possible tags for each type</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>word_tags <span class="op">=</span> defaultdict(<span class="bu">set</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> token <span class="kw">in</span> tokens:</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> token.text.isalpha():</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        word_tags[token.text].add(token.pos_)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the tags for the top 15 tokens</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word, count <span class="kw">in</span> top_15[:<span class="dv">1</span>]:</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>word<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>word_tags[word]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all of the possible tags for each type</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>word_tags <span class="op">=</span> defaultdict(<span class="bu">set</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> token <span class="kw">in</span> tokens:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> token.text.isalpha():</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        word_tags[token.text].add(token.pos_)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the tags for the top 15 tokens</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word, count <span class="kw">in</span> top_15[:<span class="dv">1</span>]:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>word<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>word_tags[word]<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>et: 259 {'ADV', 'CCONJ'}</code></pre>
 </div>
 </div>
 <p>Finally, we put this all together in a table (using <code>tabulate</code>) with the columns from <strong>SFNL 1.4.2</strong>. The table is shown below.</p>
 <div id="cell-15" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 4: Add the word counts to a table with the columns "Word", "Freq." and "Use"</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word, count <span class="kw">in</span> top_15:</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    tags <span class="op">=</span> word_tags[word]</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    data.append((word, count, <span class="st">', '</span>.join(tags)))</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate.tabulate(data, headers<span class="op">=</span>[<span class="st">'Word'</span>, <span class="st">'Freq.'</span>, <span class="st">'Use'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 4: Add the word counts to a table with the columns "Word", "Freq." and "Use"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word, count <span class="kw">in</span> top_15:</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    tags <span class="op">=</span> word_tags[word]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    data.append((word, count, <span class="st">', '</span>.join(tags)))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate.tabulate(data, headers<span class="op">=</span>[<span class="st">'Word'</span>, <span class="st">'Freq.'</span>, <span class="st">'Use'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Word      Freq.  Use
 ------  -------  -----------
@@ -365,20 +349,20 @@ a            87  ADP</code></pre>
 </div>
 <p>We can also make one additional refinement. In the <strong>FSNLP</strong> example, “Use” is spelled out a bit more than our POS tags. We can take advantage of spaCy’s tag mapping to expand our uses.</p>
 <div id="cell-17" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 4 (extra): Map the tags to their definitions using spaCy's explain</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the table with spaCy's built-in explanations</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word, count <span class="kw">in</span> top_15:</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    tags <span class="op">=</span> word_tags[word]</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Map each tag to its explanation using spacy.explain()</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    mapped_tags <span class="op">=</span> <span class="st">', '</span>.join(spacy.explain(tag) <span class="cf">for</span> tag <span class="kw">in</span> tags)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    data.append((word, count, mapped_tags))</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate.tabulate(data, headers<span class="op">=</span>[<span class="st">'Word'</span>, <span class="st">'Freq.'</span>, <span class="st">'Use'</span>]), end<span class="op">=</span><span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Table 1.1. Common words in *In Catilinam*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PC 4 (extra): Map the tags to their definitions using spaCy's explain</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the table with spaCy's built-in explanations</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word, count <span class="kw">in</span> top_15:</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    tags <span class="op">=</span> word_tags[word]</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Map each tag to its explanation using spacy.explain()</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    mapped_tags <span class="op">=</span> <span class="st">', '</span>.join(spacy.explain(tag) <span class="cf">for</span> tag <span class="kw">in</span> tags)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    data.append((word, count, mapped_tags))</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate.tabulate(data, headers<span class="op">=</span>[<span class="st">'Word'</span>, <span class="st">'Freq.'</span>, <span class="st">'Use'</span>]), end<span class="op">=</span><span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Table 1.1. Common words in *In Catilinam*"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Word      Freq.  Use
 ------  -------  -------------------------------------
@@ -404,20 +388,20 @@ Table 1.1. Common words in *In Catilinam*</code></pre>
 <p>With this we have accomplished our <strong>FSNLP</strong> goal of answering “What are the most common words in the text?” Moreover, just like the <em>Tom Sawyer</em> list, it is primarily taken up with the “little words…which have important grammatical roles.” So, the prepositions (or adpositions as they are called in the spaCy space), the conjunctions, the particles. We a few pronouns and other part of speech as well. (We also have an error—<em>esse</em> shouldn’t ever by a NOUN, but remember that the LatinCy tagger works at around 97% accuracy, so we should expect some errors.)</p>
 <p>What we don’t have in this list is a “Tom”. That is, Manning and Schütze note that “Tom” appears in the top 15 words of <em>Tom Sawyer</em>. Whereas most of the words reflect general patterns of English usage, “<em>Tom</em>…clearly reflects the text that we chose.” For <em>In Catilinam</em> we have to go a bit further into the frequency list, but we do see that proper nouns like <em>Quirites</em> and forms of <em>Catilina</em> appear in the top 100 words of this text though would be unlikely to appear in the top 100 words of a different Latin text. We can say that the former are “representative” of the Latin corpus and the latter are not. This is an idea that we will continue to revisit as we describe the language and its texts from the <strong>FSNLP</strong> perspective.</p>
 <div id="cell-19" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>top_words <span class="op">=</span> counter.most_common(<span class="dv">100</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (word, count) <span class="kw">in</span> <span class="bu">enumerate</span>(top_words, <span class="dv">1</span>):</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    tags <span class="op">=</span> word_tags[word]</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Map each tag to its explanation using spacy.explain()</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    mapped_tags <span class="op">=</span> <span class="st">', '</span>.join(spacy.explain(tag) <span class="cf">for</span> tag <span class="kw">in</span> tags)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"proper noun"</span> <span class="kw">not</span> <span class="kw">in</span> mapped_tags:</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Skip proper nouns</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    data.append((i, word, count, mapped_tags))</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate.tabulate(data, headers<span class="op">=</span>[<span class="st">"Rank"</span>, <span class="st">'Word'</span>, <span class="st">'Freq.'</span>, <span class="st">'Use'</span>]), end<span class="op">=</span><span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Table 1.2. Rank of proper nouns in the top 100 words of *In Catilinam*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>top_words <span class="op">=</span> counter.most_common(<span class="dv">100</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (word, count) <span class="kw">in</span> <span class="bu">enumerate</span>(top_words, <span class="dv">1</span>):</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    tags <span class="op">=</span> word_tags[word]</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Map each tag to its explanation using spacy.explain()</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    mapped_tags <span class="op">=</span> <span class="st">', '</span>.join(spacy.explain(tag) <span class="cf">for</span> tag <span class="kw">in</span> tags)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"proper noun"</span> <span class="kw">not</span> <span class="kw">in</span> mapped_tags:</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Skip proper nouns</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    data.append((i, word, count, mapped_tags))</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate.tabulate(data, headers<span class="op">=</span>[<span class="st">"Rank"</span>, <span class="st">'Word'</span>, <span class="st">'Freq.'</span>, <span class="st">'Use'</span>]), end<span class="op">=</span><span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Table 1.2. Rank of proper nouns in the top 100 words of *In Catilinam*"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Rank  Word         Freq.  Use
 ------  ---------  -------  -----------
@@ -436,6 +420,7 @@ Table 1.2. Rank of proper nouns in the top 100 words of *In Catilinam*</code></p
 Manning, C. D., and H. Schütze. 1999. <em>Foundations of <span>Statistical Natural Language Processing</span></em>. Cambridge, MA: MIT Press.
 </div>
 </div>
+<p>—<em>Originally published April 15, 2025. Updated February 2, 2026 to use the <code>latincyreaders</code> package (v1.0.2), which replaces the deprecated <code>cltkreaders</code> package.</em></p>
 
 
 </section>
@@ -493,13 +478,14 @@ Manning, C. D., and H. Schütze. 1999. <em>Foundations of <span>Statistical Natu
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
