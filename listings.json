@@ -3,6 +3,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/word-counts/index.html",
+      "/posts/virgilian-numbers/index.html",
       "/posts/words-clouds/index.html",
       "/posts/wills-1996/index.html"
     ]
