@@ -128,9 +128,6 @@ ENV/
 env.bak/
 venv.bak/
 
-# UV
-.uvenv
-
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -165,11 +162,14 @@ cython_debug/
 # Quarto
 /.quarto/
 /_site/
+**/*.quarto_ipynb
 
 # Mac
 .DS_Store
 
-# Claude Code local configuration
-.claude/
+# uv
+.python-version
+uv.lock
 
-**/*.quarto_ipynb
+# Claude
+.claude/

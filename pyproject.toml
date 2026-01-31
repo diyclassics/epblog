@@ -1,0 +1,20 @@
+[project]
+name = "ep-blog"
+version = "0.1.0"
+description = "Exploratory Philology blog"
+requires-python = ">=3.10"
+dependencies = [
+    "latincy-readers @ git+https://github.com/diyclassics/latincy-readers.git",
+    "la-core-web-lg @ https://huggingface.co/latincy/la_core_web_lg/resolve/main/la_core_web_lg-3.8.0-py3-none-any.whl",
+    "natsort>=8.4.0",
+    "pandas>=2.1.1",
+    "seaborn>=0.13.2",
+    "spacy>=3.7.5",
+    "tabulate>=0.9.0",
+    "tqdm>=4.64.1",
+    "wordcloud>=1.9.2",
+    "jupyter",
+]
+
+[dependency-groups]
+dev = []
