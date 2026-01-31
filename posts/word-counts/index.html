@@ -222,17 +222,7 @@ div.csl-indent {
 
 
 
-<p>This semester I have been teaching a course called “Statistical Programming for Ancient World” study. As a result I have been returning frequently to some natural language processing fundamentals from Manning and Schütze’s 1999 book <em>Foundations of Statistical Natural Language Processing</em> (<span class="citation" data-cites="manning_1999">Manning and Schütze (<a href="#ref-manning_1999" role="doc-biblioref">1999</a>)</span>) and have been thinking that it may be useful to computational philologists just starting out for me to work through this book using Latin or Ancient Greek examples. This is the first notebook in this series and looks at <strong>FSNLP</strong> 1.4.2 on “Word counts”.</p>
-<p>What we want to do here is represent a Latin text—and we will start by representing a text as a list of words and then count the words to determine which are the most frequent. Manning and Schütze used <em>Tom Sawyer</em> for this exercise. We’ll use Cicero’s <em>In Catilinam</em>. A word count like this is the most basic of text analysis tasks, but it is still one of the most useful. The FSNLP example, shown in Table 1.1, also shows the “Use”, that is roughly the part of speech of each of the items listed.</p>
-<p><span class=".preview-image" style="display: none;"><img src="preview.png"></span></p>
-<p><strong>Run this notebook in the browser using Binder here <a href="https://mybinder.org/v2/gh/diyclassics/epblog/notebooks?labpath=notebooks%2Fword-counts.ipynb"><img src="https://mybinder.org/badge_logo.svg" class="img-fluid" alt="Binder"></a></strong></p>
-<p><strong>Pseudocode for FSNLP 1.4.2</strong></p>
-<ol type="1">
-<li>Load our library of Latin texts, keeping only <em>In Catilinam</em></li>
-<li>Get the tokens for the text.</li>
-<li>Count the tokens, ranking them from most to least frequent and keeping only the top 15.</li>
-<li>Add the word counts to a table with the columns “Word”, “Freq.” and “Use”</li>
-</ol>
+<p>This semester I have been teaching a course called “Statistical Programming for Ancient World” study. As a result I have been returning frequently to some natural language processing fundamentals from Manning and Schütze’s 1999 book <em>Foundations of Statistical Natural Language Processing</em> (<span class="citation" data-cites="manning_1999">Manning and Schütze (<a href="#ref-manning_1999" role="doc-biblioref">1999</a>)</span>) and have been thinking that it may be useful to computational philologists just starting out for me to work through this book using Latin or Ancient Greek examples. This is the first notebook in this series and looks at <strong>FSNLP</strong> 1.4.2 on “Word counts”.What we want to do here is represent a Latin text—and we will start by representing a text as a list of words and then count the words to determine which are the most frequent. Manning and Schütze used <em>Tom Sawyer</em> for this exercise. We’ll use Cicero’s <em>In Catilinam</em>. A word count like this is the most basic of text analysis tasks, but it is still one of the most useful. The FSNLP example, shown in Table 1.1, also shows the “Use”, that is roughly the part of speech of each of the items listed.<span class=".preview-image" style="display: none;"><img src="preview.png"></span><strong>Pseudocode for FSNLP 1.4.2</strong>1. Load our library of Latin texts, keeping only <em>In Catilinam</em>2. Get the tokens for the text.3. Count the tokens, ranking them from most to least frequent and keeping only the top 15.4. Add the word counts to a table with the columns “Word”, “Freq.” and “Use”</p>
 <section id="workflow" class="level2">
 <h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
 <p>As always, we start with our basic imports…</p>
