@@ -1,0 +1,65 @@
+---
+title: "LatinCy Loves Data, Part 1: UD Latin Treebanks"
+description: "The first in a five-part series highlighting key datasets behind LatinCy, starting with the six Universal Dependencies Latin treebanks and the LASLA corpus."                                                      
+author: "Patrick J. Burns"
+date: "2026-02-09"
+categories: [latincy, latin, treebanks, universal-dependencies, lasla]
+bibliography: "references.bib"
+nocite: |
+  @demarneffe_2021, @burnsLatinCySyntheticTrained2023, @eckhoff_2018, @cecchiniChallengesConvertingIndex2018, @mambrini_2019, @cecchini_2020, @gambaLatinMorphologyCenturies2023, @gambaUniversalisingLatinUniversal2023, @denoozLordinateurLatinTechniques1978
+format:
+    html:
+        code-fold: false
+image: preview.png
+draft: false
+reference-section-title: false
+---
+
+Last week I saw an email for NYU Libraries announcing it was their annual [Love Data Week](https://guides.nyu.edu/love-data) with the theme "Where's the data?". As it so happens, especially with the [LatinCy Annual Meeting](https://diyclassics.github.io/latincy2026/) coming up at the end of the month, I have been immersed in Latin datasets as I prepare the next release of the [LatinCy](https://huggingface.co/latincy) pipelines. Putting these two things together, I thought it would be good to highlight five key data sets—one a day—for a kind of LatinCy Loves Data Week.
+
+When it comes to training [SpaCy](https://spacy.io) pipelines, there is an obvious place to start—the [Universal Dependency](https://universaldependencies.org/la/) (UD) treebanks. Back in 2019 when I first started thinking about developing a Latin spaCy model, my entry point was—and in some ways still is—this [spaCy project](https://github.com/explosion/projects/tree/v3/pipelines/tagger_parser_ud).
+
+The UD is [in their own words](https://universaldependencies.org) "a framework for consistent annotation of grammar…across different human languages," with origins in treebanking projects at Stanford NLP and Google. (A full history can be found [here](https://universaldependencies.org/history.html).) Basically, UD supports sentence- and token-level annotations of lemmas, part-of-speech and morphological tags, dependency relationships, and other useful linguistic data. At present there are six Latin treebanks at UD, each covering a different subset of the language whether based on period or author or genre.
+
+So, [UD Perseus](https://universaldependencies.org/treebanks/la_perseus/index.html) covers classical literary Latin, while the [Late Latin Charter Treebank](https://universaldependencies.org/treebanks/la_llct/index.html) (LLCT) covers medieval charters. [PROIEL](https://universaldependencies.org/treebanks/la_proiel/index.html) also covers some classical literary Latin but also has significant coverage of biblical texts. [*Index Thomisticus Treebank*](https://universaldependencies.org/treebanks/la_ittb/index.html) (ITTB) covers the works of Thomas Aquinas. [UDante](https://universaldependencies.org/treebanks/la_udante/index.html) covers the Latin works of Dante. A sixth treebank, [CIRCSE](https://universaldependencies.org/treebanks/la_circse/index.html), originates from a collaboration between the [*LiLa: Linking Latin*](https://lila-erc.eu) project and the [LASLA](http://web.philo.ulg.ac.be/lasla/) laboratory.
+
+| Treebank | Sentences | Tokens |
+|----------|----------:|-------:|
+| Perseus | 2,273 | 29,858 |
+| PROIEL | 18,132 | 217,722 |
+| ITTB | 26,977 | 458,152 |
+| LLCT | 9,023 | 243,681 |
+| UDante | 1,721 | 55,531 |
+| CIRCSE | 1,664 | 26,563 |
+
+: UD Latin treebanks summary {#tbl-treebanks}
+
+LatinCy tries to leverage as many UD annotations as possible to improve performance on tasks like lemmatization, POS tagging, and dependency parsing, among others. The advantage of working with multiple treebanks is one of numbers. The classifiers beneath the pipeline components benefit from seeing more features in as many contexts as possible. A fairly common word like *dico* only appears in the Perseus treebank 95 times; in all six together, we have 7,137 instances on which to base future predictions. That represents an enormous increase in the number of contexts!
+
+The difficulty with using all six treebanks is that they all have slightly different annotation strategies and implementations. As such, the treebanks need to be harmonized. So, if one treebank tags *sum* as `VERB` and another tags it as `AUX`, this makes it all the more difficult for a classifier to assign future tags correctly and consistently so. Some treebanks capitalize the first word of sentences, some do not. Some end sentence with punctuation, some do not. Some use consonantal *u*, others use *v.* I have been chipping away at these problems for years with each LatinCy release; a previous example of the harmonization code can be found [here](https://github.com/diyclassics/la_core_web_lg/blob/main/scripts/analyze_feats.py) (the process is also described in the "4.1 Preprocessing" section of the LatinCy [preprint](https://arxiv.org/abs/2305.04365)). Federica Gamba and Daniel Zeman have also been making inroads in [harmonizing the Latin treebanks](https://github.com/fjambe/Latin-variability) with respect to both morphological and syntactic annotations. This is ongoing and important work if we want to train Latin language models on sufficient amounts of quality data.
+
+We should also mention here the [CIRCSE/LASLA: LASLA Corpus](https://zenodo.org/records/8370759). These are not, strictly speaking, treebanks as they do not have dependency data. At the same time, the LASLA files have other key annotations—e.g. lemma, POS, morph—and *a lot* of them. This collections covers around 20 authors and consists of more than 1.8 million annotated tokens in all—an amazing data source for these NLP features.
+
+For the data-format curious here is the [basic structure](https://universaldependencies.org/format.html) of a UD treebank, using a sentence from CIRCSE's [*Hercules Furens*](https://github.com/UniversalDependencies/UD_Latin-CIRCSE/blob/master/la_circse-ud-test.conllu):
+
+```{.default}
+# sent_id = Latin_SenecaYounger_HercF_poetry-282
+# text = certus inclusos tenet locus nocentes
+# speaker = Amphitryon
+1	certus	certus	ADJ	C1	Case=Nom|Degree=Pos|Gender=Masc|InflClass=IndEurO|Number=Sing	4	amod	_	LiLaflcat=n6
+2	inclusos	includo	VERB	B3	Aspect=Perf|Case=Acc|Degree=Pos|Gender=Masc|InflClass=LatX|InflClass[nominal]=IndEurO|Number=Plur|VerbForm=Part|Voice=Pass	3	advcl:pred	_	LiLaflcat=v3
+3	tenet	teneo	VERB	B2	Aspect=Imp|InflClass=LatE|Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	LiLaflcat=v2
+4	locus	locus	NOUN	A2	Case=Nom|Gender=Masc|InflClass=IndEurO|Number=Sing	3	nsubj	_	LiLaflcat=n2
+5	nocentes	nocens	ADJ	C5	Case=Acc|Degree=Pos|Gender=Masc|InflClass=IndEurI|Number=Plur	3	obj	_	LiLaflcat=n7
+```
+
+You can see the metadata—a collection-specific identifier for the sentence, the text of the sentence, and the speaker of the line in the tragedy—at the top of the record, offset with the # character. The text of the sentence is then reproduced one token per line with the following annotations: running per-sentence token count, word form, lemma, universal part-of-speech tag, project-specific POS tag, morphological features, three columns of word-to-word dependencies, and finally a catch-all miscellaneous column. Each treebank includes slightly different metadata field and present the token-level annotation with its own system, but the basic CoNNL-U structure is shared between all of the Latin UD treebanks.
+
+One way you can get started with working with UD treebanks is by download them from GitHub and processing them with the [CoNLL-U Parser](https://pypi.org/project/conllu/). That said, both the Latin UD files (and the LASLA files, via [Zenodo](https://zenodo.org/records/8370759)) are supported by the just-released [LatinCy Readers](https://github.com/diyclassics/latincy-readers) project.
+
+Check back here for another LatinCy Loves Data post tomorrow on the word vectors used throughout the LatinCy project.
+
+## Further Reading
+
+::: {#refs}
+:::
