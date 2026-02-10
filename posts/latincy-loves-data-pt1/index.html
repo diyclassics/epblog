@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Patrick J. Burns">
+<meta name="dcterms.date" content="2026-02-09">
+<meta name="description" content="The first in a five-part series highlighting key datasets behind LatinCy, starting with the six Universal Dependencies Latin treebanks and the LASLA corpus.">
+
+<title>LatinCy Loves Data, Part 1: UD Latin Treebanks – Exploratory Philology Blog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-de3d5226f8b5168607ddcc3c03efb082.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Exploratory Philology Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/diyclassics"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/diyclassics"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">LatinCy Loves Data, Part 1: UD Latin Treebanks</h1>
+                  <div>
+        <div class="description">
+          The first in a five-part series highlighting key datasets behind LatinCy, starting with the six Universal Dependencies Latin treebanks and the LASLA corpus.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">latincy</div>
+                <div class="quarto-category">latin</div>
+                <div class="quarto-category">treebanks</div>
+                <div class="quarto-category">universal-dependencies</div>
+                <div class="quarto-category">lasla</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Patrick J. Burns </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 9, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Last week I saw an email for NYU Libraries announcing it was their annual <a href="https://guides.nyu.edu/love-data">Love Data Week</a> with the theme “Where’s the data?”. As it so happens, especially with the <a href="https://diyclassics.github.io/latincy2026/">LatinCy Annual Meeting</a> coming up at the end of the month, I have been immersed in Latin datasets as I prepare the next release of the <a href="https://huggingface.co/latincy">LatinCy</a> pipelines. Putting these two things together, I thought it would be good to highlight five key data sets—one a day—for a kind of LatinCy Loves Data Week.</p>
+<p>When it comes to training <a href="https://spacy.io">SpaCy</a> pipelines, there is an obvious place to start—the <a href="https://universaldependencies.org/la/">Universal Dependency</a> (UD) treebanks. Back in 2019 when I first started thinking about developing a Latin spaCy model, my entry point was—and in some ways still is—this <a href="https://github.com/explosion/projects/tree/v3/pipelines/tagger_parser_ud">spaCy project</a>.</p>
+<p>The UD is <a href="https://universaldependencies.org">in their own words</a> “a framework for consistent annotation of grammar…across different human languages,” with origins in treebanking projects at Stanford NLP and Google. (A full history can be found <a href="https://universaldependencies.org/history.html">here</a>.) Basically, UD supports sentence- and token-level annotations of lemmas, part-of-speech and morphological tags, dependency relationships, and other useful linguistic data. At present there are six Latin treebanks at UD, each covering a different subset of the language whether based on period or author or genre.</p>
+<p>So, <a href="https://universaldependencies.org/treebanks/la_perseus/index.html">UD Perseus</a> covers classical literary Latin, while the <a href="https://universaldependencies.org/treebanks/la_llct/index.html">Late Latin Charter Treebank</a> (LLCT) covers medieval charters. <a href="https://universaldependencies.org/treebanks/la_proiel/index.html">PROIEL</a> also covers some classical literary Latin but also has significant coverage of biblical texts. <a href="https://universaldependencies.org/treebanks/la_ittb/index.html"><em>Index Thomisticus Treebank</em></a> (ITTB) covers the works of Thomas Aquinas. <a href="https://universaldependencies.org/treebanks/la_udante/index.html">UDante</a> covers the Latin works of Dante. A sixth treebank, <a href="https://universaldependencies.org/treebanks/la_circse/index.html">CIRCSE</a>, originates from a collaboration between the <a href="https://lila-erc.eu"><em>LiLa: Linking Latin</em></a> project and the <a href="http://web.philo.ulg.ac.be/lasla/">LASLA</a> laboratory.</p>
+<div id="tbl-treebanks" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-treebanks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: UD Latin treebanks summary
+</figcaption>
+<div aria-describedby="tbl-treebanks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Treebank</th>
+<th style="text-align: right;">Sentences</th>
+<th style="text-align: right;">Tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Perseus</td>
+<td style="text-align: right;">2,273</td>
+<td style="text-align: right;">29,858</td>
+</tr>
+<tr class="even">
+<td>PROIEL</td>
+<td style="text-align: right;">18,132</td>
+<td style="text-align: right;">217,722</td>
+</tr>
+<tr class="odd">
+<td>ITTB</td>
+<td style="text-align: right;">26,977</td>
+<td style="text-align: right;">458,152</td>
+</tr>
+<tr class="even">
+<td>LLCT</td>
+<td style="text-align: right;">9,023</td>
+<td style="text-align: right;">243,681</td>
+</tr>
+<tr class="odd">
+<td>UDante</td>
+<td style="text-align: right;">1,721</td>
+<td style="text-align: right;">55,531</td>
+</tr>
+<tr class="even">
+<td>CIRCSE</td>
+<td style="text-align: right;">1,664</td>
+<td style="text-align: right;">26,563</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>LatinCy tries to leverage as many UD annotations as possible to improve performance on tasks like lemmatization, POS tagging, and dependency parsing, among others. The advantage of working with multiple treebanks is one of numbers. The classifiers beneath the pipeline components benefit from seeing more features in as many contexts as possible. A fairly common word like <em>dico</em> only appears in the Perseus treebank 95 times; in all six together, we have 7,137 instances on which to base future predictions. That represents an enormous increase in the number of contexts!</p>
+<p>The difficulty with using all six treebanks is that they all have slightly different annotation strategies and implementations. As such, the treebanks need to be harmonized. So, if one treebank tags <em>sum</em> as <code>VERB</code> and another tags it as <code>AUX</code>, this makes it all the more difficult for a classifier to assign future tags correctly and consistently so. Some treebanks capitalize the first word of sentences, some do not. Some end sentence with punctuation, some do not. Some use consonantal <em>u</em>, others use <em>v.</em> I have been chipping away at these problems for years with each LatinCy release; a previous example of the harmonization code can be found <a href="https://github.com/diyclassics/la_core_web_lg/blob/main/scripts/analyze_feats.py">here</a> (the process is also described in the “4.1 Preprocessing” section of the LatinCy <a href="https://arxiv.org/abs/2305.04365">preprint</a>). Federica Gamba and Daniel Zeman have also been making inroads in <a href="https://github.com/fjambe/Latin-variability">harmonizing the Latin treebanks</a> with respect to both morphological and syntactic annotations. This is ongoing and important work if we want to train Latin language models on sufficient amounts of quality data.</p>
+<p>We should also mention here the <a href="https://zenodo.org/records/8370759">CIRCSE/LASLA: LASLA Corpus</a>. These are not, strictly speaking, treebanks as they do not have dependency data. At the same time, the LASLA files have other key annotations—e.g.&nbsp;lemma, POS, morph—and <em>a lot</em> of them. This collections covers around 20 authors and consists of more than 1.8 million annotated tokens in all—an amazing data source for these NLP features.</p>
+<p>For the data-format curious here is the <a href="https://universaldependencies.org/format.html">basic structure</a> of a UD treebank, using a sentence from CIRCSE’s <a href="https://github.com/UniversalDependencies/UD_Latin-CIRCSE/blob/master/la_circse-ud-test.conllu"><em>Hercules Furens</em></a>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a># sent_id = Latin_SenecaYounger_HercF_poetry-282</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a># text = certus inclusos tenet locus nocentes</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a># speaker = Amphitryon</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>1   certus  certus  ADJ C1  Case=Nom|Degree=Pos|Gender=Masc|InflClass=IndEurO|Number=Sing   4   amod    _   LiLaflcat=n6</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>2   inclusos    includo VERB    B3  Aspect=Perf|Case=Acc|Degree=Pos|Gender=Masc|InflClass=LatX|InflClass[nominal]=IndEurO|Number=Plur|VerbForm=Part|Voice=Pass  3   advcl:pred  _   LiLaflcat=v3</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>3   tenet   teneo   VERB    B2  Aspect=Imp|InflClass=LatE|Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act   0   root    _   LiLaflcat=v2</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>4   locus   locus   NOUN    A2  Case=Nom|Gender=Masc|InflClass=IndEurO|Number=Sing  3   nsubj   _   LiLaflcat=n2</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>5   nocentes    nocens  ADJ C5  Case=Acc|Degree=Pos|Gender=Masc|InflClass=IndEurI|Number=Plur   3   obj _   LiLaflcat=n7</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can see the metadata—a collection-specific identifier for the sentence, the text of the sentence, and the speaker of the line in the tragedy—at the top of the record, offset with the # character. The text of the sentence is then reproduced one token per line with the following annotations: running per-sentence token count, word form, lemma, universal part-of-speech tag, project-specific POS tag, morphological features, three columns of word-to-word dependencies, and finally a catch-all miscellaneous column. Each treebank includes slightly different metadata field and present the token-level annotation with its own system, but the basic CoNNL-U structure is shared between all of the Latin UD treebanks.</p>
+<p>One way you can get started with working with UD treebanks is by download them from GitHub and processing them with the <a href="https://pypi.org/project/conllu/">CoNLL-U Parser</a>. That said, both the Latin UD files (and the LASLA files, via <a href="https://zenodo.org/records/8370759">Zenodo</a>) are supported by the just-released <a href="https://github.com/diyclassics/latincy-readers">LatinCy Readers</a> project.</p>
+<p>Check back here for another LatinCy Loves Data post tomorrow on the word vectors used throughout the LatinCy project.</p>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-burnsLatinCySyntheticTrained2023" class="csl-entry" role="listitem">
+Burns, Patrick J. 2023. <span>“<span>LatinCy</span>: <span>Synthetic Trained Pipelines</span> for <span>Latin NLP</span>.”</span> May 7, 2023. <a href="https://arxiv.org/abs/2305.04365v1">https://arxiv.org/abs/2305.04365v1</a>.
+</div>
+<div id="ref-cecchiniChallengesConvertingIndex2018" class="csl-entry" role="listitem">
+Cecchini, Flavio Massimiliano, Marco Passarotti, Paola Marongiu, and Daniel Zeman. 2018. <span>“Challenges in Converting the <span>Index Thomisticus Treebank</span> into <span>Universal Dependencies</span>.”</span> In <em>Proceedings of the <span>Second Workshop</span> on <span>Universal Dependencies</span> (<span>UDW</span> 2018)</em>, edited by Marie-Catherine de Marneffe, Teresa Lynn, and Sebastian Schuster, 27–36. Brussels, Belgium: Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/W18-6004">https://doi.org/10.18653/v1/W18-6004</a>.
+</div>
+<div id="ref-cecchini_2020" class="csl-entry" role="listitem">
+Cecchini, Flavio M., Rachele Sprugnoli, Giovanni Moretti, and Marco Passarotti. 2020. <span>“<span>UDante</span>: <span>First Steps Towards</span> the <span>Universal Dependencies Treebank</span> of <span>Dante</span>’s <span>Latin Works</span>.”</span> In <em>Proceedings of the <span>Seventh Italian Conference</span> on <span class="nocase">Computational Linguistics CLiC-it</span> 2020</em>, edited by Felice Dell’Orletta, Johanna Monti, and Fabio Tamburini, 99–105. Accademia University Press. <a href="https://doi.org/10.4000/books.aaccademia.8653">https://doi.org/10.4000/books.aaccademia.8653</a>.
+</div>
+<div id="ref-denoozLordinateurLatinTechniques1978" class="csl-entry" role="listitem">
+Denooz, Joseph. 1978. <em>L’ordinateur et le latin: Techniques et méthodes</em>. Université de Liège: L.A.S.L.A. <a href="http://orbi.ulg.ac.be/handle/2268/1059">http://orbi.ulg.ac.be/handle/2268/1059</a>.
+</div>
+<div id="ref-eckhoff_2018" class="csl-entry" role="listitem">
+Eckhoff, Hanne, Kristin Bech, Gerlof Bouma, Kristine Eide, Dag Haug, Odd Einar Haugen, and Marius Jøhndal. 2018. <span>“The <span>PROIEL Treebank Family</span>: <span>A Standard</span> for <span>Early Attestations</span> of <span>Indo-European Languages</span>.”</span> <em>Language Resources and Evaluation</em> 52 (1): 29–65. <a href="https://doi.org/10.1007/s10579-017-9388-5">https://doi.org/10.1007/s10579-017-9388-5</a>.
+</div>
+<div id="ref-gambaUniversalisingLatinUniversal2023" class="csl-entry" role="listitem">
+Gamba, Federica, and Daniel Zeman. 2023a. <span>“Universalising <span>Latin Universal Dependencies</span>: <span>A Harmonisation</span> of <span>Latin Treebanks</span> in <span>UD</span>.”</span> In <em>Proceedings of the <span>Sixth Workshop</span> on <span>Universal Dependencies</span> (<span>UDW</span>, <span>GURT</span>/<span>SyntaxFest</span> 2023)</em>, edited by Loïc Grobol and Francis Tyers, 7–16. Washington, D.C.: Association for Computational Linguistics. <a href="https://aclanthology.org/2023.udw-1.2">https://aclanthology.org/2023.udw-1.2</a>.
+</div>
+<div id="ref-gambaLatinMorphologyCenturies2023" class="csl-entry" role="listitem">
+———. 2023b. <span>“Latin <span>Morphology</span> Through the <span>Centuries</span>: <span>Ensuring Consistency</span> for <span>Better Language Processing</span>.”</span> In <em>Proceedings of the <span>Ancient Language Processing Workshop</span></em>, edited by Adam Anderson, Shai Gordin, Bin Li, Yudong Liu, and Marco C. Passarotti, 59–67. Varna, Bulgaria: INCOMA Ltd., Shoumen, Bulgaria. <a href="https://aclanthology.org/2023.alp-1.7/">https://aclanthology.org/2023.alp-1.7/</a>.
+</div>
+<div id="ref-mambrini_2019" class="csl-entry" role="listitem">
+Mambrini, Francesco, and Marco Passarotti. 2019. <span>“Linked <span>Open Treebanks</span>: <span>Interlinking Syntactically Annotated Corpora</span> in the <span>LiLa Knowledge Base</span> of <span>Linguistic Resources</span> for <span>Latin</span>.”</span> In <em>Proceedings of the 18th <span>International Workshop</span> on <span>Treebanks</span> and <span>Linguistic Theories</span> (<span>TLT</span>, <span>SyntaxFest</span> 2019)</em>, 74–81. <a href="https://aclanthology.org/W19-7808.pdf">https://aclanthology.org/W19-7808.pdf</a>.
+</div>
+<div id="ref-demarneffe_2021" class="csl-entry" role="listitem">
+Marneffe, Marie-Catherine de, Christopher D. Manning, Joakim Nivre, and Daniel Zeman. 2021. <span>“Universal <span>Dependencies</span>.”</span> <em>Computational Linguistics</em> 47 (2): 255–308. <a href="https://doi.org/10.1162/coli_a_00402">https://doi.org/10.1162/coli_a_00402</a>.
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/exploratoryphilology\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
