@@ -15,7 +15,7 @@ draft: false
 reference-section-title: false
 ---
 
-Last week I saw an email for NYU Libraries announcing it was their annual [Love Data Week](https://guides.nyu.edu/love-data) with the theme "Where's the data?". As it so happens, especially with the [LatinCy Annual Meeting](https://diyclassics.github.io/latincy2026/) coming up at the end of the month, I have been immersed in Latin datasets as I prepare the next release of the [LatinCy](https://huggingface.co/latincy) pipelines. Putting these two things together, I thought it would be good to highlight five key data sets—one a day—for a kind of LatinCy Loves Data Week.
+Last week I saw an email for NYU Libraries announcing it was their annual [Love Data Week](https://guides.nyu.edu/love-data) with the theme "Where's the data?". As it so happens, especially with the [LatinCy Annual Meeting](https://diyclassics.github.io/latincy2026/) coming up at the end of the month, I have been immersed in Latin datasets as I prepare the next release of the [LatinCy](https://huggingface.co/latincy) pipelines. Putting these two things together, I thought it would be good to highlight five key data sets—one each Monday for the next five weeks—for a kind of LatinCy Loves Data series.
 
 When it comes to training [SpaCy](https://spacy.io) pipelines, there is an obvious place to start—the [Universal Dependency](https://universaldependencies.org/la/) (UD) treebanks. Back in 2019 when I first started thinking about developing a Latin spaCy model, my entry point was—and in some ways still is—this [spaCy project](https://github.com/explosion/projects/tree/v3/pipelines/tagger_parser_ud).
 
@@ -57,7 +57,7 @@ You can see the metadata—a collection-specific identifier for the sentence, th
 
 One way you can get started with working with UD treebanks is by download them from GitHub and processing them with the [CoNLL-U Parser](https://pypi.org/project/conllu/). That said, both the Latin UD files (and the LASLA files, via [Zenodo](https://zenodo.org/records/8370759)) are supported by the just-released [LatinCy Readers](https://github.com/diyclassics/latincy-readers) project.
 
-Check back here for another LatinCy Loves Data post tomorrow on the word vectors used throughout the LatinCy project.
+Check back here next Monday for another LatinCy Loves Data post on the word vectors used throughout the LatinCy project.
 
 ## Further Reading
 
