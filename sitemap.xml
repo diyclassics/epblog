@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://exploratoryphilology.org/posts/words-clouds/index.html</loc>
+    <loc>https://exploratoryphilology.org/posts/word-counts/index.html</loc>
+    <lastmod>2026-01-31T14:45:01.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://exploratoryphilology.org/posts/virgilian-numbers/index.html</loc>
     <lastmod>2026-01-31T14:44:54.000Z</lastmod>
   </url>
   <url>
-    <loc>https://exploratoryphilology.org/posts/wills-1996/index.html</loc>
-    <lastmod>2025-08-19T20:23:32.000Z</lastmod>
+    <loc>https://exploratoryphilology.org/notebooks/wordsclouds.html</loc>
+    <lastmod>2026-01-31T14:44:55.000Z</lastmod>
   </url>
   <url>
-    <loc>https://exploratoryphilology.org/notebooks/word-counts.html</loc>
+    <loc>https://exploratoryphilology.org/notebooks/virgilian-numbers.html</loc>
     <lastmod>2026-01-31T14:44:55.000Z</lastmod>
   </url>
   <url>
@@ -25,19 +29,19 @@
     <lastmod>2026-01-31T14:44:54.000Z</lastmod>
   </url>
   <url>
-    <loc>https://exploratoryphilology.org/notebooks/virgilian-numbers.html</loc>
+    <loc>https://exploratoryphilology.org/posts/latincy-xpos-tags/index.html</loc>
+    <lastmod>2026-03-31T17:33:28.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://exploratoryphilology.org/notebooks/word-counts.html</loc>
     <lastmod>2026-01-31T14:44:55.000Z</lastmod>
   </url>
   <url>
-    <loc>https://exploratoryphilology.org/notebooks/wordsclouds.html</loc>
-    <lastmod>2026-01-31T14:44:55.000Z</lastmod>
+    <loc>https://exploratoryphilology.org/posts/wills-1996/index.html</loc>
+    <lastmod>2025-08-19T20:23:32.000Z</lastmod>
   </url>
   <url>
-    <loc>https://exploratoryphilology.org/posts/virgilian-numbers/index.html</loc>
+    <loc>https://exploratoryphilology.org/posts/words-clouds/index.html</loc>
     <lastmod>2026-01-31T14:44:54.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://exploratoryphilology.org/posts/word-counts/index.html</loc>
-    <lastmod>2026-01-31T14:45:01.000Z</lastmod>
   </url>
 </urlset>
