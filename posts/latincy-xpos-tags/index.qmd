@@ -9,73 +9,70 @@ format:
     html:
         code-fold: false
 image: preview.png
-draft: true
+draft: false
 ---
 
-The LatinCy pipelines (and now the LatinCy Stanza, Flair, and UDPipe models) are trained ultimately on the Latin Universal Dependency (UD) treebanks. UD provides for two different kinds of part-of-speech tagging: UPOS and XPOS. The UPOS is a restricted set of, well, universal POS tags: `NOUN`, `VERB`, `CCONJ` (short for coordinating conjunction), and so on. The set is restrictive enough that I can just share it in its entirety:
+The [LatinCy pipelines](https://huggingface.co/latincy/la_core_web_lg) (and now the LatinCy [Stanza](https://huggingface.co/latincy/la_stanza_latincy) and [Flair](https://huggingface.co/latincy/la_flair_latincy) models) are trained ultimately on the [Universal Dependency](https://universaldependencies.org/) (UD) [Latin treebanks](https://exploratoryphilology.org/posts/latincy-loves-data-pt1/). UD provides for two different kinds of part-of-speech tagging: UPOS and XPOS. The UPOS is a restricted set of, well, [universal POS tags](https://universaldependencies.org/u/pos/): `NOUN`, `VERB`, `CCONJ` (short for coordinating conjunction), and so on. The set is restrictive enough that I can just share it in its entirety:
 
-- `ADJ`: adjective
-- `ADP`: adposition
-- `ADV`: adverb
-- `AUX`: auxiliary
-- `CCONJ`: coordinating conjunction
-- `DET`: determiner
-- `INTJ`: interjection
-- `NOUN`: noun
-- `NUM`: numeral
-- `PART`: particle
-- `PRON`: pronoun
-- `PROPN`: proper noun
-- `PUNCT`: punctuation
-- `SCONJ`: subordinating conjunction
-- `SYM`: symbol
-- `VERB`: verb
-- `X`: other
+>`ADJ`, `ADP` (adposition), `ADV`, `AUX`, `CCONJ` (coordinating conjunction), `DET`, `INTJ`, `NOUN`, `NUM`, `PART`, `PRON`, `PROPN` (proper noun), `PUNCT`, `SCONJ` (subordinating conjunction), `SYM`, `VERB`, and `X` (other).
 
-XPOS, on the other hand, is designed to offer language-specific flexibility to this type of NLP annotation. As the CoNLL-U documentation describes it, XPOS is an "optional language-specific (or treebank-specific) part-of-speech / morphological tag" ([universaldependencies.org/format.html](https://universaldependencies.org/format.html)). With this release of the LatinCy models, I have tried to make this XPOS space more useful.
+XPOS, on the other hand, is designed, as noted in the the CoNLL-U [documentation](https://universaldependencies.org/format.html), to offer an "optional language-specific (or treebank-specific) part-of-speech / morphological tag." With this release of the LatinCy models, I have tried to make this XPOS space more useful.
 
 Here are the new LatinCy XPOS tags:
 
-`adjective`, `adverb`, `conjunction`, `conjunction/coordinating`, `conjunction/subordinating`, `determiner`, `foreign`, `interjection`, `noun`, `noun/proper`, `number`, `particle`, `preposition`, `preposition/ablative`, `preposition/accusative`, `pronoun`, `punc`, `unknown`, `verb`, `verb/deponent`, `verb/impersonal`, `verb/semideponent`
+>`adjective`, `adverb`, `conjunction`, `conjunction/coordinating`, `conjunction/subordinating`, `determiner`, `foreign`, `interjection`, `noun`, `noun/proper`, `number`, `particle`, `preposition`, `preposition/ablative`, `preposition/accusative`, `pronoun`, `punc`, `unknown`, `verb`, `verb/deponent`, `verb/impersonal`, `verb/semideponent`
 
 I will explain my motivation for this specific set of tags shortly. But first, a few words on the current state of Latin XPOS tags.
 
-There are currently six Latin treebanks—Perseus, PROIEL, ITTB, LLCT, UDante, and CIRCSE—and each handles XPOS differently. Perseus uses XPOS tags that look like this:
+There are currently six Latin treebanks—Perseus, PROIEL, ITTB, LLCT, UDante, and CIRCSE—and each handles XPOS differently. Let's take a common word, *erat*, and see how the treebanks tag it.
 
-`v3siia---`
+**Perseus** uses a nine-position code: `v3siia---`
 
-This is for the token `stabat` and here is what we make of it, reading one character left to right:
+Reading one character left to right:
 
 - It's a verb, i.e. `v`.
 - It's third person, i.e. `3`.
 - It's singular, i.e. `s`.
-- And it's imperfect indicative active, i.e. `i`, `i`, `a`.
+- And it's indicative imperfect active, i.e. `i`, `i`, `a`.
 
-The other three spaces—here `---`—are used for other parts of speech (e.g. TK).
+The other three spaces—here `---`—encode gender, case, and degree, which are filled for other parts of speech (e.g. `a-s---fbc` for the comparative adjective *maiore*).
 
-PROIEL uses the space differently. Same word, `stabat`, and here is the XPOS tag: `V-`. We can reasonably infer, especially after seeing the Perseus example, that the capital `V` means that this is a verb. And the hyphen? Just an empty marker to fill two character spaces. Some nouns are labelled `Nb` and others are labelled `Ne`. What is the difference? We would have to look that up. `Nb` is for common nouns, `Ne` is for proper nouns.
+The Perseus XPOS codes are more or less decipherable, but they still require that extra step of decipherment.
 
-ITTB uses an entirely different system [MORE] And UDante yet another. And LLCT yet another. At least in the case of ITTB the first part of the XPOS space overlaps with the conventions established over 50 years ago by the LASLA project [@denooz_1978].
+And one more thing to note, both here and, in different ways, in the treebank-specific descriptions that follow: XPOS information overlaps with other annotations. In this case, the fact that *erat* is a verb is already hinted at in the UPOS tag `AUX` which is a specific type of Latin verb. (Any other verb, e.g. *fecit*, would just have `VERB` as its UPOS.) Moreover, the fact that *erat* is third person and singular and indicative imperfect active is also already captured in the morphological FEATS: `Aspect=Imp|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin`. It is not entirely clear what XPOS adds to our token-level Latin information.
 
-As I see the current state of Latin XPOS tagging, there are two main problems: 1. the XPOS tags largely (and at times entirely) repeat information otherwise found or derivable from the other UD annotations, particularly the UPOS and morphological features; and 2. the XPOS tags are highly compressed and non-transparent, often to the point of obscurity without reference to an external resource. Accordingly, I saw an opportunity to use the XPOS space in a way that encodes new information not easily derived from other annotation categories and that is human readable, and more specifically Latin-teacher readable.
+**PROIEL** uses the space differently. Same word, *erat*—and here is the XPOS tag: `V-`.
 
-Instead of `V-` or `A1` or etc., the LatinCy XPOS gives `verb`. And in certain cases it will return a more specific tag. With the v3.9 models, deponent verbs return `verb/deponent`, semi-deponent verbs `verb/semideponent`, and impersonal verbs `verb/impersonal`. These categories are not easily derived from existing UD tag data, but are useful to Latinists. (Yes, you could infer from UPOS of `VERB` and a lemma ending in `-t` that a verb was impersonal; this use of XPOS is more direct.)
+We can reasonably infer, especially after seeing the Perseus example, that the capital `V` means that this is a verb. And the hyphen? Just an empty marker to fill two character spaces. Other parts of speech use both of the character spaces. For example, some nouns are labelled `Nb` and others are labelled `Ne`. What is the difference? We would have to look that up. `Nb` is for common nouns, `Ne` is for proper nouns. So, we need to have reference to the tagset to determine the difference.
 
-By using a delimiter, that is the forward slash (`/`), we keep the more general category isolatable. Take for example prepositions: we now support with the models the case with which the preposition is found. For words like `propter` or `sine`, this is not a concern as they are always going to be, under our new system, `preposition/accusative` and `preposition/ablative` respectively. But for words like `in` or `sub` this is perhaps more useful.[^1] And, again, you might be able to extract this information by labelling a word with UPOS `ADP` and following its dependency to a given noun and looking at that noun's morphological FEATS. Here we make that three-step process a simple lookup.
+**LLCT** uses yet another system—a pipe-delimited expansion of the Perseus positional scheme: `v|v|3|s|i|i|a|-|-|-`. The same nine positions as Perseus plus a leading broad POS category, separated by pipes for readability.
 
-I should note that other languages use the XPOS space to more readily surface certain linguistic phenomena. Here is the verb coverage for the English language models, following the Penn Treebank conventions:
+**UDante** takes yet another similar approach: `va5iis3`. This is a compressed alphanumeric code where `v` is the POS, `a` marks active voice, `5` the conjugation class (here, irregular), `i` indicative mood, `i` imperfect tense, `s` singular number, and `3` third person. Again, like Perseus and LLCT, decipherable, but also not truly self-documenting.
 
-Verb, base form (`VB`); Verb, past tense (`VBD`); Verb, gerund or present participle (`VBG`); Verb, past participle (`VBN`); Verb, non-3rd person singular present (`VBP`); Verb, 3rd person singular present (`VBZ`)
+**ITTB** uses a pipe-delimited system with several categories explained in the [tagset description](https://itreebank.marginalia.it/doc/Tagset_IT.pdf). For *erat*, the tag is `N3|modA|tem2|gen6`. Here `N3` is a lexical class code (for *sum* and its compounds), `modA` is the mood (indicative), `tem2` the tense (imperfect), and `gen6` the person/number (third singular). Without the ITTB documentation, these codes would be opaque.
 
-German UD treebanks similarly make use of the Stuttgart-Tübingen Tagset. Here are the verb categories used there:
+**CIRCSE** follows the [LASLA encoding](@denooz_1978) and uses short alphanumeric codes (like `B6` for forms of *sum*) for XPOS tags. (*erat* itself is not attested in the current CIRCSE treebank, but `est` is tagged `B6`.) Once again, without documentation, the code is difficult to connect to the part of speech tag.
 
-Auxiliary verb, finite (`VAFIN`); Auxiliary verb, infinitive (`VAINF`); Auxiliary verb, imperative (`VAIMP`); Auxiliary verb, past participle (`VAPP`); Modal verb, finite (`VMFIN`); Modal verb, infinitive (`VMINF`); Modal verb, past participle (`VMPP`); Full verb, finite (`VVFIN`); Full verb, infinitive (`VVINF`); Full verb, "zu"-infinitive (`VVIZU`); Full verb, imperative (`VVIMP`); Full verb, past participle (`VVPP`)
+With all of this in mind, when I look at the current state of Latin XPOS tagging, there appear to be two main problems: 1. the XPOS tags largely (and at times entirely) repeat information otherwise found or derivable from the other UD annotations, particularly the UPOS and morphological features; and 2. the XPOS tags are highly compressed and non-transparent, often to the point of obscurity without reference to an external resource. Accordingly, I saw an opportunity to use the XPOS space in a way that encodes new information 1. that is perhaps not directly or easily derived from other annotation categories, and 2. that is human readable, and more specifically Latinist readable.
+
+Instead of `V-` or `N3` or `B6`, the LatinCy XPOS gives `verb`. And in certain cases it will return a more specific tag. For example, with the v3.9 models, deponent verbs return `verb/deponent`, semi-deponent verbs `verb/semideponent`, and impersonal verbs `verb/impersonal`. These categories are not easily derived from existing UD tag data, but are useful to Latinists. (Yes, you could infer from UPOS of `VERB` and a lemma ending in `-t` that a verb was impersonal; this use of XPOS is more direct.)
+
+By using a delimiter, that is the forward slash (`/`), we keep the more general category isolatable. Take for example prepositions: we now support with the models the case with which the preposition is found. For words like `propter` or `sine`, this is not a concern as they are always going to be, under our new system, `preposition/accusative` and `preposition/ablative` respectively. But for words like `in` or `sub` this is perhaps more useful.[^1] And, again, you might be able to extract this information by labelling a word with UPOS `ADP` *and* following its dependency to a given noun *and* looking at that noun's morphological FEATS. Here we make that three-step process a simple lookup.
+
+I should note that other languages use the XPOS space to more readily surface certain linguistic phenomena. Here is the verb coverage for the English language models, following the [Penn Treebank](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html) conventions:
+
+>Verb, base form (`VB`); Verb, past tense (`VBD`); Verb, gerund or present participle (`VBG`); Verb, past participle (`VBN`); Verb, non-3rd person singular present (`VBP`); Verb, 3rd person singular present (`VBZ`)
+
+Similarly, German UD treebanks make use of the [Stuttgart-Tübingen Tagset](https://www.ims.uni-stuttgart.de/documents/ressourcen/lexika/tagsets/stts-1999.pdf). Here are the verb categories used there:
+
+>Auxiliary verb, finite (`VAFIN`); Auxiliary verb, infinitive (`VAINF`); Auxiliary verb, imperative (`VAIMP`); Auxiliary verb, past participle (`VAPP`); Modal verb, finite (`VMFIN`); Modal verb, infinitive (`VMINF`); Modal verb, past participle (`VMPP`); Full verb, finite (`VVFIN`); Full verb, infinitive (`VVINF`); Full verb, "zu"-infinitive (`VVIZU`); Full verb, imperative (`VVIMP`); Full verb, past participle (`VVPP`)
 
 As with some of the Latin examples above, it is arguable whether these could simply be recovered from existing UPOS and morphological FEATS. The convenience of having some linguistic features available with a single lookup should not be dismissed. In creating the new LatinCy XPOS tags I have tried to balance this convenience with the additional goal of human readability as well as the goal of genuinely surfacing otherwise hard-to-derive linguistic data when possible.
 
-Are there any other reasons to develop a custom system? I think there is and it involves model training itself. At present the LatinCy pipelines jointly train the lemmatizer, the tagger, the morphologizer, and the dependency parser—that is, a composite scoring function based on these components determines whether the model is learning and when early stopping should kick in. The joint training seems to make the model learn more slowly, but it is also learning more meaningful representations by solving a more difficult problem. With the v3.8 models, we were only predicting, say, that `in` was a preposition. Now we are predicting not only the POS but its complementary case.
+Are there any other reasons to develop a custom system? I think there is, and it involves model training itself. At present the LatinCy pipelines jointly train the lemmatizer, the tagger, the morphologizer, the sentence segmenter, and the dependency parser—that is, a composite scoring function based on these components determines  whether the model is learning and when early stopping should kick in. The joint training seems to make the model learn more slowly, but it is also learning more meaningful representations by solving a more difficult problem: the XPOS tags themselves now encode more linguistic information. With the v3.8 models, we were only predicting, say, that *in* was a preposition. Now we are predicting not only the POS but its complementary case.
 
-One obvious argument against the LatinCy XPOS system is that it is "heavy." The abbreviated two-position codes found in LASLA or nine-position codes in the Perseus tags have roots in data compression. Files with LatinCy XPOS *are* larger; they may take marginally more time to process. (This last point is less of a concern than ever for two reasons: 1. overall compute is not tripping over a few additional bytes per token; and 2. for its primary usage within spaCy, the strings are immediately mapped to a more performant integer representation anyway.) If this turns out to be a genuine impediment or point of friction, we could consider strategies for minifying or otherwise compressing files. Maybe we can even revisit an abbreviated system that better balances human readability.
+
+One obvious argument against the LatinCy XPOS system is that it is "heavy." The abbreviated two-position codes found in LASLA or nine-position codes in the Perseus tags have roots in data compression. Files with LatinCy XPOS *are* larger; they may take marginally more time to process. (This last point is perhaps less of a concern than ever for two reasons: 1. overall compute is not tripping over a few additional bytes per token; and 2. for its primary usage within spaCy, the strings are immediately mapped to a more performant integer representation anyway.) If this turns out to be a genuine impediment or point of friction, we could consider strategies for minifying or otherwise compressing files. Maybe we can even consider a compromise, that is an abbreviated system that better addresses human readability.
 
 The v3.9 LatinCy XPOS tagset is a draft experiment at providing users with more immediately useful Latin annotations for research and teaching. I welcome feedback on other tags and subtags that should be considered in future releases.
 
