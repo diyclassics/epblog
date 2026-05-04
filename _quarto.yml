@@ -18,8 +18,8 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/diyclassics
-      - icon: twitter
-        href: https://twitter.com/diyclassics
+      - icon: bluesky
+        href: https://bsky.app/profile/diyclassics.bsky.social
 
 format:
   html:

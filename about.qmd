@@ -4,9 +4,9 @@ title: "About"
 about:
   template: jolla
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/diyclassics
+    - icon: bluesky
+      text: Bluesky
+      href: https://bsky.app/profile/diyclassics.bsky.social
     - icon: github
       text: Github
       href: https://github.com/diyclassics
