@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/homeric-hapaxes/index.html",
       "/posts/latincy-xpos-tags/index.html",
       "/posts/latincy-loves-data-pt1/index.html",
       "/posts/word-counts/index.html",
