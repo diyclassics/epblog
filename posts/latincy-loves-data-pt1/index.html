@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>LatinCy Loves Data, Part 1: UD Latin Treebanks – Exploratory Philology Blog</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -62,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +92,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-de3d5226f8b5168607ddcc3c03efb082.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd9b71c7e62ea4f8cd686ca2fbba957c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -138,8 +139,6 @@ div.csl-indent {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Exploratory Philology Blog</span>
     </a>
@@ -294,33 +293,33 @@ Table&nbsp;1: UD Latin treebanks summary
 <p>Check back here next Monday for another LatinCy Loves Data post on the word vectors used throughout the LatinCy project.</p>
 <section id="further-reading" class="level2">
 <h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-burnsLatinCySyntheticTrained2023" class="csl-entry" role="listitem">
-Burns, Patrick J. 2023. <span>“<span>LatinCy</span>: <span>Synthetic Trained Pipelines</span> for <span>Latin NLP</span>.”</span> May 7, 2023. <a href="https://arxiv.org/abs/2305.04365v1">https://arxiv.org/abs/2305.04365v1</a>.
+Burns, Patrick J. 2023. <span>“<span>LatinCy</span>: <span>Synthetic Trained Pipelines</span> for <span>Latin NLP</span>.”</span> Pre-published May 7. <a href="https://arxiv.org/abs/2305.04365v1">https://arxiv.org/abs/2305.04365v1</a>.
 </div>
 <div id="ref-cecchiniChallengesConvertingIndex2018" class="csl-entry" role="listitem">
-Cecchini, Flavio Massimiliano, Marco Passarotti, Paola Marongiu, and Daniel Zeman. 2018. <span>“Challenges in Converting the <span>Index Thomisticus Treebank</span> into <span>Universal Dependencies</span>.”</span> In <em>Proceedings of the <span>Second Workshop</span> on <span>Universal Dependencies</span> (<span>UDW</span> 2018)</em>, edited by Marie-Catherine de Marneffe, Teresa Lynn, and Sebastian Schuster, 27–36. Brussels, Belgium: Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/W18-6004">https://doi.org/10.18653/v1/W18-6004</a>.
+Cecchini, Flavio Massimiliano, Marco Passarotti, Paola Marongiu, and Daniel Zeman. 2018. <span>“Challenges in Converting the <span>Index Thomisticus Treebank</span> into <span>Universal Dependencies</span>.”</span> In <em>Proceedings of the <span>Second Workshop</span> on <span>Universal Dependencies</span> (<span>UDW</span> 2018)</em>, edited by Marie-Catherine de Marneffe, Teresa Lynn, and Sebastian Schuster. Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/W18-6004">https://doi.org/10.18653/v1/W18-6004</a>.
 </div>
 <div id="ref-cecchini_2020" class="csl-entry" role="listitem">
-Cecchini, Flavio M., Rachele Sprugnoli, Giovanni Moretti, and Marco Passarotti. 2020. <span>“<span>UDante</span>: <span>First Steps Towards</span> the <span>Universal Dependencies Treebank</span> of <span>Dante</span>’s <span>Latin Works</span>.”</span> In <em>Proceedings of the <span>Seventh Italian Conference</span> on <span class="nocase">Computational Linguistics CLiC-it</span> 2020</em>, edited by Felice Dell’Orletta, Johanna Monti, and Fabio Tamburini, 99–105. Accademia University Press. <a href="https://doi.org/10.4000/books.aaccademia.8653">https://doi.org/10.4000/books.aaccademia.8653</a>.
+Cecchini, Flavio M., Rachele Sprugnoli, Giovanni Moretti, and Marco Passarotti. 2020. <span>“<span>UDante</span>: <span>First Steps Towards</span> the <span>Universal Dependencies Treebank</span> of <span>Dante</span>’s <span>Latin Works</span>.”</span> In <em>Proceedings of the <span>Seventh Italian Conference</span> on <span class="nocase">Computational Linguistics CLiC-it</span> 2020</em>, edited by Felice Dell’Orletta, Johanna Monti, and Fabio Tamburini. Accademia University Press. <a href="https://doi.org/10.4000/books.aaccademia.8653">https://doi.org/10.4000/books.aaccademia.8653</a>.
 </div>
 <div id="ref-denoozLordinateurLatinTechniques1978" class="csl-entry" role="listitem">
-Denooz, Joseph. 1978. <em>L’ordinateur et le latin: Techniques et méthodes</em>. Université de Liège: L.A.S.L.A. <a href="http://orbi.ulg.ac.be/handle/2268/1059">http://orbi.ulg.ac.be/handle/2268/1059</a>.
+Denooz, Joseph. 1978. <em>L’ordinateur et le latin: Techniques et méthodes</em>. L.A.S.L.A. <a href="http://orbi.ulg.ac.be/handle/2268/1059">http://orbi.ulg.ac.be/handle/2268/1059</a>.
 </div>
 <div id="ref-eckhoff_2018" class="csl-entry" role="listitem">
-Eckhoff, Hanne, Kristin Bech, Gerlof Bouma, Kristine Eide, Dag Haug, Odd Einar Haugen, and Marius Jøhndal. 2018. <span>“The <span>PROIEL Treebank Family</span>: <span>A Standard</span> for <span>Early Attestations</span> of <span>Indo-European Languages</span>.”</span> <em>Language Resources and Evaluation</em> 52 (1): 29–65. <a href="https://doi.org/10.1007/s10579-017-9388-5">https://doi.org/10.1007/s10579-017-9388-5</a>.
-</div>
-<div id="ref-gambaUniversalisingLatinUniversal2023" class="csl-entry" role="listitem">
-Gamba, Federica, and Daniel Zeman. 2023a. <span>“Universalising <span>Latin Universal Dependencies</span>: <span>A Harmonisation</span> of <span>Latin Treebanks</span> in <span>UD</span>.”</span> In <em>Proceedings of the <span>Sixth Workshop</span> on <span>Universal Dependencies</span> (<span>UDW</span>, <span>GURT</span>/<span>SyntaxFest</span> 2023)</em>, edited by Loïc Grobol and Francis Tyers, 7–16. Washington, D.C.: Association for Computational Linguistics. <a href="https://aclanthology.org/2023.udw-1.2">https://aclanthology.org/2023.udw-1.2</a>.
+Eckhoff, Hanne, Kristin Bech, Gerlof Bouma, et al. 2018. <span>“The <span>PROIEL Treebank Family</span>: <span>A Standard</span> for <span>Early Attestations</span> of <span>Indo-European Languages</span>.”</span> <em>Language Resources and Evaluation</em> 52 (1): 29–65. <a href="https://doi.org/10.1007/s10579-017-9388-5">https://doi.org/10.1007/s10579-017-9388-5</a>.
 </div>
 <div id="ref-gambaLatinMorphologyCenturies2023" class="csl-entry" role="listitem">
-———. 2023b. <span>“Latin <span>Morphology</span> Through the <span>Centuries</span>: <span>Ensuring Consistency</span> for <span>Better Language Processing</span>.”</span> In <em>Proceedings of the <span>Ancient Language Processing Workshop</span></em>, edited by Adam Anderson, Shai Gordin, Bin Li, Yudong Liu, and Marco C. Passarotti, 59–67. Varna, Bulgaria: INCOMA Ltd., Shoumen, Bulgaria. <a href="https://aclanthology.org/2023.alp-1.7/">https://aclanthology.org/2023.alp-1.7/</a>.
+Gamba, Federica, and Daniel Zeman. 2023a. <span>“Latin <span>Morphology</span> Through the <span>Centuries</span>: <span>Ensuring Consistency</span> for <span>Better Language Processing</span>.”</span> In <em>Proceedings of the <span>Ancient Language Processing Workshop</span></em>, edited by Adam Anderson, Shai Gordin, Bin Li, Yudong Liu, and Marco C. Passarotti. INCOMA Ltd., Shoumen, Bulgaria. <a href="https://aclanthology.org/2023.alp-1.7/">https://aclanthology.org/2023.alp-1.7/</a>.
+</div>
+<div id="ref-gambaUniversalisingLatinUniversal2023" class="csl-entry" role="listitem">
+Gamba, Federica, and Daniel Zeman. 2023b. <span>“Universalising <span>Latin Universal Dependencies</span>: <span>A Harmonisation</span> of <span>Latin Treebanks</span> in <span>UD</span>.”</span> In <em>Proceedings of the <span>Sixth Workshop</span> on <span>Universal Dependencies</span> (<span>UDW</span>, <span>GURT</span>/<span>SyntaxFest</span> 2023)</em>, edited by Loïc Grobol and Francis Tyers. Association for Computational Linguistics. <a href="https://aclanthology.org/2023.udw-1.2">https://aclanthology.org/2023.udw-1.2</a>.
 </div>
 <div id="ref-mambrini_2019" class="csl-entry" role="listitem">
-Mambrini, Francesco, and Marco Passarotti. 2019. <span>“Linked <span>Open Treebanks</span>: <span>Interlinking Syntactically Annotated Corpora</span> in the <span>LiLa Knowledge Base</span> of <span>Linguistic Resources</span> for <span>Latin</span>.”</span> In <em>Proceedings of the 18th <span>International Workshop</span> on <span>Treebanks</span> and <span>Linguistic Theories</span> (<span>TLT</span>, <span>SyntaxFest</span> 2019)</em>, 74–81. <a href="https://aclanthology.org/W19-7808.pdf">https://aclanthology.org/W19-7808.pdf</a>.
+Mambrini, Francesco, and Marco Passarotti. 2019. <span>“Linked <span>Open Treebanks</span>: <span>Interlinking Syntactically Annotated Corpora</span> in the <span>LiLa Knowledge Base</span> of <span>Linguistic Resources</span> for <span>Latin</span>.”</span> <em>Proceedings of the 18th <span>International Workshop</span> on <span>Treebanks</span> and <span>Linguistic Theories</span> (<span>TLT</span>, <span>SyntaxFest</span> 2019)</em>, 74–81. <a href="https://aclanthology.org/W19-7808.pdf">https://aclanthology.org/W19-7808.pdf</a>.
 </div>
 <div id="ref-demarneffe_2021" class="csl-entry" role="listitem">
-Marneffe, Marie-Catherine de, Christopher D. Manning, Joakim Nivre, and Daniel Zeman. 2021. <span>“Universal <span>Dependencies</span>.”</span> <em>Computational Linguistics</em> 47 (2): 255–308. <a href="https://doi.org/10.1162/coli_a_00402">https://doi.org/10.1162/coli_a_00402</a>.
+Marneffe, Marie-Catherine de, Christopher D. Manning, Joakim Nivre, and Daniel Zeman. 2021. <span>“Universal <span>Dependencies</span>.”</span> <em>Computational Linguistics</em> (Cambridge, MA) 47 (2): 255–308. <a href="https://doi.org/10.1162/coli_a_00402">https://doi.org/10.1162/coli_a_00402</a>.
 </div>
 </div>
 
@@ -401,7 +400,7 @@ Marneffe, Marie-Catherine de, Christopher D. Manning, Joakim Nivre, and Daniel Z
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/exploratoryphilology\.org");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Patrick J. Burns">
-<meta name="dcterms.date" content="2026-03-30">
-<meta name="description" content="With v3.9, the LatinCy pipelines introduce a new set of human-readable, Latin-specific XPOS tags designed to surface useful linguistic information not easily derived from other UD annotations.">
+<meta name="dcterms.date" content="2026-07-10">
+<meta name="description" content="Introducing LatinCy Vocab, a Python package and spaCy component that turns plaintext Latin into pedagogically-aware, well-formatted vocabulary lists.">
 
-<title>Updating LatinCy XPOS Tags – Exploratory Philology Blog</title>
+<title>Introducing… LatinCy Vocab – Exploratory Philology Blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,7 +26,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -120,18 +139,16 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Updating LatinCy XPOS Tags</h1>
+      <h1 class="title">Introducing… LatinCy Vocab</h1>
                   <div>
         <div class="description">
-          With v3.9, the LatinCy pipelines introduce a new set of human-readable, Latin-specific XPOS tags designed to surface useful linguistic information not easily derived from other UD annotations.
+          Introducing LatinCy Vocab, a Python package and spaCy component that turns plaintext Latin into pedagogically-aware, well-formatted vocabulary lists.
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">latincy</div>
-                <div class="quarto-category">latin</div>
-                <div class="quarto-category">xpos</div>
-                <div class="quarto-category">universal-dependencies</div>
-                <div class="quarto-category">nlp</div>
+                <div class="quarto-category">latin-pedagogy</div>
+                <div class="quarto-category">vocabulary</div>
               </div>
                   </div>
   </div>
@@ -149,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 30, 2026</p>
+        <p class="date">July 10, 2026</p>
       </div>
     </div>
     
@@ -168,59 +185,70 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>The <a href="https://huggingface.co/latincy/la_core_web_lg">LatinCy pipelines</a> (and now the LatinCy <a href="https://huggingface.co/latincy/la_stanza_latincy">Stanza</a> and <a href="https://huggingface.co/latincy/la_flair_latincy">Flair</a> models) are trained ultimately on the <a href="https://universaldependencies.org/">Universal Dependency</a> (UD) <a href="https://exploratoryphilology.org/posts/latincy-loves-data-pt1/">Latin treebanks</a>. UD provides for two different kinds of part-of-speech tagging: UPOS and XPOS. The UPOS is a restricted set of, well, <a href="https://universaldependencies.org/u/pos/">universal POS tags</a>: <code>NOUN</code>, <code>VERB</code>, <code>CCONJ</code> (short for coordinating conjunction), and so on. The set is restrictive enough that I can just share it in its entirety:</p>
-<blockquote class="blockquote">
-<p><code>ADJ</code>, <code>ADP</code> (adposition), <code>ADV</code>, <code>AUX</code>, <code>CCONJ</code> (coordinating conjunction), <code>DET</code>, <code>INTJ</code>, <code>NOUN</code>, <code>NUM</code>, <code>PART</code>, <code>PRON</code>, <code>PROPN</code> (proper noun), <code>PUNCT</code>, <code>SCONJ</code> (subordinating conjunction), <code>SYM</code>, <code>VERB</code>, and <code>X</code> (other).</p>
-</blockquote>
-<p>XPOS, on the other hand, is designed, as noted in the the CoNLL-U <a href="https://universaldependencies.org/format.html">documentation</a>, to offer an “optional language-specific (or treebank-specific) part-of-speech / morphological tag.” With this release of the LatinCy models, I have tried to make this XPOS space more useful.</p>
-<p>Here are the new LatinCy XPOS tags:</p>
-<blockquote class="blockquote">
-<p><code>adjective</code>, <code>adverb</code>, <code>conjunction</code>, <code>conjunction/coordinating</code>, <code>conjunction/subordinating</code>, <code>determiner</code>, <code>foreign</code>, <code>interjection</code>, <code>noun</code>, <code>noun/proper</code>, <code>number</code>, <code>particle</code>, <code>preposition</code>, <code>preposition/ablative</code>, <code>preposition/accusative</code>, <code>pronoun</code>, <code>punc</code>, <code>unknown</code>, <code>verb</code>, <code>verb/deponent</code>, <code>verb/impersonal</code>, <code>verb/semideponent</code></p>
-</blockquote>
-<p>I will explain my motivation for this specific set of tags shortly. But first, a few words on the current state of Latin XPOS tags.</p>
-<p>There are currently six Latin treebanks—Perseus, PROIEL, ITTB, LLCT, UDante, and CIRCSE—and each handles XPOS differently. Let’s take a common word, <em>erat</em>, and see how the treebanks tag it.</p>
-<p><strong>Perseus</strong> uses a nine-position code: <code>v3siia---</code></p>
-<p>Reading one character left to right:</p>
+<p>In two recent talks—one for the AP Latin class at <a href="https://diyclassics.github.io/vocab-lists-fordham/">Fordham Prep</a> and the other for the <a href="https://diyclassics.github.io/vocab-lists-hunter/">Hunter High School classics club</a>—I introduced students to the world of Latin natural language processing through the idea of automated vocabulary lists. The premise is as follows: What text analysis and formatting tools would we need to have in place to take a plaintext passage of Latin and extract the kind of vocabulary lists you might find in an introductory textbook or intermediate reader? So, not merely a brief gloss of each word, but a list that knows to express a verb with its principal parts and an adjective with its three genders, knows which words are specific to a passage and which are “core” vocabulary, and so on.</p>
+<p>It is in the spirit of these talks that I developed <a href="https://github.com/latincy/latincy-vocab">LatinCy Vocab</a> over the last few months. Vocab is a Python package and <a href="https://spacy.io/">spaCy</a> component that wraps functionality from <a href="https://huggingface.co/latincy/la_core_web_lg">LatinCy Pipelines</a>, <a href="https://github.com/latincy/latincy-lexicon">LatinCy Lexicon</a> (an NLP-aware refactoring of <a href="https://mk270.github.io/whitakers-words/">Whitaker’s Words</a>), and related LatinCy resources together to accomplish the goal of turning plaintext Latin into a formatted vocabulary list. The package is available in a v0.1 beta release here: <a href="https://pypi.org/project/latincy-vocab/">https://pypi.org/project/latincy-vocab/</a>.</p>
+<div id="fig-latincy-vocab" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-latincy-vocab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="assets/img/latincy-vocab.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-latincy-vocab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: LatinCy Vocab Logo &amp; Description
+</figcaption>
+</figure>
+</div>
+<p>In the talks, I break down vocabulary list production into the following text tasks:</p>
 <ul>
-<li>It’s a verb, i.e.&nbsp;<code>v</code>.</li>
-<li>It’s third person, i.e.&nbsp;<code>3</code>.</li>
-<li>It’s singular, i.e.&nbsp;<code>s</code>.</li>
-<li>And it’s indicative imperfect active, i.e.&nbsp;<code>i</code>, <code>i</code>, <code>a</code>.</li>
+<li>tokenization</li>
+<li>lemmatization</li>
+<li>POS tagging</li>
+<li>lexical expansion, e.g., getting principal parts from any single instance of a verb</li>
+<li>lexical formatting, e.g., POS-aware presentations</li>
+<li>“keyness” measures</li>
+<li>named entity recognition</li>
+<li>word sense disambiguation (WSD)</li>
+<li>other considerations (e.g., macronization)</li>
 </ul>
-<p>The other three spaces—here <code>---</code>—encode gender, case, and degree, which are filled for other parts of speech (e.g.&nbsp;<code>a-s---fbc</code> for the comparative adjective <em>maiore</em>).</p>
-<p>The Perseus XPOS codes are more or less decipherable, but they still require that extra step of decipherment.</p>
-<p>And one more thing to note, both here and, in different ways, in the treebank-specific descriptions that follow: XPOS information overlaps with other annotations. In this case, the fact that <em>erat</em> is a verb is already hinted at in the UPOS tag <code>AUX</code> which is a specific type of Latin verb. (Any other verb, e.g.&nbsp;<em>fecit</em>, would just have <code>VERB</code> as its UPOS.) Moreover, the fact that <em>erat</em> is third person and singular and indicative imperfect active is also already captured in the morphological FEATS: <code>Aspect=Imp|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin</code>. It is not entirely clear what XPOS adds to our token-level Latin information.</p>
-<p><strong>PROIEL</strong> uses the space differently. Same word, <em>erat</em>—and here is the XPOS tag: <code>V-</code>.</p>
-<p>We can reasonably infer, especially after seeing the Perseus example, that the capital <code>V</code> means that this is a verb. And the hyphen? Just an empty marker to fill two character spaces. Other parts of speech use both of the character spaces. For example, some nouns are labelled <code>Nb</code> and others are labelled <code>Ne</code>. What is the difference? We would have to look that up. <code>Nb</code> is for common nouns, <code>Ne</code> is for proper nouns. So, we need to have reference to the tagset to determine the difference.</p>
-<p><strong>LLCT</strong> uses yet another system—a pipe-delimited expansion of the Perseus positional scheme: <code>v|v|3|s|i|i|a|-|-|-</code>. The same nine positions as Perseus plus a leading broad POS category, separated by pipes for readability.</p>
-<p><strong>UDante</strong> takes yet another similar approach: <code>va5iis3</code>. This is a compressed alphanumeric code where <code>v</code> is the POS, <code>a</code> marks active voice, <code>5</code> the conjugation class (here, irregular), <code>i</code> indicative mood, <code>i</code> imperfect tense, <code>s</code> singular number, and <code>3</code> third person. Again, like Perseus and LLCT, decipherable, but also not truly self-documenting.</p>
-<p><strong>ITTB</strong> uses a pipe-delimited system with several categories explained in the <a href="https://itreebank.marginalia.it/doc/Tagset_IT.pdf">tagset description</a>. For <em>erat</em>, the tag is <code>N3|modA|tem2|gen6</code>. Here <code>N3</code> is a lexical class code (for <em>sum</em> and its compounds), <code>modA</code> is the mood (indicative), <code>tem2</code> the tense (imperfect), and <code>gen6</code> the person/number (third singular). Without the ITTB documentation, these codes would be opaque.</p>
-<p><strong>CIRCSE</strong> follows the <a href="@denooz_1978">LASLA encoding</a> and uses short alphanumeric codes (like <code>B6</code> for forms of <em>sum</em>) for XPOS tags. (<em>erat</em> itself is not attested in the current CIRCSE treebank, but <code>est</code> is tagged <code>B6</code>.) Once again, without documentation, the code is difficult to connect to the part of speech tag.</p>
-<p>With all of this in mind, when I look at the current state of Latin XPOS tagging, there appear to be two main problems: 1. the XPOS tags largely (and at times entirely) repeat information otherwise found or derivable from the other UD annotations, particularly the UPOS and morphological features; and 2. the XPOS tags are highly compressed and non-transparent, often to the point of obscurity without reference to an external resource. Accordingly, I saw an opportunity to use the XPOS space in a way that encodes new information 1. that is perhaps not directly or easily derived from other annotation categories, and 2. that is human readable, and more specifically Latinist readable.</p>
-<p>Instead of <code>V-</code> or <code>N3</code> or <code>B6</code>, the LatinCy XPOS gives <code>verb</code>. And in certain cases it will return a more specific tag. For example, with the v3.9 models, deponent verbs return <code>verb/deponent</code>, semi-deponent verbs <code>verb/semideponent</code>, and impersonal verbs <code>verb/impersonal</code>. These categories are not easily derived from existing UD tag data, but are useful to Latinists. (Yes, you could infer from UPOS of <code>VERB</code> and a lemma ending in <code>-t</code> that a verb was impersonal; this use of XPOS is more direct.)</p>
-<p>By using a delimiter, that is the forward slash (<code>/</code>), we keep the more general category isolatable. Take for example prepositions: we now support with the models the case with which the preposition is found. For words like <code>propter</code> or <code>sine</code>, this is not a concern as they are always going to be, under our new system, <code>preposition/accusative</code> and <code>preposition/ablative</code> respectively. But for words like <code>in</code> or <code>sub</code> this is perhaps more useful.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> And, again, you might be able to extract this information by labelling a word with UPOS <code>ADP</code> <em>and</em> following its dependency to a given noun <em>and</em> looking at that noun’s morphological FEATS. Here we make that three-step process a simple lookup.</p>
-<p>I should note that other languages use the XPOS space to more readily surface certain linguistic phenomena. Here is the verb coverage for the English language models, following the <a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html">Penn Treebank</a> conventions:</p>
-<blockquote class="blockquote">
-<p>Verb, base form (<code>VB</code>); Verb, past tense (<code>VBD</code>); Verb, gerund or present participle (<code>VBG</code>); Verb, past participle (<code>VBN</code>); Verb, non-3rd person singular present (<code>VBP</code>); Verb, 3rd person singular present (<code>VBZ</code>)</p>
-</blockquote>
-<p>Similarly, German UD treebanks make use of the <a href="https://www.ims.uni-stuttgart.de/documents/ressourcen/lexika/tagsets/stts-1999.pdf">Stuttgart-Tübingen Tagset</a>. Here are the verb categories used there:</p>
-<blockquote class="blockquote">
-<p>Auxiliary verb, finite (<code>VAFIN</code>); Auxiliary verb, infinitive (<code>VAINF</code>); Auxiliary verb, imperative (<code>VAIMP</code>); Auxiliary verb, past participle (<code>VAPP</code>); Modal verb, finite (<code>VMFIN</code>); Modal verb, infinitive (<code>VMINF</code>); Modal verb, past participle (<code>VMPP</code>); Full verb, finite (<code>VVFIN</code>); Full verb, infinitive (<code>VVINF</code>); Full verb, “zu”-infinitive (<code>VVIZU</code>); Full verb, imperative (<code>VVIMP</code>); Full verb, past participle (<code>VVPP</code>)</p>
-</blockquote>
-<p>As with some of the Latin examples above, it is arguable whether these could simply be recovered from existing UPOS and morphological FEATS. The convenience of having some linguistic features available with a single lookup should not be dismissed. In creating the new LatinCy XPOS tags I have tried to balance this convenience with the additional goal of human readability as well as the goal of genuinely surfacing otherwise hard-to-derive linguistic data when possible.</p>
-<p>Are there any other reasons to develop a custom system? I think there is, and it involves model training itself. At present the LatinCy pipelines jointly train the lemmatizer, the tagger, the morphologizer, the sentence segmenter, and the dependency parser—that is, a composite scoring function based on these components determines whether the model is learning and when early stopping should kick in. The joint training seems to make the model learn more slowly, but it is also learning more meaningful representations by solving a more difficult problem: the XPOS tags themselves now encode more linguistic information. With the v3.8 models, we were only predicting, say, that <em>in</em> was a preposition. Now we are predicting not only the POS but its complementary case.</p>
-<p>One obvious argument against the LatinCy XPOS system is that it is “heavy.” The abbreviated two-position codes found in LASLA or nine-position codes in the Perseus tags have roots in data compression. Files with LatinCy XPOS <em>are</em> larger; they may take marginally more time to process. (This last point is perhaps less of a concern than ever for two reasons: 1. overall compute is not tripping over a few additional bytes per token; and 2. for its primary usage within spaCy, the strings are immediately mapped to a more performant integer representation anyway.) If this turns out to be a genuine impediment or point of friction, we could consider strategies for minifying or otherwise compressing files. Maybe we can even consider a compromise, that is an abbreviated system that better addresses human readability.</p>
-<p>The v3.9 LatinCy XPOS tagset is a draft experiment at providing users with more immediately useful Latin annotations for research and teaching. I welcome feedback on other tags and subtags that should be considered in future releases.</p>
+<p>Let’s briefly summarize where LatinCy stands with respect to these kinds of tasks.</p>
+<p>LatinCy Vocab combines the annotations from each of the projects noted above: the pipelines give us the main NLP annotations of tokens, lemmas, POS tags, even the named entities. Lexicon provides the glosses and the POS-aware expansions. Vocab then handles the pedagogical preparation by putting those two things together. Accordingly, this package knows how to make a Latin noun look like this in the vocabulary…</p>
+<p><strong>verbum, -i</strong>, <em>n.</em> word</p>
+<p>and a Latin verb like this…</p>
+<p><strong>dico, -ere, dixi, dictum</strong>, <em>v.</em> to say</p>
+<p>And a Latin adjective like this…</p>
+<p><strong>bonus, -a, -um</strong>, <em>adj.</em> good</p>
+<p>and so on.</p>
+<p>A nice addition to the package is the ability to filter vocabulary either by static word lists or by keyness measures. As for the first, for example, let’s say that you want to get only the vocabulary for a passage that is not covered by the <a href="https://dcc.dickinson.edu/latin-core-list1">DCC Latin Core Vocabulary</a> list. You could pass that list of lemmas to the vocabulary builder. So, given the opening of <a href="https://www.perseus.tufts.edu/hopper/text?doc=Plin.+Ep.+6.16">Pliny’s letter on Vesuvius</a>, we keep <em>avunculus</em> (“uncle”) in the vocab but drop <em>scribo</em> (“to write”). The package also allows us to pass more flexible and dynamically generated keyness measures. For example, we can pass a TF-IDF matrix for all of Pliny’s letters to the builder to ensure that a “key” word for Letter 6.16 like <em>pumex</em> (“pumice stone”) is retained but less letter-specific words like <em>ut</em> (“as” <em>inter alia</em>) or <em>tibi</em> (“for you”) are dropped.</p>
+<p>Another item on the list above—specifically WSD—has good progress in the LatinCy world and should see a proper model and dataset release within the next few weeks. The importance of WSD—as discussed in my <a href="https://diyclassics.github.io/wsd/">talk at the Thesaurus Linguae Latinae</a> last October—for vocabulary lists is obvious: while Whitaker’s Words (and so, LatinCy Lexicon) can provide general glosses for words, it would be far more helpful for readers to get context-specific glosses: thinking about Pliny’s letter again, a reader can orient themselves to the sense of the opening by understanding that the literal meaning of <em>exitus</em> is “a going out or forth, egress, departure” (<a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.04.0059%3Aentry%3Dexitus2">Lewis &amp; Short literal sense I</a>) but they cannot really understand the passage until they know that the word here means “end of life, end, death” (L&amp;S II.A.2). The best performing vocabulary list constructor should be able to handle that nuance. We are not there, but we are getting there.</p>
+<p>In the high school talks, I present the idea of NLP-assisted vocabulary list generation as an example of what Jeannette Wing describes as <a href="https://dl.acm.org/doi/10.1145/1118178.1118215">“computational thinking”</a>. In her essay for <em>Communications of the ACM</em>, she defines one key aspect of computational thinking as “abstraction and decomposition when attacking a large complex task or designing a large complex system” <span class="citation" data-cites="wing_2006_computational">(<a href="#ref-wing_2006_computational" role="doc-biblioref">Wing 2006, 33</a>)</span>. This is precisely what we do when we break down the idea of vocabulary list generation into its requisite parts. Making a vocabulary list is in this sense like making a <a href="https://pratt.duke.edu/news/learning-coding-pbjs/">peanut butter and jelly sandwich</a> <span class="citation" data-cites="kingery_2024_learning">(<a href="#ref-kingery_2024_learning" role="doc-biblioref">Kingery 2024</a>)</span>: it will not come together until everyone takes the time to “think critically about each step of the … creation process as well as the solutions to the obstacles … encountered along the way.”</p>
+<p>You may be tempted to ask in 2026—now more than three years into the <a href="https://crossworks.holycross.edu/necj/vol51/iss1/3/">ChatGPT era</a>—why not just offload this whole complex, multistep process to an LLM. I would be the first to admit that it is not particularly difficult to prompt ChatGPT (or Claude or Gemini etc.) with something like “Make a well-formatted vocabulary list for this Latin passage,” with some Latin text appended (see <a href="#fig-llm-vocab" class="quarto-xref">Figure&nbsp;2</a>). You will get a result, likely a perfectly passable result, maybe even a good one. But the scientific part of your philological and pedagogical brain should be asking questions like “How did the LLM come up with this list?” or “Why do I get a different list from very slightly different prompts?” And so on. Post prompt, we have a list. But we don’t have a good sense of how it came to be. Moreover, we don’t have a sense of where its weaknesses lie or even where it is flat-out wrong. In AI terms, with respect to vocabulary list generation, LLMs lack explainability and interpretability.</p>
+<p>Here is Russell and Norvig <span class="citation" data-cites="russell_2020_artificial">(<a href="#ref-russell_2020_artificial" role="doc-biblioref">2020, 711</a>)</span> on these topics: “We say that a machine learning model is interpretable if you can inspect the actual model and understand why it got a particular answer for a given input, and how the answer would change when the input changes. … An explainable model is one that can help you understand ‘why was this output produced for this input?’” It is critical as we redefine Latin pedagogy around computational affordances that we at the same time aspire to explainable philology, interpretable philology. This starts with being able to better explain what happens between a prompt and a response or between a Latin input and a Latin output. <a href="https://diyclassics.github.io/small-models/">Smaller language models</a>, in contrast to LLMs, can help us get there.</p>
+<div id="fig-llm-vocab" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-llm-vocab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="assets/img/llm-vocab.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-llm-vocab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: An LLM-generated vocabulary list for the opening of Pliny’s letter on Vesuvius (<em>Ep.</em> 6.16) via ChatGPT.
+</figcaption>
+</figure>
+</div>
+<p>The LatinCy Vocab lists, while—from my experience so far—quite good, also contain errors. That said, I can add that I know the error rates of each component in the NLP pipeline and have reported them for research transparency. I am constantly working on improving these scores over their current baselines. They may never reach 100% accuracy, but they will get better. If the models weren’t explainable they also wouldn’t be fixable, at least not in the same way. This kind of error analysis—and what is key, error correction being fed back into model training—is some of the most important work that we can do today in computational philology.</p>
+<p>If you would like to learn more about the NLP underpinnings of automatic vocabulary list production, I will be hosting a workshop on the topic at this year’s annual meeting of the <a href="https://caas-cw.org/category/2026-fall-meeting/">Classical Association of the Atlantic States</a> in Wilmington, DE this October. The workshop will help Latinists walk through each step of the process from tokenization and lemmatization to glossing for specific word senses, learning text analysis and natural language processing fundamentals, not to mention computational thinking fundamentals, along the way.</p>
 
 
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>I also expect that as the models mature this feature will prove helpful to Hellenists working with our new Greek models. I am trying to add the LatinCy XPOS system to the <code>grc</code> pipelines for v3.10.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-kingery_2024_learning" class="csl-entry" role="listitem">
+Kingery, Ken. 2024. <span>“Learning Coding Basics by Building <span><span>PB</span>&amp;Js</span>. Duke Pratt School of Engineering.”</span> May 20. <a href="https://pratt.duke.edu/news/learning-coding-pbjs/">https://pratt.duke.edu/news/learning-coding-pbjs/</a>.
+</div>
+<div id="ref-russell_2020_artificial" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: A Modern Approach</em>. 4th edition. Pearson.
+</div>
+<div id="ref-wing_2006_computational" class="csl-entry" role="listitem">
+Wing, Jeannette M. 2006. <span>“Computational Thinking.”</span> <em>Communications of the <span>ACM</span></em> 49 (3): 33–35.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>Aristophanic Wordclouds – Exploratory Philology Blog</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -62,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +92,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-de3d5226f8b5168607ddcc3c03efb082.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd9b71c7e62ea4f8cd686ca2fbba957c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -141,8 +142,6 @@ div.csl-indent {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Exploratory Philology Blog</span>
     </a>
@@ -228,7 +227,7 @@ div.csl-indent {
 <p>In Aristophanes’s <em>Clouds</em>, we find a certain Strepsiades who joins a philosophy-rhetoric school—The Phrontisterion—in order to learn the arts of Strong and Weak Argumentation from Socrates in the hopes of getting out of financial straits. For our purposes, we don’t need to concern ourselves as much with the plot as with the main characters and main ideas of the comedy. In other words, we want to find the <em>key</em> words of <em>Clouds</em>, that is that words that refer to the characters, places, ideas, and so on that are specifically important to this play and not to, say, other plays of Aristophanes like <em>Lysistrata</em> or <em>The Frogs</em>. Our plan then in this experiment based on a chapter from the upcoming book <em>Exploratory Philology</em> is to generate a word cloud, a <em>Clouds</em> cloud if you will.</p>
 <p><img src="preview.png" class="preview-image img-fluid"></p>
 <p><strong>Run this notebook in the browser using Binder here <a href="https://mybinder.org/v2/gh/diyclassics/epblog/notebooks?labpath=notebooks%2Fwordsclouds.ipynb"><img src="https://mybinder.org/badge_logo.svg" class="img-fluid" alt="Binder"></a></strong></p>
-<p>Wordclouds are a text visualization that packs words densely into a confined space such that the words themselves are given visual priority—e.g.&nbsp;some words will be bigger than others—based on some criteria and often specifically based on frequency. As <span class="citation" data-cites="hicke_word_2022">Hicke, Goenka, and Alexander (<a href="#ref-hicke_word_2022" role="doc-biblioref">2022</a>)</span> note: “Their intuitive and engaging design has made them a popular choice for authors, but many visualization specialists are skeptical about their effectiveness.” Nevertheless, as <span class="citation" data-cites="kalanicraig_teaching_2014">Craig (<a href="#ref-kalanicraig_teaching_2014" role="doc-biblioref">2014</a>)</span> writes, the format can show students a “systematic way to handle something many of them think of as ineffable” and specifically one that can “appeal to humanities students a way of questioning their intuitive approach to textual analysis.”</p>
+<p>Wordclouds are a text visualization that packs words densely into a confined space such that the words themselves are given visual priority—e.g.&nbsp;some words will be bigger than others—based on some criteria and often specifically based on frequency. As <span class="citation" data-cites="hicke_word_2022">Hicke et al. (<a href="#ref-hicke_word_2022" role="doc-biblioref">2022</a>)</span> note: “Their intuitive and engaging design has made them a popular choice for authors, but many visualization specialists are skeptical about their effectiveness.” Nevertheless, as <span class="citation" data-cites="kalanicraig_teaching_2014">Craig (<a href="#ref-kalanicraig_teaching_2014" role="doc-biblioref">2014</a>)</span> writes, the format can show students a “systematic way to handle something many of them think of as ineffable” and specifically one that can “appeal to humanities students a way of questioning their intuitive approach to textual analysis.”</p>
 <p>Before getting into the code, let’s sketch out a plan for the experiment in pseudocode, i.e.&nbsp;some plain-language instructions that we can “translate” into working Python. Let’s start with the following…</p>
 <p><strong>Pseudocode for creating wordclouds for Aristophanes’ <i>Clouds</i></strong></p>
 <ol type="1">
@@ -871,18 +870,18 @@ Name: clouds, dtype: float64</code></pre>
 <p>What to do next? The clearest next step for this exploration would be to compare the <em>Cloud</em> wordclouds to those for the other Aristophanic works. They are already in memory, ready to be generated. But it is worth asking then—what does it mean to compare one wordcloud to another? We should also check how the wordcloud change when you look at <em>Clouds</em> against a different set of reference texts, say, e.g., the plays of Euripides? all of Greek poetry? etc. This is the kind of read-write-refactor coding style that is at the heart of <em>Exploratory Philology</em>.</p>
 <section id="references" class="level3">
 <h3 class="anchored" data-anchor-id="references">References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-kalanicraig_teaching_2014" class="csl-entry" role="listitem">
-Craig, Kalani. 2014. <span>“Teaching <span>Digital</span> <span>Humanities</span> with <span>Analog</span> <span>Tools</span>: <span>Word</span> <span>Clouds</span> and <span>Text</span> <span>Mining</span>.”</span> <a href="https://kalanicraig.com/teaching/teaching-digital-humanities-with-analog-tools-word-clouds-and-text-mining/">https://kalanicraig.com/teaching/teaching-digital-humanities-with-analog-tools-word-clouds-and-text-mining/</a>.
+Craig, Kalani. 2014. <em>Teaching <span>Digital</span> <span>Humanities</span> with <span>Analog</span> <span>Tools</span>: <span>Word</span> <span>Clouds</span> and <span>Text</span> <span>Mining</span></em>. <a href="https://kalanicraig.com/teaching/teaching-digital-humanities-with-analog-tools-word-clouds-and-text-mining/">https://kalanicraig.com/teaching/teaching-digital-humanities-with-analog-tools-word-clouds-and-text-mining/</a>.
 </div>
 <div id="ref-dunbar_complete_1883" class="csl-entry" role="listitem">
-Dunbar, Henry. 1883. <em>A <span>Complete</span> <span>Concordance</span> to the <span>Comedies</span> and <span>Fragments</span> of <span>Aristophanes</span></em>. Oxford: Claredon Press.
+Dunbar, Henry. 1883. <em>A <span>Complete</span> <span>Concordance</span> to the <span>Comedies</span> and <span>Fragments</span> of <span>Aristophanes</span></em>. Claredon Press.
 </div>
 <div id="ref-hicke_word_2022" class="csl-entry" role="listitem">
-Hicke, Rebecca M. M., Maanya Goenka, and Eric Alexander. 2022. <span>“Word <span>Clouds</span> in the <span>Wild</span>.”</span> In <em>2022 <span>IEEE</span> 7th <span>Workshop</span> on <span>Visualization</span> for the <span>Digital</span> <span>Humanities</span> (<span>VIS4DH</span>)</em>, 43–48. Oklahoma City, OK, USA: IEEE. <a href="https://doi.org/10.1109/VIS4DH57440.2022.00015">https://doi.org/10.1109/VIS4DH57440.2022.00015</a>.
+Hicke, Rebecca M. M., Maanya Goenka, and Eric Alexander. 2022. <span>“Word <span>Clouds</span> in the <span>Wild</span>.”</span> <em>2022 <span>IEEE</span> 7th <span>Workshop</span> on <span>Visualization</span> for the <span>Digital</span> <span>Humanities</span> (<span>VIS4DH</span>)</em> (Oklahoma City, OK, USA), October, 43–48. <a href="https://doi.org/10.1109/VIS4DH57440.2022.00015">https://doi.org/10.1109/VIS4DH57440.2022.00015</a>.
 </div>
 <div id="ref-mueller_wordcloud_2020" class="csl-entry" role="listitem">
-Mueller, Andreas C. 2020. <span>“Wordcloud.”</span> <a href="https://github.com/amueller/wordcloud">https://github.com/amueller/wordcloud</a>.
+Mueller, Andreas C. 2020. <em>Wordcloud</em>. <a href="https://github.com/amueller/wordcloud">https://github.com/amueller/wordcloud</a>.
 </div>
 </div>
 
@@ -963,7 +962,7 @@ Mueller, Andreas C. 2020. <span>“Wordcloud.”</span> <a href="https://github.
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/exploratoryphilology\.org");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
