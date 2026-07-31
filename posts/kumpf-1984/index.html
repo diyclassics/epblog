@@ -256,7 +256,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <section id="getting-the-homeric-data-from-agldt" class="level2">
 <h2 class="anchored" data-anchor-id="getting-the-homeric-data-from-agldt">Getting the Homeric data from AGLDT</h2>
 <p>First, download and parse the files for the Homeric text from the XML in the AGLDT v2.1.</p>
-<div id="a8f55529" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:31:50.724176Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:31:50.724084Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:05.447853Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:05.447095Z&quot;}}">
+<div id="a8f55529" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:13.999984Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:13.999881Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:22.938307Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:22.937788Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> unicodedata</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
@@ -292,7 +292,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <section id="preprocessing-agldt-data" class="level2">
 <h2 class="anchored" data-anchor-id="preprocessing-agldt-data">Preprocessing AGLDT data</h2>
 <p>Here we handle a handful of AGLDT v2.1 that lemmas retain pre-Unicode noise (e.g.&nbsp;~ for a circumflex) and other encoding/representation issues that if not addressed might surface as false hapaxes.</p>
-<div id="0e22e0be" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:05.453551Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:05.453385Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:05.456830Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:05.456151Z&quot;}}" data-execution_count="2">
+<div id="0e22e0be" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:22.940162Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:22.940024Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:22.943058Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:22.942516Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize AGLDT lemma encoding artifacts before counting</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Standalone breathing-mark prefixes (separate visible chars)</span></span>
@@ -326,7 +326,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 </section>
 <section id="get-bookline-data-for-each-word-i.e.-concordance" class="level2">
 <h2 class="anchored" data-anchor-id="get-bookline-data-for-each-word-i.e.-concordance">Get book/line data for each word, i.e.&nbsp;concordance</h2>
-<div id="eddbf638" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:05.458436Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:05.458336Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.040191Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.039745Z&quot;}}" data-execution_count="3">
+<div id="eddbf638" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:22.944944Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:22.944851Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.536738Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.536191Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>CITE_RE <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r":</span><span class="kw">(</span><span class="dv">\d</span><span class="op">+</span><span class="kw">)</span>(?:<span class="ch">\.</span><span class="kw">(</span><span class="dv">\d</span><span class="op">+</span><span class="kw">)</span>)<span class="op">?</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -381,12 +381,13 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <h2 class="anchored" data-anchor-id="rebuilding-table-i-one-column-at-a-time">Rebuilding Table I, one column at a time</h2>
 <section id="book-letters" class="level3">
 <h3 class="anchored" data-anchor-id="book-letters">Book letters</h3>
-<div id="c6bd052f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.041756Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.041658Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.049370Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.048986Z&quot;}}" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>BOOK_LETTERS <span class="op">=</span> <span class="bu">list</span>(<span class="st">"ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ"</span>)  <span class="co"># 24 books, standard numbering</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>table1 <span class="op">=</span> pd.DataFrame({<span class="st">"book"</span>: <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">25</span>)})</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>table1[<span class="st">"book_letter"</span>] <span class="op">=</span> BOOK_LETTERS</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c6bd052f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.538350Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.538232Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.545849Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.545334Z&quot;}}" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>BOOK_LETTERS_UPPER <span class="op">=</span> <span class="bu">list</span>(<span class="st">"ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ"</span>)  <span class="co"># Iliad, standard numbering</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>BOOK_LETTERS_LOWER <span class="op">=</span> <span class="bu">list</span>(<span class="st">"αβγδεζηθικλμνξοπρστυφχψω"</span>)  <span class="co"># Odyssey, standard numbering</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>table1 <span class="op">=</span> pd.DataFrame({<span class="st">"book"</span>: <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">25</span>)})</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>table1[<span class="st">"book_letter"</span>] <span class="op">=</span> BOOK_LETTERS_UPPER</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -529,7 +530,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 </section>
 <section id="counting-total-lines" class="level3">
 <h3 class="anchored" data-anchor-id="counting-total-lines">Counting total lines</h3>
-<div id="da0c1333" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.050849Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.050758Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.069939Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.069582Z&quot;}}" data-execution_count="5">
+<div id="da0c1333" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.547218Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.547120Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.575107Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.574324Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>iliad_lines <span class="op">=</span> words_df[(words_df[<span class="st">"work"</span>] <span class="op">==</span> <span class="st">"iliad"</span>) <span class="op">&amp;</span> words_df[<span class="st">"line"</span>].notna()]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>lines_per_book <span class="op">=</span> iliad_lines.groupby(<span class="st">"book"</span>)[<span class="st">"line"</span>].nunique()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -703,19 +704,22 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 </section>
 <section id="count-hapax-legomena-in-both-works" class="level3">
 <h3 class="anchored" data-anchor-id="count-hapax-legomena-in-both-works">Count hapax legomena in both works</h3>
-<div id="95972f51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.071735Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.071632Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.090296Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.089676Z&quot;}}">
+<div id="95972f51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.577088Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.576971Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.593831Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.593353Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lemma_counts <span class="op">=</span> words_df[<span class="st">"lemma"</span>].value_counts()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>HAPAX_LEMMAS <span class="op">=</span> <span class="bu">set</span>(lemma_counts[lemma_counts <span class="op">==</span> <span class="dv">1</span>].index)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(HAPAX_LEMMAS)<span class="sc">}</span><span class="ss"> Homeric hapax lemmas (AGLDT, corpus-wide)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2972 Homeric hapax lemmas (AGLDT, corpus-wide)</code></pre>
 </div>
-<div id="4f9e6188" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.091882Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.091772Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.114110Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.113735Z&quot;}}" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>iliad_words <span class="op">=</span> words_df[words_df[<span class="st">"work"</span>] <span class="op">==</span> <span class="st">"iliad"</span>]</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>hapax_per_book <span class="op">=</span> (</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    iliad_words[iliad_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS)].groupby(<span class="st">"book"</span>).size()</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>table1[<span class="st">"hapax"</span>] <span class="op">=</span> table1[<span class="st">"book"</span>].<span class="bu">map</span>(hapax_per_book).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="4f9e6188" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.595228Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.595139Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.618448Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.618060Z&quot;}}" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>iliad_words <span class="op">=</span> words_df[words_df[<span class="st">"work"</span>] <span class="op">==</span> <span class="st">"iliad"</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>hapax_per_book <span class="op">=</span> (</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    iliad_words[iliad_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS)].groupby(<span class="st">"book"</span>).size()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>table1[<span class="st">"hapax"</span>] <span class="op">=</span> table1[<span class="st">"book"</span>].<span class="bu">map</span>(hapax_per_book).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
@@ -909,16 +913,16 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <section id="counting-proper-words" class="level3">
 <h3 class="anchored" data-anchor-id="counting-proper-words">Counting “proper” words</h3>
 <p>We can use capitalization as a proxy indicator of proper nouns for our table to match Kumpf’s definition of “proper” hapaxes.</p>
-<div id="49d1e254" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.115997Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.115897Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.127847Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.127484Z&quot;}}" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>iliad_hapax_words <span class="op">=</span> iliad_words[iliad_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS)]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>proper_per_book <span class="op">=</span> (</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    iliad_hapax_words[iliad_hapax_words[<span class="st">"lemma"</span>].<span class="bu">str</span>[<span class="dv">0</span>].<span class="bu">str</span>.isupper()]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"book"</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    .size()</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>table1[<span class="st">"proper_words"</span>] <span class="op">=</span> table1[<span class="st">"book"</span>].<span class="bu">map</span>(proper_per_book).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="49d1e254" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.620027Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.619934Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.632769Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.632295Z&quot;}}" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>iliad_hapax_words <span class="op">=</span> iliad_words[iliad_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS)]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>proper_per_book <span class="op">=</span> (</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    iliad_hapax_words[iliad_hapax_words[<span class="st">"lemma"</span>].<span class="bu">str</span>[<span class="dv">0</span>].<span class="bu">str</span>.isupper()]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"book"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    .size()</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>table1[<span class="st">"proper_words"</span>] <span class="op">=</span> table1[<span class="st">"book"</span>].<span class="bu">map</span>(proper_per_book).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -1137,11 +1141,11 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <section id="compute-frequency" class="level3">
 <h3 class="anchored" data-anchor-id="compute-frequency">Compute frequency</h3>
 <p>Kumpf maintains in his tables a ratio of hapaxes to total lines per book…</p>
-<div id="ca30fbb7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.129451Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.129344Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.134897Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.134501Z&quot;}}" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>table1[<span class="st">"frequency"</span>] <span class="op">=</span> table1.<span class="bu">apply</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> r: <span class="ss">f"1:</span><span class="sc">{</span>r[<span class="st">'lines'</span>] <span class="op">/</span> r[<span class="st">'hapax'</span>]<span class="sc">:.3f}</span><span class="ss">"</span> <span class="cf">if</span> r[<span class="st">"hapax"</span>] <span class="cf">else</span> <span class="va">None</span>, axis<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="ca30fbb7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.634331Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.634215Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.639760Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.639174Z&quot;}}" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>table1[<span class="st">"frequency"</span>] <span class="op">=</span> table1.<span class="bu">apply</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> r: <span class="ss">f"1:</span><span class="sc">{</span>r[<span class="st">'lines'</span>] <span class="op">/</span> r[<span class="st">'hapax'</span>]<span class="sc">:.3f}</span><span class="ss">"</span> <span class="cf">if</span> r[<span class="st">"hapax"</span>] <span class="cf">else</span> <span class="va">None</span>, axis<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
@@ -1386,16 +1390,16 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <section id="compare-against-kumpfs-printed-table-i" class="level2">
 <h2 class="anchored" data-anchor-id="compare-against-kumpfs-printed-table-i">Compare against Kumpf’s printed Table I</h2>
 <p>Here are the first four rows of Kumpf’s Table I as a Pandas dataframe:</p>
-<div id="0a8fc229" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.136342Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.136247Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.140457Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.139774Z&quot;}}" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kumpf 1984, Table I (p. 203) — first four books only (Α–Δ), not the full</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 24-book table.</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>kumpf_table1 <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"book_letter"</span>: [<span class="st">"Α"</span>, <span class="st">"Β"</span>, <span class="st">"Γ"</span>, <span class="st">"Δ"</span>],</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hapax_kumpf"</span>: [<span class="dv">48</span>, <span class="dv">258</span>, <span class="dv">45</span>, <span class="dv">61</span>],</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"proper_words_kumpf"</span>: [<span class="dv">6</span>, <span class="dv">187</span>, <span class="dv">10</span>, <span class="dv">17</span>],</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lines_kumpf"</span>: [<span class="dv">611</span>, <span class="dv">877</span>, <span class="dv">461</span>, <span class="dv">544</span>],</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>kumpf_table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="0a8fc229" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.641196Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.641094Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.645009Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.644508Z&quot;}}" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kumpf 1984, Table I (p. 203) — first four books only (Α–Δ), not the full</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 24-book table.</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>kumpf_table1 <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"book_letter"</span>: [<span class="st">"Α"</span>, <span class="st">"Β"</span>, <span class="st">"Γ"</span>, <span class="st">"Δ"</span>],</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hapax_kumpf"</span>: [<span class="dv">48</span>, <span class="dv">258</span>, <span class="dv">45</span>, <span class="dv">61</span>],</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"proper_words_kumpf"</span>: [<span class="dv">6</span>, <span class="dv">187</span>, <span class="dv">10</span>, <span class="dv">17</span>],</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lines_kumpf"</span>: [<span class="dv">611</span>, <span class="dv">877</span>, <span class="dv">461</span>, <span class="dv">544</span>],</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>kumpf_table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
@@ -1449,13 +1453,13 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <section id="inspecting-the-data-ἑτέρως" class="level3">
 <h3 class="anchored" data-anchor-id="inspecting-the-data-ἑτέρως">Inspecting the data: ἑτέρως</h3>
 <p>As noted in the post introduction, Kumpf discusses adjective/adverb considerations for defining hapax legomena. Here is where our computational definition runs into the same issue, using ἑτέρως. Since AGLDT lemmatizes the adverb separately from the adjective, we count it as a hapax. Kumpf does not. Just one example of a definitional difference that leads to drift in hapax counts.</p>
-<div id="2cab8b7d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.142392Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.142224Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.155679Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.155123Z&quot;}}" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lemma <span class="kw">in</span> (<span class="st">"ἕτερος"</span>, <span class="st">"ἑτέρως"</span>):</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">int</span>(lemma_counts.get(lemma, <span class="dv">0</span>))</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>lemma<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> occurrence(s), hapax=</span><span class="sc">{</span>lemma <span class="kw">in</span> HAPAX_LEMMAS<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># where is the one ἑτέρως?</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>words_df[words_df[<span class="st">"lemma"</span>] <span class="op">==</span> <span class="st">"ἑτέρως"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2cab8b7d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.646464Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.646379Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.660045Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.659556Z&quot;}}" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lemma <span class="kw">in</span> (<span class="st">"ἕτερος"</span>, <span class="st">"ἑτέρως"</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">int</span>(lemma_counts.get(lemma, <span class="dv">0</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>lemma<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> occurrence(s), hapax=</span><span class="sc">{</span>lemma <span class="kw">in</span> HAPAX_LEMMAS<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># where is the one ἑτέρως?</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>words_df[words_df[<span class="st">"lemma"</span>] <span class="op">==</span> <span class="st">"ἑτέρως"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>ἕτερος: 66 occurrence(s), hapax=False
 ἑτέρως: 1 occurrence(s), hapax=True</code></pre>
@@ -1494,21 +1498,21 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <section id="inspecting-the-data-iliad-3-proper-hapaxes" class="level3">
 <h3 class="anchored" data-anchor-id="inspecting-the-data-iliad-3-proper-hapaxes">Inspecting the data: Iliad 3 “proper” hapaxes</h3>
 <p>Before moving on to the second table, let’s also take a moment to inspect a case where we do have an “exact” match between the computer counts and the printed counts: let’s look at the “proper” hapaxes in <em>Il</em>. 3. It will be instructive to look a bit closer to ensure that not only do our counts match, but that the actual lemmas match as well.</p>
-<div id="42741f11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.157081Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.156983Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.273055Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.272587Z&quot;}}" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyuca <span class="im">import</span> Collator</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>collator <span class="op">=</span> Collator()</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> proper_hapax_lemmas(work, book):</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    book_words <span class="op">=</span> words_df[(words_df[<span class="st">"work"</span>] <span class="op">==</span> work) <span class="op">&amp;</span> (words_df[<span class="st">"book"</span>] <span class="op">==</span> book)]</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    hapax <span class="op">=</span> book_words[book_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS)]</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    proper <span class="op">=</span> hapax.loc[hapax[<span class="st">"lemma"</span>].<span class="bu">str</span>[<span class="dv">0</span>].<span class="bu">str</span>.isupper(), <span class="st">"lemma"</span>].unique()</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(proper, key<span class="op">=</span>collator.sort_key)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Proper hapax lemmas in Iliad Book 3 (AGLDT):"</span>)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lemma <span class="kw">in</span> <span class="bu">enumerate</span>(proper_hapax_lemmas(<span class="st">"iliad"</span>, <span class="dv">3</span>), <span class="dv">1</span>):</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>lemma<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="42741f11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.661524Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.661418Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.780732Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.780239Z&quot;}}" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyuca <span class="im">import</span> Collator</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>collator <span class="op">=</span> Collator()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> proper_hapax_lemmas(work, book):</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    book_words <span class="op">=</span> words_df[(words_df[<span class="st">"work"</span>] <span class="op">==</span> work) <span class="op">&amp;</span> (words_df[<span class="st">"book"</span>] <span class="op">==</span> book)]</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    hapax <span class="op">=</span> book_words[book_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS)]</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    proper <span class="op">=</span> hapax.loc[hapax[<span class="st">"lemma"</span>].<span class="bu">str</span>[<span class="dv">0</span>].<span class="bu">str</span>.isupper(), <span class="st">"lemma"</span>].unique()</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(proper, key<span class="op">=</span>collator.sort_key)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Proper hapax lemmas in Iliad Book 3 (AGLDT):"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lemma <span class="kw">in</span> <span class="bu">enumerate</span>(proper_hapax_lemmas(<span class="st">"iliad"</span>, <span class="dv">3</span>), <span class="dv">1</span>):</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>lemma<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Proper hapax lemmas in Iliad Book 3 (AGLDT):
 1: Αἴθρη
@@ -1524,10 +1528,10 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 </div>
 </div>
 <p>Upon closer inspection, we find that this list largely, but not entirely, overlaps with Kumpf’s printed list of proper hapaxes (derived from Index II, p.&nbsp;113–114). These nine match: Αἴθρη, Ἑλικάων, Θυμοίτης, Κρήτηθεν, Μύγδων, Ὀτρεύς, Οὐκαλέγων, Πιτθεύς, and Πυγμαῖοι. As for the tenth, we have Φρυγία in our list, Kumpf does not. Kumpf has Κρανάη, we do not. Let’s look closer…</p>
-<div id="2c748c1b" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.274721Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.274619Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.286216Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.285709Z&quot;}}" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Κρανάη, Il. 3.445 What does AGLDT do with that line?</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>words_df[(words_df[<span class="st">"work"</span>] <span class="op">==</span> <span class="st">"iliad"</span>) <span class="op">&amp;</span> (words_df[<span class="st">"book"</span>] <span class="op">==</span> <span class="dv">3</span>) <span class="op">&amp;</span> (words_df[<span class="st">"line"</span>] <span class="op">==</span> <span class="dv">445</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2c748c1b" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.782828Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.782707Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.795326Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.794604Z&quot;}}" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Κρανάη, Il. 3.445 What does AGLDT do with that line?</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>words_df[(words_df[<span class="st">"work"</span>] <span class="op">==</span> <span class="st">"iliad"</span>) <span class="op">&amp;</span> (words_df[<span class="st">"book"</span>] <span class="op">==</span> <span class="dv">3</span>) <span class="op">&amp;</span> (words_df[<span class="st">"line"</span>] <span class="op">==</span> <span class="dv">445</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
@@ -1615,17 +1619,17 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 </div>
 </div>
 <p>Here we see that AGLDT has assigned this a lowercase lemma, i.e.&nbsp;not a proper noun, an interpretative difference: is it a “rocky” (i.e.&nbsp;from adj. <em>κραναός</em>) island or is it the island named Κρανάη? Considering the AGLDT form here is capitalized, i.e.&nbsp;Κραναῇ, I think we can safely say that this should have been retained as a proper noun hapax, kept separate from the adjective form which appears elsewhere in the Homeric texts (5x)…</p>
-<div id="95d33699" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.287595Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.287491Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.289586Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.289056Z&quot;}}" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># κραναός counts, if we remove the potentially mislabelled Κρανάη</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"κραναός: </span><span class="sc">{</span>lemma_counts<span class="sc">.</span>get(<span class="st">'κραναός'</span>, <span class="dv">0</span>) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> occurrences corpus-wide"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="95d33699" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.796890Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.796787Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.799064Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.798532Z&quot;}}" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># κραναός counts, if we remove the potentially mislabelled Κρανάη</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"κραναός: </span><span class="sc">{</span>lemma_counts<span class="sc">.</span>get(<span class="st">'κραναός'</span>, <span class="dv">0</span>) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> occurrences corpus-wide"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>κραναός: 5 occurrences corpus-wide</code></pre>
 </div>
 </div>
 <p>What about Φρυγία? Harder to say, since it doesn’t appear in the Kumpf lists (and so the reason for its absence is not explicit). But looking at what does surface from the AGLDT data, we can surmise that this has been excluded because of inconsistent lemma assignment in AGLDT. Two forms exist in the <em>Iliad</em>—Φρυγίην and Φρυγίη—and should likely be assigned to the same lemma. But this is not what we see in AGLDT and so we wind up with two hapaxes where Kumpf sees none.</p>
-<div id="151c14e5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.290882Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.290789Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.299574Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.299168Z&quot;}}" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>words_df[words_df[<span class="st">"lemma"</span>].isin([<span class="st">"Φρυγία"</span>, <span class="st">"Φρυγίη"</span>])]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="151c14e5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.801525Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.801395Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.810810Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.810170Z&quot;}}" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>words_df[words_df[<span class="st">"lemma"</span>].isin([<span class="st">"Φρυγία"</span>, <span class="st">"Φρυγίη"</span>])]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
@@ -1669,33 +1673,33 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <section id="table-ii-hapaxes-in-the-odyssey-according-to-agldt" class="level2">
 <h2 class="anchored" data-anchor-id="table-ii-hapaxes-in-the-odyssey-according-to-agldt">Table II: Hapaxes in the <em>Odyssey</em> according to AGLDT</h2>
 <p>Here is a parallel reconstruction of Kumpf’s Table II, this time for the <em>Odyssey</em>. The same caveats about definitional differences and so differences in counts apply here as well.</p>
-<div id="ad70b3c0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.301072Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.300968Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.361976Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.361309Z&quot;}}" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_book_table(work, n_books<span class="op">=</span><span class="dv">24</span>):</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Same column-by-column logic as table1 above, generalized over work."""</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    work_words <span class="op">=</span> words_df[words_df[<span class="st">"work"</span>] <span class="op">==</span> work]</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    work_lines <span class="op">=</span> work_words[work_words[<span class="st">"line"</span>].notna()]</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    lines_per_book <span class="op">=</span> work_lines.groupby(<span class="st">"book"</span>)[<span class="st">"line"</span>].nunique()</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    hapax_words <span class="op">=</span> work_words[work_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS)]</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    hapax_per_book <span class="op">=</span> hapax_words.groupby(<span class="st">"book"</span>).size()</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    proper_per_book <span class="op">=</span> (</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        hapax_words[hapax_words[<span class="st">"lemma"</span>].<span class="bu">str</span>[<span class="dv">0</span>].<span class="bu">str</span>.isupper()].groupby(<span class="st">"book"</span>).size()</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    table <span class="op">=</span> pd.DataFrame({<span class="st">"book"</span>: <span class="bu">range</span>(<span class="dv">1</span>, n_books <span class="op">+</span> <span class="dv">1</span>)})</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"book_letter"</span>] <span class="op">=</span> BOOK_LETTERS[:n_books]</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"lines"</span>] <span class="op">=</span> table[<span class="st">"book"</span>].<span class="bu">map</span>(lines_per_book)</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"hapax"</span>] <span class="op">=</span> table[<span class="st">"book"</span>].<span class="bu">map</span>(hapax_per_book).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"proper_words"</span>] <span class="op">=</span> table[<span class="st">"book"</span>].<span class="bu">map</span>(proper_per_book).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"frequency"</span>] <span class="op">=</span> table.<span class="bu">apply</span>(</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> r: <span class="ss">f"1:</span><span class="sc">{</span>r[<span class="st">'lines'</span>] <span class="op">/</span> r[<span class="st">'hapax'</span>]<span class="sc">:.3f}</span><span class="ss">"</span> <span class="cf">if</span> r[<span class="st">"hapax"</span>] <span class="cf">else</span> <span class="va">None</span>, axis<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> table</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>table2 <span class="op">=</span> build_book_table(<span class="st">"odyssey"</span>)</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>table2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div id="ad70b3c0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.812301Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.812199Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.847388Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.846847Z&quot;}}" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_book_table(work, book_letters, n_books<span class="op">=</span><span class="dv">24</span>):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Same column-by-column logic as table1 above, generalized over work."""</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    work_words <span class="op">=</span> words_df[words_df[<span class="st">"work"</span>] <span class="op">==</span> work]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    work_lines <span class="op">=</span> work_words[work_words[<span class="st">"line"</span>].notna()]</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    lines_per_book <span class="op">=</span> work_lines.groupby(<span class="st">"book"</span>)[<span class="st">"line"</span>].nunique()</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    hapax_words <span class="op">=</span> work_words[work_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS)]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    hapax_per_book <span class="op">=</span> hapax_words.groupby(<span class="st">"book"</span>).size()</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    proper_per_book <span class="op">=</span> (</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        hapax_words[hapax_words[<span class="st">"lemma"</span>].<span class="bu">str</span>[<span class="dv">0</span>].<span class="bu">str</span>.isupper()].groupby(<span class="st">"book"</span>).size()</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    table <span class="op">=</span> pd.DataFrame({<span class="st">"book"</span>: <span class="bu">range</span>(<span class="dv">1</span>, n_books <span class="op">+</span> <span class="dv">1</span>)})</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"book_letter"</span>] <span class="op">=</span> book_letters[:n_books]</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"lines"</span>] <span class="op">=</span> table[<span class="st">"book"</span>].<span class="bu">map</span>(lines_per_book)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"hapax"</span>] <span class="op">=</span> table[<span class="st">"book"</span>].<span class="bu">map</span>(hapax_per_book).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"proper_words"</span>] <span class="op">=</span> table[<span class="st">"book"</span>].<span class="bu">map</span>(proper_per_book).fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    table[<span class="st">"frequency"</span>] <span class="op">=</span> table.<span class="bu">apply</span>(</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> r: <span class="ss">f"1:</span><span class="sc">{</span>r[<span class="st">'lines'</span>] <span class="op">/</span> r[<span class="st">'hapax'</span>]<span class="sc">:.3f}</span><span class="ss">"</span> <span class="cf">if</span> r[<span class="st">"hapax"</span>] <span class="cf">else</span> <span class="va">None</span>, axis<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> table</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>table2 <span class="op">=</span> build_book_table(<span class="st">"odyssey"</span>, BOOK_LETTERS_LOWER)</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>table2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
 
@@ -1715,7 +1719,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
 <td>1</td>
-<td>Α</td>
+<td>α</td>
 <td>441</td>
 <td>29</td>
 <td>8</td>
@@ -1724,7 +1728,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
 <td>2</td>
-<td>Β</td>
+<td>β</td>
 <td>433</td>
 <td>26</td>
 <td>0</td>
@@ -1733,7 +1737,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
 <td>3</td>
-<td>Γ</td>
+<td>γ</td>
 <td>495</td>
 <td>41</td>
 <td>12</td>
@@ -1742,7 +1746,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
 <td>4</td>
-<td>Δ</td>
+<td>δ</td>
 <td>845</td>
 <td>65</td>
 <td>18</td>
@@ -1751,7 +1755,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
 <td>5</td>
-<td>Ε</td>
+<td>ε</td>
 <td>492</td>
 <td>77</td>
 <td>4</td>
@@ -1760,7 +1764,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">5</th>
 <td>6</td>
-<td>Ζ</td>
+<td>ζ</td>
 <td>330</td>
 <td>38</td>
 <td>4</td>
@@ -1769,7 +1773,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">6</th>
 <td>7</td>
-<td>Η</td>
+<td>η</td>
 <td>346</td>
 <td>31</td>
 <td>7</td>
@@ -1778,7 +1782,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">7</th>
 <td>8</td>
-<td>Θ</td>
+<td>θ</td>
 <td>585</td>
 <td>65</td>
 <td>13</td>
@@ -1787,7 +1791,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">8</th>
 <td>9</td>
-<td>Ι</td>
+<td>ι</td>
 <td>550</td>
 <td>70</td>
 <td>5</td>
@@ -1796,7 +1800,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">9</th>
 <td>10</td>
-<td>Κ</td>
+<td>κ</td>
 <td>572</td>
 <td>52</td>
 <td>7</td>
@@ -1805,7 +1809,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">10</th>
 <td>11</td>
-<td>Λ</td>
+<td>λ</td>
 <td>640</td>
 <td>76</td>
 <td>26</td>
@@ -1814,7 +1818,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">11</th>
 <td>12</td>
-<td>Μ</td>
+<td>μ</td>
 <td>452</td>
 <td>55</td>
 <td>6</td>
@@ -1823,7 +1827,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">12</th>
 <td>13</td>
-<td>Ν</td>
+<td>ν</td>
 <td>440</td>
 <td>39</td>
 <td>1</td>
@@ -1832,7 +1836,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">13</th>
 <td>14</td>
-<td>Ξ</td>
+<td>ξ</td>
 <td>532</td>
 <td>64</td>
 <td>5</td>
@@ -1841,7 +1845,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">14</th>
 <td>15</td>
-<td>Ο</td>
+<td>ο</td>
 <td>556</td>
 <td>49</td>
 <td>10</td>
@@ -1850,7 +1854,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">15</th>
 <td>16</td>
-<td>Π</td>
+<td>π</td>
 <td>479</td>
 <td>32</td>
 <td>2</td>
@@ -1859,7 +1863,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">16</th>
 <td>17</td>
-<td>Ρ</td>
+<td>ρ</td>
 <td>605</td>
 <td>44</td>
 <td>2</td>
@@ -1868,7 +1872,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">17</th>
 <td>18</td>
-<td>Σ</td>
+<td>σ</td>
 <td>427</td>
 <td>43</td>
 <td>3</td>
@@ -1877,7 +1881,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">18</th>
 <td>19</td>
-<td>Τ</td>
+<td>τ</td>
 <td>603</td>
 <td>68</td>
 <td>8</td>
@@ -1886,7 +1890,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">19</th>
 <td>20</td>
-<td>Υ</td>
+<td>υ</td>
 <td>393</td>
 <td>35</td>
 <td>2</td>
@@ -1895,7 +1899,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">20</th>
 <td>21</td>
-<td>Φ</td>
+<td>φ</td>
 <td>423</td>
 <td>36</td>
 <td>5</td>
@@ -1904,7 +1908,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">21</th>
 <td>22</td>
-<td>Χ</td>
+<td>χ</td>
 <td>500</td>
 <td>48</td>
 <td>4</td>
@@ -1913,7 +1917,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="odd">
 <th data-quarto-table-cell-role="th">22</th>
 <td>23</td>
-<td>Ψ</td>
+<td>ψ</td>
 <td>370</td>
 <td>22</td>
 <td>3</td>
@@ -1922,7 +1926,7 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <tr class="even">
 <th data-quarto-table-cell-role="th">23</th>
 <td>24</td>
-<td>Ω</td>
+<td>ω</td>
 <td>548</td>
 <td>40</td>
 <td>8</td>
@@ -1938,26 +1942,26 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 <section id="table-iii-the-iliad-and-odyssey-compared" class="level2">
 <h2 class="anchored" data-anchor-id="table-iii-the-iliad-and-odyssey-compared">Table III: the <em>Iliad</em> and <em>Odyssey</em> compared</h2>
 <p>Comparisons between Tables I &amp; II and then deltas between Kumpf’s counts and our AGLDT counts…</p>
-<div id="9546322e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.363721Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.363593Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.369203Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.368627Z&quot;}}" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> aggregate_table(table):</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    hapax <span class="op">=</span> <span class="bu">int</span>(table[<span class="st">"hapax"</span>].<span class="bu">sum</span>())</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> <span class="bu">int</span>(table[<span class="st">"lines"</span>].<span class="bu">sum</span>())</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hapax"</span>: hapax,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"proper_words"</span>: <span class="bu">int</span>(table[<span class="st">"proper_words"</span>].<span class="bu">sum</span>()),</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"lines"</span>: lines,</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"frequency"</span>: <span class="ss">f"1:</span><span class="sc">{</span>lines <span class="op">/</span> hapax<span class="sc">:.3f}</span><span class="ss">"</span> <span class="cf">if</span> hapax <span class="cf">else</span> <span class="va">None</span>,</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>table3 <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    [aggregate_table(table1), aggregate_table(table2)],</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Iliad"</span>, <span class="st">"Odyssey"</span>],</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>table3.loc[<span class="st">"Iliad &amp; Odyssey"</span>] <span class="op">=</span> aggregate_table(pd.concat([table1, table2]))</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>table3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div id="9546322e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.849603Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.849469Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.855911Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.855331Z&quot;}}" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> aggregate_table(table):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    hapax <span class="op">=</span> <span class="bu">int</span>(table[<span class="st">"hapax"</span>].<span class="bu">sum</span>())</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> <span class="bu">int</span>(table[<span class="st">"lines"</span>].<span class="bu">sum</span>())</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hapax"</span>: hapax,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"proper_words"</span>: <span class="bu">int</span>(table[<span class="st">"proper_words"</span>].<span class="bu">sum</span>()),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"lines"</span>: lines,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"frequency"</span>: <span class="ss">f"1:</span><span class="sc">{</span>lines <span class="op">/</span> hapax<span class="sc">:.3f}</span><span class="ss">"</span> <span class="cf">if</span> hapax <span class="cf">else</span> <span class="va">None</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>table3 <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    [aggregate_table(table1), aggregate_table(table2)],</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Iliad"</span>, <span class="st">"Odyssey"</span>],</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>table3.loc[<span class="st">"Iliad &amp; Odyssey"</span>] <span class="op">=</span> aggregate_table(pd.concat([table1, table2]))</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>table3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 
 
@@ -1999,19 +2003,19 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 </div>
 </div>
 </div>
-<div id="61a71cf9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.370834Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.370716Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.374912Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.374382Z&quot;}}" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kumpf 1984, Table III (p. 206) — "The Number and Frequency of Homeric</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Hapax Legomena in the Iliad and the Odyssey Compared"</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>kumpf_table3 <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"hapax"</span>: <span class="dv">1669</span>, <span class="st">"proper_words"</span>: <span class="dv">506</span>, <span class="st">"lines"</span>: <span class="dv">15682</span>, <span class="st">"frequency"</span>: <span class="st">"1:9.396"</span>},</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"hapax"</span>: <span class="dv">1023</span>, <span class="st">"proper_words"</span>: <span class="dv">149</span>,  <span class="st">"lines"</span>: <span class="dv">12111</span>, <span class="st">"frequency"</span>: <span class="st">"1:11.838"</span>},</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"hapax"</span>: <span class="dv">2692</span>, <span class="st">"proper_words"</span>: <span class="dv">655</span>, <span class="st">"lines"</span>: <span class="dv">27793</span>, <span class="st">"frequency"</span>: <span class="st">"1:10.324"</span>},</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Iliad"</span>, <span class="st">"Odyssey"</span>, <span class="st">"Iliad &amp; Odyssey"</span>],</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>kumpf_table3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div id="61a71cf9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.857521Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.857402Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.862739Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.862036Z&quot;}}" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kumpf 1984, Table III (p. 206) — "The Number and Frequency of Homeric</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Hapax Legomena in the Iliad and the Odyssey Compared"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>kumpf_table3 <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"hapax"</span>: <span class="dv">1669</span>, <span class="st">"proper_words"</span>: <span class="dv">506</span>, <span class="st">"lines"</span>: <span class="dv">15682</span>, <span class="st">"frequency"</span>: <span class="st">"1:9.396"</span>},</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"hapax"</span>: <span class="dv">1023</span>, <span class="st">"proper_words"</span>: <span class="dv">149</span>,  <span class="st">"lines"</span>: <span class="dv">12111</span>, <span class="st">"frequency"</span>: <span class="st">"1:11.838"</span>},</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"hapax"</span>: <span class="dv">2692</span>, <span class="st">"proper_words"</span>: <span class="dv">655</span>, <span class="st">"lines"</span>: <span class="dv">27793</span>, <span class="st">"frequency"</span>: <span class="st">"1:10.324"</span>},</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Iliad"</span>, <span class="st">"Odyssey"</span>, <span class="st">"Iliad &amp; Odyssey"</span>],</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>kumpf_table3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 
 
@@ -2053,12 +2057,12 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 </div>
 </div>
 </div>
-<div id="afa0f10a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.376296Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.376196Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.381448Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.380995Z&quot;}}" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>comparison3 <span class="op">=</span> table3.join(kumpf_table3, lsuffix<span class="op">=</span><span class="st">""</span>, rsuffix<span class="op">=</span><span class="st">"_kumpf"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>comparison3[<span class="st">"hapax_delta"</span>] <span class="op">=</span> comparison3[<span class="st">"hapax"</span>] <span class="op">-</span> comparison3[<span class="st">"hapax_kumpf"</span>]</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>comparison3[<span class="st">"lines_delta"</span>] <span class="op">=</span> comparison3[<span class="st">"lines"</span>] <span class="op">-</span> comparison3[<span class="st">"lines_kumpf"</span>]</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>comparison3[[<span class="st">"hapax"</span>, <span class="st">"hapax_kumpf"</span>, <span class="st">"hapax_delta"</span>, <span class="st">"lines"</span>, <span class="st">"lines_kumpf"</span>, <span class="st">"lines_delta"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div id="afa0f10a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.864301Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.864186Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:23.875089Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:23.874407Z&quot;}}" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>comparison3 <span class="op">=</span> table3.join(kumpf_table3, lsuffix<span class="op">=</span><span class="st">""</span>, rsuffix<span class="op">=</span><span class="st">"_kumpf"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>comparison3[<span class="st">"hapax_delta"</span>] <span class="op">=</span> comparison3[<span class="st">"hapax"</span>] <span class="op">-</span> comparison3[<span class="st">"hapax_kumpf"</span>]</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>comparison3[<span class="st">"lines_delta"</span>] <span class="op">=</span> comparison3[<span class="st">"lines"</span>] <span class="op">-</span> comparison3[<span class="st">"lines_kumpf"</span>]</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>comparison3[[<span class="st">"hapax"</span>, <span class="st">"hapax_kumpf"</span>, <span class="st">"hapax_delta"</span>, <span class="st">"lines"</span>, <span class="st">"lines_kumpf"</span>, <span class="st">"lines_delta"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 
 
@@ -2112,39 +2116,45 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 </section>
 <section id="looking-at-hapax-free-passages" class="level2">
 <h2 class="anchored" data-anchor-id="looking-at-hapax-free-passages">Looking at hapax-free passages</h2>
-<p>The fourth table in Kumpf’s book lists passages in the Homeric works which are 1. 100 lines or longer, and 2. contain no hapax legomena. Kumpf lists four such passages: - Od. 21.152–283 (131 lines) - Od. 4.645–774 (129 lines) - Od. 8.362–478 (116 lines) - Od. 2.87–192 (105 lines)</p>
+<p>The fourth table in Kumpf’s book lists passages in the Homeric works which are 1. 100 lines or longer, and 2. contain no hapax legomena. Kumpf lists four such passages:</p>
+<ul>
+<li>Od. 21.152–283 (131 lines)</li>
+<li>Od. 4.645–774 (129 lines)</li>
+<li>Od. 8.362–478 (116 lines)</li>
+<li>Od. 2.87–192 (105 lines)</li>
+</ul>
 <p>As we have already seen from the previous tables, enough discrepancies exist between Kumpf’s hapaxes and our AGLDT hapaxes that we are unlikely to find the same hapax gaps. So, what follows is simply a recasting of Kumpf’s method on the AGLDT data…</p>
-<div id="748b8fbf" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T18:32:06.382775Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T18:32:06.382678Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T18:32:06.771905Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T18:32:06.771401Z&quot;}}" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_long_hapax_gaps(work, book, min_len<span class="op">=</span><span class="dv">100</span>):</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    book_words <span class="op">=</span> words_df[</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        (words_df[<span class="st">"work"</span>] <span class="op">==</span> work) <span class="op">&amp;</span> (words_df[<span class="st">"book"</span>] <span class="op">==</span> book) <span class="op">&amp;</span> words_df[<span class="st">"line"</span>].notna()</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    hapax_lines <span class="op">=</span> <span class="bu">set</span>(</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        book_words.loc[book_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS), <span class="st">"line"</span>].astype(<span class="bu">int</span>)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    max_line <span class="op">=</span> <span class="bu">int</span>(book_words[<span class="st">"line"</span>].<span class="bu">max</span>())</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    gaps, start <span class="op">=</span> [], <span class="va">None</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, max_line <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> line <span class="kw">in</span> hapax_lines:</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> start <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> line <span class="op">-</span> start <span class="op">&gt;=</span> min_len:</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                gaps.append((start, line <span class="op">-</span> <span class="dv">1</span>, line <span class="op">-</span> start))</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>            start <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> start <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>            start <span class="op">=</span> line</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> start <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> max_line <span class="op">+</span> <span class="dv">1</span> <span class="op">-</span> start <span class="op">&gt;=</span> min_len:</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>        gaps.append((start, max_line, max_line <span class="op">+</span> <span class="dv">1</span> <span class="op">-</span> start))</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gaps</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>our_table4 <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"work"</span>: work, <span class="st">"book"</span>: book, <span class="st">"start_line"</span>: s, <span class="st">"end_line"</span>: e, <span class="st">"length"</span>: length}</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> work <span class="kw">in</span> (<span class="st">"iliad"</span>, <span class="st">"odyssey"</span>)</span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> book <span class="kw">in</span> <span class="bu">sorted</span>(words_df.loc[words_df[<span class="st">"work"</span>] <span class="op">==</span> work, <span class="st">"book"</span>].unique())</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> s, e, length <span class="kw">in</span> find_long_hapax_gaps(work, book)</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>our_table4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="748b8fbf" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:23.876783Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:23.876671Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:24.288199Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:24.287766Z&quot;}}" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_long_hapax_gaps(work, book, min_len<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    book_words <span class="op">=</span> words_df[</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        (words_df[<span class="st">"work"</span>] <span class="op">==</span> work) <span class="op">&amp;</span> (words_df[<span class="st">"book"</span>] <span class="op">==</span> book) <span class="op">&amp;</span> words_df[<span class="st">"line"</span>].notna()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    hapax_lines <span class="op">=</span> <span class="bu">set</span>(</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        book_words.loc[book_words[<span class="st">"lemma"</span>].isin(HAPAX_LEMMAS), <span class="st">"line"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    max_line <span class="op">=</span> <span class="bu">int</span>(book_words[<span class="st">"line"</span>].<span class="bu">max</span>())</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    gaps, start <span class="op">=</span> [], <span class="va">None</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, max_line <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> line <span class="kw">in</span> hapax_lines:</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> start <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> line <span class="op">-</span> start <span class="op">&gt;=</span> min_len:</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                gaps.append((start, line <span class="op">-</span> <span class="dv">1</span>, line <span class="op">-</span> start))</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>            start <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> start <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>            start <span class="op">=</span> line</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> start <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> max_line <span class="op">+</span> <span class="dv">1</span> <span class="op">-</span> start <span class="op">&gt;=</span> min_len:</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>        gaps.append((start, max_line, max_line <span class="op">+</span> <span class="dv">1</span> <span class="op">-</span> start))</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gaps</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>our_table4 <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"work"</span>: work, <span class="st">"book"</span>: book, <span class="st">"start_line"</span>: s, <span class="st">"end_line"</span>: e, <span class="st">"length"</span>: length}</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> work <span class="kw">in</span> (<span class="st">"iliad"</span>, <span class="st">"odyssey"</span>)</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> book <span class="kw">in</span> <span class="bu">sorted</span>(words_df.loc[words_df[<span class="st">"work"</span>] <span class="op">==</span> work, <span class="st">"book"</span>].unique())</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> s, e, length <span class="kw">in</span> find_long_hapax_gaps(work, book)</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>our_table4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 
@@ -2184,11 +2194,11 @@ Figure&nbsp;2: Fig. 2. Example with ἀβλής and ἄβλητος in Autenreit
 </div>
 </div>
 <p>Before wrapping up, let’s look briefly at our longest hapax-free run. We <em>do</em> return the same start line as Kumpf (4.645), but we “miss” Kumpf’s hapax ἐπαγγέλλω at 4.775. Here is a case where our data is sound and our method is sound. It is just a matter of “how are we defining the ‘epic text.’” Kumpf’s edition of Homer (Monro and Allen’s OCT) prints ἐπαγγείλῃσι, our edition (Murray’s Loeb) prints ἀπαγγείλῃσι. By AGLDT count, the lemma ἀπαγγέλλω appears 10 times in the epics and so our slightly longer hapax-free run is (again by that data definition) correct. But Kumpf’s hapax-free run is also “correct,” assuming his definition of the epic text. Text-critical decision as hapax arbiter.</p>
-<div id="b5e6daad" class="cell" data-execution_count="32">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Counts of ἀπαγγέλλω and ἐπαγγέλλω in the AGLDT corpus:"</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lemma <span class="kw">in</span> (<span class="st">"ἀπαγγέλλω"</span>, <span class="st">"ἐπαγγέλλω"</span>):</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>lemma<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="bu">int</span>(lemma_counts.get(lemma, <span class="dv">0</span>))<span class="sc">}</span><span class="ss"> occurrence(s)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b5e6daad" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-31T20:05:24.289890Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-31T20:05:24.289737Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-31T20:05:24.292056Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-31T20:05:24.291556Z&quot;}}" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Counts of ἀπαγγέλλω and ἐπαγγέλλω in the AGLDT corpus:"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lemma <span class="kw">in</span> (<span class="st">"ἀπαγγέλλω"</span>, <span class="st">"ἐπαγγέλλω"</span>):</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>lemma<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="bu">int</span>(lemma_counts.get(lemma, <span class="dv">0</span>))<span class="sc">}</span><span class="ss"> occurrence(s)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Counts of ἀπαγγέλλω and ἐπαγγέλλω in the AGLDT corpus:
 ἀπαγγέλλω: 10 occurrence(s)
