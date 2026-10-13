@@ -1,0 +1,19 @@
+---
+title: "TITLE (PJB)"
+# description: (PJB) listing blurb, optional
+author: "Patrick J. Burns"
+date: "2026-10-13"
+categories: [latincy, latin-pedagogy, vocabulary]  # copied from introducing-latincy-vocab; change freely
+# image: (optional) assets/img/...
+format:
+    html:
+        code-fold: false
+draft: true
+---
+
+<!-- Skeleton only (Claude). Slug posts/caas2026/ is provisional — rename the folder if you like;
+     the #3 Events link follows whatever slug you settle on.
+     Facts for reference: "Automating Vocabulary List Production," workshop, Classical Association
+     of the Atlantic States Annual Meeting (CAAS2026), Fri. Oct. 9, 2026, 10:30 a.m., Hotel du Pont,
+     Wilmington, DE. Abstract page: https://diyclassics.github.io/automating/
+     Materials: /Volumes/fiona/work/code/diy/writing/caas2026/ -->
