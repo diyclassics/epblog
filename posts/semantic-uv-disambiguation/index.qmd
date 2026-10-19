@@ -1,0 +1,26 @@
+---
+title: "TODO title"
+description: "TODO"
+author: "Patrick J. Burns"
+date: "2026-10-15"
+categories: [latincy, latin, preprocessing, uv-normalization]
+draft: true
+---
+
+<!-- Claude skeleton: headings and asset slots only. All text is PJB's. -->
+
+## The problem: u-only forms that spell two words
+
+## Pairs and lemma groups
+
+## Approach
+
+![](assets/pipeline_light.png)
+
+## Results
+
+![](assets/accuracy_by_pair_light.png)
+
+## Limits
+
+## Next steps

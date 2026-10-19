@@ -1,0 +1,97 @@
+ID	Category	Value	Code
+1	Flexional-Type	Nominal (only degrees and cases)	1
+1	Flexional-Type	Participial	2
+1	Flexional-Type	Verbal	3
+1	Flexional-Type	Invariable	4
+1	Flexional-Type	Pseudo-lemma	5
+2	Nominals-Degree	Positive	1
+2	Nominals-Degree	Comparative	2
+2	Nominals-Degree	Superlative	3
+2	Nominals-Degree	Not stable composition	4
+2	Nominals-Degree	None	-
+3	Flexional-Category	I decl	A
+3	Flexional-Category	II decl	B
+3	Flexional-Category	III decl	C
+3	Flexional-Category	IV decl	D
+3	Flexional-Category	V decl	E
+3	Flexional-Category	Regularly irregular decl	F
+3	Flexional-Category	Uninflected nominal	G
+3	Flexional-Category	I conjug	J
+3	Flexional-Category	II conjug	K
+3	Flexional-Category	III conjug	L
+3	Flexional-Category	IV conjug	M
+3	Flexional-Category	Regularly irregular conjug	N
+3	Flexional-Category	Invariable	O
+3	Flexional-Category	Prepositional (always or not) particle	S
+3	Flexional-Category	None	-
+4	Mood	Active indicative	A
+4	Mood	Pass/Dep indicative	J
+4	Mood	Active subjunctive	B
+4	Mood	Pass/Dep subjunctive	K
+4	Mood	Active imperative	C
+4	Mood	Pass/Dep imperative	L
+4	Mood	Active participle	D
+4	Mood	Pass/Dep Participle	M
+4	Mood	Active gerund	E
+4	Mood	Passive Gerund	N
+4	Mood	Pass/Dep gerundive	O
+4	Mood	Active supine	G
+4	Mood	Pass/Dep supine	P
+4	Mood	Active infinitive	H
+4	Mood	Pass/Dep infinitive	Q
+4	Mood	None	-
+5	Tense	Present	1
+5	Tense	Imperfect	2
+5	Tense	Future	3
+5	Tense	Perfect	4
+5	Tense	Plusperfect	5
+5	Tense	Future perfect	6
+5	Tense	None	-
+6	Participials-Degree	Positive	1
+6	Participials-Degree	Comparative	2
+6	Participials-Degree	Superlative	3
+6	Participials-Degree	None	-
+7	Case/Number	Singular Nominative	A
+7	Case/Number	Plural Nominative	J
+7	Case/Number	Singular Genitive	B
+7	Case/Number	Plural Genitive	K
+7	Case/Number	Singular Dative	C
+7	Case/Number	Plural Dative	L
+7	Case/Number	Singular Accusative	D
+7	Case/Number	Plural Accusative	M
+7	Case/Number	Singular Vocative	E
+7	Case/Number	Plural Vocative	N
+7	Case/Number	Singular Ablative	F
+7	Case/Number	Plural Ablative	O
+7	Case/Number	Adverbial	G
+7	Case/Number	Casus “plurimus”	H
+7	Case/Number	None	-
+8	Gender/Number/Person	Masculine	1
+8	Gender/Number/Person	Feminine	2
+8	Gender/Number/Person	Neuter	3
+8	Gender/Number/Person	I singular	4
+8	Gender/Number/Person	II singular	5
+8	Gender/Number/Person	III singular	6
+8	Gender/Number/Person	I plural	7
+8	Gender/Number/Person	II plural	8
+8	Gender/Number/Person	III plural	9
+8	Gender/Number/Person	None	-
+9	Composition	Enclytic -ce	A
+9	Composition	Enclytic -cum	C
+9	Composition	Enclytic -met	M
+9	Composition	Enclytic -ne	N
+9	Composition	Enclytic -que	Q
+9	Composition	Enclytic -tenus	T
+9	Composition	Enclytic -ve	V
+9	Composition	Ending homographic with enclytic	H
+9	Composition	Composed with other form	Z
+9	Composition	As lemma	W
+9	Composition	None	-
+10	Formal-Variation	I variation of wordform	A
+10	Formal-Variation	II variation of wordform	B
+10	Formal-Variation	III variation of wordform	C
+10	Formal-Variation	Author mistake, or bad reading?	X
+10	Formal-Variation	None	-
+11	Graphical-Variation	Baseform	1
+11	Graphical-Variation	Graphical variations of “1”	2, 3,…
+11	Graphical-Variation	None	-

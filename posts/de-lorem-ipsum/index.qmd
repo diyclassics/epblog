@@ -1,0 +1,88 @@
+---
+title: "TODO title"
+description: "TODO"
+author: "Patrick J. Burns"
+date: "2026-10-15"
+categories: [latincy, latin, preprocessing, corpora]
+draft: true
+---
+
+<!-- Claude skeleton: headings, evidence pointers and asset slots only. All text is PJB's.
+     Numbers in comments and assets/ are from latincy-preprocess main @ cb6c3b9, measured
+     2026-10-15. Re-run if the rules change again before publication. -->
+
+## The problem: lorem ipsum in Latin web text
+
+<!-- evidence: 47,788 of the first 1M lines of cc100_final flagged (4.8%) -->
+
+{{< include assets/cc100_examples.md >}}
+
+## Lorem ipsum is Cicero
+
+<!-- source: Cic. Fin. 1.10.32-33 ("Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet...")
+     UNVERIFIED: wording and locator copied from the lorem module docstring; check against an edition -->
+<!-- likewise the Vergil/Horace locators below come from code comments, not an edition -->
+<!-- point: phrase matching on "dolor sit amet" flags Cicero and anyone quoting him -->
+<!-- point: `lorem` = tail of *dolorem* -->
+
+## Three kinds of evidence
+
+### Invented tokens
+
+<!-- STRONG_MARKERS: lorem (conditional) adipiscing incididunt cupidatat excepteur ullamco -->
+
+### Tokens OCR could also produce
+
+<!-- WEAK_MARKERS + their OCR sources: anim <- anim|um, eiusmod <- eiusmodi, aliquip <- aliquid,
+     proident <- provident, nostrud <- nostrum, exercitation <- exercitationem, cillum <- cilium;
+     anim needs a second weak marker (OCR truncation; "anim." = animal beside genus Viverra) -->
+
+### Generator vocabulary
+
+<!-- GENERATOR_WORDS (real Latin, rare in prose) vs SPECIFIC_WORDS (< 0.5/M tokens over 133.6M
+     tokens of genuine sources, vs 100-60,000/M in lipsum) -->
+<!-- excluded common words: "sunt sed non est id qui ex etiam nunc vitae magna quam ut in ac at a" -->
+
+## The decision cascade
+
+{{< include assets/cascade_table.md >}}
+
+## What it leaves alone
+
+<!-- genuine passages: Verg. Aen. 6.274-5 (pallentesque, tristisque Senectus);
+     Hor. Carm. 1.22.1-4 (Integer vitae scelerisque purus ... Fusce);
+     Cic. Fin. 1.32 in full ("consectetur, adipisci velit"; OCR edition also has aliquam, suscipit) -->
+<!-- OCR splits: "do lorem" (dolorem), "co lorem" (colorem), "ua lorem" (valorem);
+     glued debris ("Aii£lorem"); lowercase line-initial lorem (hyphenation tail);
+     proper name "Dux de Lorem" -->
+
+## Measuring false positives
+
+<!-- genuine 5 = quoted lorem samples on Wikisource; wikipedia 1 = garbled title list
+     ("Sagittis ... viverra"); OMNIA 3 = OCR garbage with two weak markers (2), Patrologia
+     grammar list with "nisl" (1) -->
+<!-- before the OCR fixes (aac8795): OMNIA 40, genuine 6; CC100 cost of the fixes: 155 lines -->
+
+{{< include assets/fp_by_corpus.md >}}
+
+## Using it
+
+```python
+from latincy_preprocess.lorem import is_lorem, lorem_score
+
+lorem_score("Duis pharetra suscipit orci, vel condimentum erat.")
+```
+
+```bash
+python -m latincy_preprocess.lorem cc100.txt -o kept.txt --dropped dropped.tsv --report report.json
+```
+
+## Limits
+
+<!-- candidates: single lowercase weak marker never fires alone; lines < 8 tokens skip the
+     density rule; non-lipsum junk (machine-translated web Latin) is out of scope;
+     ~0.6 false positives per million noisy-OCR lines (OMNIA, 3 of 4.9M);
+     capitalised "Lorem" with no generator words now passes (lipsum variants like
+     "Lorem tritani cu vix" among the 155 CC100 lines no longer flagged) -->
+
+## Next steps
