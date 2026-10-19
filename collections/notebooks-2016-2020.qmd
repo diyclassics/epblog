@@ -1,0 +1,36 @@
+---
+title: "Collected Notebooks 2016–2020"
+description: "Selected Jupyter notebooks from the *ll-experiments* and *perseus-experiments* repositories (2016–2020), edited and updated for republication here."
+listing:
+  id: collected-notebooks
+  contents:
+    - "../posts/*/index.qmd"
+    - "../posts/*/index.ipynb"
+  include:
+    categories: "*from-the-archives*"
+  type: default
+  sort: "date desc"
+  fields: [title, description, date, categories]
+  categories: false
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: false
+draft: true
+---
+
+Between late 2016 and 2020, much of my exploratory work in computational
+philology lived as loose Jupyter notebooks in two GitHub repositories —
+[`ll-experiments`](https://github.com/diyclassics/ll-experiments) (Latin,
+mostly via CLTK) and
+[`perseus-experiments`](https://github.com/diyclassics/perseus-experiments)
+(Greek and Perseus/treebank data). This collection gathers those notebooks as
+they are ported here: each one is edited for clarity, updated to current tools
+(LatinCy and friends where it makes sense), and annotated with a note pointing
+back to its original publication.
+
+The posts below carry the `from-the-archives` tag and are listed newest-first as
+they are re-published.
+
+::: {#collected-notebooks}
+:::
