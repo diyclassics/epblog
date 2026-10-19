@@ -173,3 +173,6 @@ uv.lock
 
 # Claude
 .claude/
+
+# Full-size image originals (never committed or deployed; see /blog-audit)
+_originals/
