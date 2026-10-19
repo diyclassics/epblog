@@ -5,12 +5,17 @@ project:
     - "!posts/tool-rnntagger/"
     - "**/*.qmd"
     - "**/*.ipynb"
+  post-render:
+    - scripts/prune-drafts.ts
 
 execute:
   freeze: auto
 
 website:
   title: "Exploratory Philology Blog"
+  site-url: https://exploratoryphilology.org
+  open-graph: true
+  twitter-card: true
   draft-mode: gone
   navbar:
     background: seagreen

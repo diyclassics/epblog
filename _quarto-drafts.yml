@@ -1,0 +1,4 @@
+# Local draft preview: quarto preview posts/<slug>/index.qmd --render all --profile drafts
+# Never edit draft-mode in _quarto.yml itself.
+website:
+  draft-mode: visible

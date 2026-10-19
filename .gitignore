@@ -176,3 +176,6 @@ uv.lock
 
 # Full-size image originals (never committed or deployed; see /blog-audit)
 _originals/
+
+# Quarto execution cache (site is only rendered locally)
+_freeze/
