@@ -1,11 +1,8 @@
 [
   {
-    "listing": "/collections/notebooks-2016-2020.html",
-    "items": []
-  },
-  {
     "listing": "/index.html",
     "items": [
+      "/posts/caas2026/index.html",
       "/posts/kumpf-1984/index.html",
       "/posts/introducing-latincy-vocab/index.html",
       "/posts/latincy-xpos-tags/index.html",
@@ -15,5 +12,9 @@
       "/posts/words-clouds/index.html",
       "/posts/wills-1996/index.html"
     ]
+  },
+  {
+    "listing": "/collections/notebooks-2016-2020.html",
+    "items": []
   }
 ]
