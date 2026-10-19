@@ -6,6 +6,8 @@ listing:
   contents:
     - "../posts/*/index.qmd"
     - "../posts/*/index.ipynb"
+    - "!../posts/pleias-tokenizer/"
+    - "!../posts/tool-rnntagger/"
   include:
     categories: "*from-the-archives*"
   type: default
