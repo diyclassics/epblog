@@ -4,8 +4,13 @@
     "items": []
   },
   {
+    "listing": "/collections/exploratory-philology-book.html",
+    "items": []
+  },
+  {
     "listing": "/index.html",
     "items": [
+      "/posts/latincy-newsletter-003/index.html",
       "/posts/caas2026/index.html",
       "/posts/kumpf-1984/index.html",
       "/posts/introducing-latincy-vocab/index.html",
