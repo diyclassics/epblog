@@ -109,7 +109,7 @@
     "href": "posts/latincy-newsletter-003/index.html#events",
     "title": "LatinCy Newsletter #3",
     "section": "Events",
-    "text": "Events\nMon. Oct. 26: “The Flipped Lemma: Repurposing a Latin Lexicographical Resource for Disambiguating Word Senses.” Thesaurus Linguae Latinae Workshop, Munich. Following up on last year’s talk at the TLL on word sense disambiguation for Latin, I return a year later to talk more about building a LatinCy WSD component, and more specifically building out an inverted Lewis & Short—i.e. illustration sentences to lemma/sense—to use as training data for the model."
+    "text": "Events\nMon. Oct. 26: “The Flipped Lemma: Repurposing a Latin Lexicographical Resource for Disambiguating Word Senses.” (https://diyclassics.github.io/flipped-lemma/) Thesaurus Linguae Latinae Workshop, Munich. Following up on last year’s talk at the TLL on word sense disambiguation for Latin, I return a year later to talk more about building a LatinCy WSD component, and more specifically building out an inverted Lewis & Short—i.e. illustration sentences to lemma/sense—to use as training data for the model."
   },
   {
     "objectID": "posts/latincy-newsletter-003/index.html#publications",
